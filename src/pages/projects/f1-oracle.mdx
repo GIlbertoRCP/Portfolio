@@ -8,88 +8,154 @@ import F1Simulation from '../../components/F1Simulation.jsx';
 <div class="max-w-4xl mx-auto py-12 px-6">
   
   {/* Project Header */}
-  <header class="mb-12 border-b border-slate-900 pb-8">
-    <div class="flex gap-2 mb-4">
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
       <span class="px-2.5 py-1 bg-purple-950/80 border border-purple-500/20 rounded-full text-xs font-semibold text-purple-400">Machine Learning & Analytics</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">Full Stack Project</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Full Stack Platform</span>
     </div>
-    <h1 class="text-4xl font-display font-extrabold text-white mb-4">
-      F1 Oracle — Prediction & Telemetry Platform
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      F1 Oracle — Prediction &amp; Telemetry Suite
     </h1>
-    <p class="text-lg text-slate-400 leading-relaxed">
-      An end-to-end predictive machine learning model and interactive telemetry suite that estimates driver performance, fuel weight gaps, and runs stochastic Monte Carlo race simulations.
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      An end-to-end telemetry analysis and machine learning platform powered by an XGBoost pairwise ranking model, featuring physical tyre-degradation slopes, fuel adjustments, and Monte Carlo simulators.
     </p>
   </header>
 
-  {/* Project Specifications Grid */}
-  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-950/40 border border-slate-900 rounded-2xl p-6">
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Project Role</h3>
-      <p class="text-sm font-semibold text-white mt-1">Full-Stack Data Engineer</p>
+  {/* Technical Specifications Table */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
+      <p class="text-sm font-semibold text-white">Full-Stack Data Engineer</p>
     </div>
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Models Implemented</h3>
-      <p class="text-sm font-semibold text-white mt-1">XGBRanker (Bradley-Terry)</p>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">ML Model Core</span>
+      <p class="text-sm font-semibold text-white">XGBRanker (Pairwise)</p>
     </div>
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Data Source</h3>
-      <p class="text-sm font-semibold text-white mt-1">FastF1, Ergast, OpenF1 API</p>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Telemetry Source</span>
+      <p class="text-sm font-semibold text-white">FastF1 (Ergast/OpenF1)</p>
     </div>
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Architecture Stack</h3>
-      <p class="text-sm font-semibold text-white mt-1">React, FastAPI, Docker</p>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Architecture</span>
+      <p class="text-sm font-semibold text-white">React, FastAPI, Docker</p>
     </div>
   </section>
 
-  {/* Core Content */}
-  <div class="prose prose-invert max-w-none text-slate-300 space-y-8 text-[15px] leading-relaxed">
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
     
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Project Concept</h2>
+    {/* Section 1: The Problem */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">01/</span> The F1 Telemetry Challenge
+      </h2>
       <p>
-        Formula 1 performance analysis is heavily distorted by race parameters like tyre compound choices, degradation curves, and varying fuel levels. The <strong>F1 Oracle</strong> scrapes micro-telemetry streams from official F1 sessions, applies physical correction equations to detrend raw times, and feeds the features to a pairwise ranking model that determines probability vectors for finishing positions.
+        Evaluating true driver pace in Formula 1 is notoriously difficult. A driver's raw lap time is distorted by track rubbering-in, tyre age, engine modes, and fuel weight load. Additionally, standard regression models that predict absolute lap times fail in racing applications because finishing order constraints matter far more than time intervals.
+      </p>
+      <p>
+        To solve this, the **F1 Oracle** implements physical telemetry correction formulas to filter out distortions, then uses a pairwise preference ranking model to predict the final order and simulate probability curves.
       </p>
     </div>
 
-    {/* Simulation Interactive Demo Section */}
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Interactive Predictor & Monte Carlo Simulator</h2>
+    {/* Section 2: Live Predictor Widget */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">02/</span> Matchups &amp; Stochastic Simulation
+      </h2>
       <p class="mb-6">
-        Test the prediction logic directly in the browser. Select two drivers to compute a Bradley-Terry head-to-head win probability. You can also configure track dampness and Safety Car frequencies, then run a 1,000-run Monte Carlo simulation to evaluate predicted distributions.
+        Below is the browser-based simulation suite. You can select two drivers to evaluate their comparative timing attributes and compute a Bradley-Terry victory probability. Alternatively, select track dampness and Safety Car parameters and run a 1,000-run Monte Carlo simulation to evaluate predicted distributions.
       </p>
       
+      {/* Interactive Widget Mount */}
       <F1Simulation client:load />
     </div>
 
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Engineered Telemetry Features</h2>
+    {/* Section 3: Feature Engineering */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">03/</span> Physics-Based Feature Engineering
+      </h2>
       <p>
-        Standard practice focuses solely on raw lap times. This project engineered customized columns from micro-telemetry streams:
+        Before training the model, we filter out laps under safety car or pit lane exits and extract micro-telemetry streams. We then compute customized features:
       </p>
       
-      <ul class="list-disc pl-6 space-y-2 mt-2">
-        <li><strong>Fuel-Corrected Pace:</strong> Subtracts estimated lap fuel burning weights (adjusted dynamically for tracks, e.g. Monaco vs Spa) and applies a penalty coefficient (~0.03s per kg) to find a driver's true pace.</li>
-        <li><strong>Tyre Degradation Rate:</strong> Computes the linear regression slope of lap times vs. tyre age across stints of at least 5 clean laps.</li>
-        <li><strong>ERS Efficiency Proxy:</strong> Calculates the ratio of full-throttle time to braking recovery time during a driver's best push lap relative to the field median.</li>
-        <li><strong>Asymmetric PU Deployment:</strong> Sector 1/Sector 3 ratios to detect battery starvation and ERS clipping.</li>
-      </ul>
+      <div class="grid sm:grid-cols-2 gap-6 pt-4">
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
+          <div class="text-purple-400 font-bold text-sm">⏱️ Fuel-Corrected Pace</div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Subtracts estimated lap fuel burning weights (adjusted dynamically for tracks, e.g. Monaco vs Spa) and applies a penalty coefficient (~0.03s per kg) to find a driver's true pace.
+          </p>
+        </div>
+        
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
+          <div class="text-purple-400 font-bold text-sm">📈 Tyre Degradation Rate</div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Computes the linear regression slope of lap times vs. tyre age across stints of at least 5 clean laps.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
+          <div class="text-purple-400 font-bold text-sm">⚡ ERS Efficiency Proxy</div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Calculates the ratio of full-throttle time to braking recovery time during a driver's best push lap relative to the field median.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
+          <div class="text-purple-400 font-bold text-sm">🔋 Asymmetric PU Deployment</div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Calculates Sector 1/Sector 3 ratios to detect battery starvation and ERS clipping.
+          </p>
+        </div>
+      </div>
     </div>
 
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Machine Learning Modeling</h2>
+    {/* Section 4: Pairwise XGBoost Model */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">04/</span> Pairwise XGBRanker &amp; Decay
+      </h2>
       <p>
-        We train an <code>XGBRanker</code> gradient boosted tree using a <code>rank:pairwise</code> loss function. Instead of predicting absolute times, the ranker learns driver ordering constraints per race.
+        The prediction engine trains an <code>XGBRanker</code> gradient boosted tree using a <code>rank:pairwise</code> loss function. This treats each race as a ranking group and learns relative preferences between drivers.
       </p>
       <p>
-        The training data utilizes a temporal decay function (weight = exp(-λ * Δt)) where recent 2026 races are heavily weighted, and historical data (2024-2025) provides weaker priors, accounting for structural regulation shifts.
+        The training data utilizes a temporal decay function (weight = exp(-λ * Δt)), where recent 2026 races are heavily weighted, and historical data provides weaker priors, accounting for structural regulation shifts.
       </p>
+    </div>
+
+    {/* Section 5: Prefetching Pipeline */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">05/</span> Async Prefetching Architecture
+      </h2>
+      <p>
+        F1 telemetry payloads are extremely heavy. To prevent long wait times on a cold cache, the FastAPI backend implements background prefetching using <code>BackgroundTasks</code>:
+      </p>
+      <ul class="space-y-3.5 mt-4">
+        <li class="flex items-start gap-3">
+          <span class="text-purple-500 mt-1">✓</span>
+          <div>
+            <strong class="text-white">Calendar Ingestion Trigger:</strong> 
+            Loading the season calendar triggers an async prefetch worker for the next upcoming GP round of the active season.
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-purple-500 mt-1">✓</span>
+          <div>
+            <strong class="text-white">Sequential Pre-fetching:</strong> 
+            Querying predictions for any GP round dynamically schedules a background cache load for the next round chronologically.
+          </div>
+        </li>
+      </ul>
     </div>
 
   </div>
 
-  <div class="mt-16 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
-    <a href="/" class="hover:text-blue-400 transition">&larr; Back to Home</a>
-    <span>F1 Oracle Prediction Suite</span>
+  {/* Page Navigation */}
+  <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
+    <span>F1 Oracle Predictor Suite</span>
   </div>
 
 </div>
