@@ -1,0 +1,91 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Tap-Tap Trivia — Real-time Multiplayer App'
+description: 'Multiplayer trivia lobby and trivia buzzer game using Next.js App Router, Framer Motion, and Prisma.'
+---
+import TriviaDemo from '../../components/TriviaDemo.jsx';
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8">
+    <div class="flex gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-yellow-950/80 border border-yellow-500/20 rounded-full text-xs font-semibold text-yellow-400">Web App & Multiplayer</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">Full Stack Project</span>
+    </div>
+    <h1 class="text-4xl font-display font-extrabold text-white mb-4">
+      Tap-Tap Trivia — Real-time Multiplayer App
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed">
+      A fast-paced multiplayer lobby buzzer game featuring real-time state synchronization, animated scoring widgets, and keyboard accessibility.
+    </p>
+  </header>
+
+  {/* Project Specifications Grid */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-950/40 border border-slate-900 rounded-2xl p-6">
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Project Role</h3>
+      <p class="text-sm font-semibold text-white mt-1">Full-Stack Web Developer</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Framework Core</h3>
+      <p class="text-sm font-semibold text-white mt-1">Next.js (App Router)</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Database / ORM</h3>
+      <p class="text-sm font-semibold text-white mt-1">PostgreSQL & Prisma</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">UX Animations</h3>
+      <p class="text-sm font-semibold text-white mt-1">Framer Motion, CSS Triggers</p>
+    </div>
+  </section>
+
+  {/* Core Content */}
+  <div class="prose prose-invert max-w-none text-slate-300 space-y-8 text-[15px] leading-relaxed">
+    
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Project Concept</h2>
+      <p>
+        Building real-time web applications with tight timer constraints poses significant state-sync challenges. <strong>Tap-Tap Trivia</strong> is a multiplayer quiz platform where users enter a room lobby, wait for the host, and race to hit the buzzer first. Scores are computed dynamically based on the exact millisecond response latency.
+      </p>
+    </div>
+
+    {/* Simulation Interactive Demo Section */}
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Playable Single-Player Quiz Demo</h2>
+      <p class="mb-6">
+        Below is a single-player version of the trivia buzzer. Test your knowledge on the specs of the other projects in this portfolio! Hit answers quickly to score higher. You can use keyboard hotkeys (1, 2, 3, 4) to trigger selections.
+      </p>
+      
+      <TriviaDemo client:load />
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">System Engineering & Sync</h2>
+      <p>
+        Multiplayer rooms require strong transactional guarantees. We built the sync layer with:
+      </p>
+      
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>Dynamic Room Routing:</strong> Leverages Next.js parallel layouts (<code>(public)</code> and <code>(host)</code> namespaces) to split host dashboards from general player join views.</li>
+        <li><strong>State Polling Loop:</strong> Implements a client-side polling ticker checking <code>/api/rooms/[roomId]/state</code>, syncing question changes and timer bars under 100ms lag thresholds.</li>
+        <li><strong>Millisecond Timing verification:</strong> When a user clicks or presses a key, the client captures the precise timestamp relative to the round start, sending the payload to the database to prevent network latency cheating.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">User Interface & Design</h2>
+      <p>
+        The game uses a high-vibrancy aesthetic with rich indigo-purple gradients, bouncy hover effects, and spring animations powered by <strong>Framer Motion</strong>. AnimatePresence is used to smoothly transition between question slides and leaderboard tables.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="mt-16 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/" class="hover:text-blue-400 transition">&larr; Back to Home</a>
+    <span>Tap-Tap Trivia App</span>
+  </div>
+
+</div>

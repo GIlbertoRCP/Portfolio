@@ -1,0 +1,88 @@
+---
+// src/layouts/Layout.astro
+import ChatWidget from '../components/ChatWidget.jsx';
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gilberto Romero-Cano | Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio of Gilberto Romero-Cano, a Computer Science student at CU Denver building full-stack applications, ML telemetry platforms, and hardware-integrated robotics." />
+    <meta name="author" content="Gilberto Romero-Cano" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-blue-500/30 flex flex-col min-h-screen relative overflow-x-hidden">
+    
+    <!-- Background Glows -->
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-900/10 blur-[120px] pointer-events-none -z-10 animate-pulse"></div>
+    <div class="absolute bottom-[20%] right-[-10%] w-[45%] h-[45%] rounded-full bg-purple-900/10 blur-[120px] pointer-events-none -z-10"></div>
+    
+    <!-- Sticky Glassmorphic Header -->
+    <nav class="border-b border-slate-900 bg-slate-950/75 backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+      <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-white font-display font-bold text-2xl tracking-tight hover:text-blue-400 hover:scale-105 transition duration-300">
+          GRC<span class="text-blue-500">.</span>
+        </a>
+        <div class="flex gap-6 text-sm font-medium items-center">
+          <a href="/#projects" class="text-slate-300 hover:text-white hover:underline underline-offset-4 decoration-blue-500 transition">Projects</a>
+          <a href="/about" class="text-slate-300 hover:text-white hover:underline underline-offset-4 decoration-blue-500 transition">About</a>
+          <a href="https://github.com/GIlbertoRCP" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg text-white transition flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="flex-grow">
+      <slot /> 
+    </div>
+
+    <!-- Premium Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950/40 py-10 mt-24">
+      <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left text-sm text-slate-500">
+        <div>
+          &copy; {new Date().getFullYear()} Gilberto Romero-Cano. All rights reserved.
+        </div>
+        <div class="flex gap-6">
+          <a href="https://github.com/GIlbertoRCP" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">GitHub</a>
+          <a href="/about" class="hover:text-blue-400 transition">About Me</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Client-Side Assistant Chat -->
+    <ChatWidget client:load /> 
+
+  </body>
+</html>
+
+<style is:global>
+  /* Custom scrollbar and base style updates */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617; /* slate-950 */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b; /* slate-800 */
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155; /* slate-700 */
+  }
+
+  body {
+    background-color: #020617; /* slate-950 */
+  }
+</style>

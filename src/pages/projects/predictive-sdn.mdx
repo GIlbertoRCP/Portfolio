@@ -1,0 +1,109 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Predictive SDN Telemetry & Self-Healing System'
+description: 'Event-driven SDN traffic engineering using LSTM congestion forecasting, DQN reinforcement learning, and Apache Kafka.'
+---
+import SdnTelemetryDemo from '../../components/SdnTelemetryDemo.jsx';
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8">
+    <div class="flex gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-blue-950/80 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">Machine Learning & Systems</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">CSCI 4930 HL1 @ CU Denver</span>
+    </div>
+    <h1 class="text-4xl font-display font-extrabold text-white mb-4">
+      Predictive SDN Telemetry & Self-Healing System
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed">
+      A distributed, event-driven traffic engineering pipeline that combines LSTM forecasts and DQN reinforcement learning agents to move from reactive to proactive network routing.
+    </p>
+  </header>
+
+  {/* Project Specifications Grid */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-950/40 border border-slate-900 rounded-2xl p-6">
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Project Role</h3>
+      <p class="text-sm font-semibold text-white mt-1">Lead Systems & ML Dev</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Event Streaming</h3>
+      <p class="text-sm font-semibold text-white mt-1">Apache Kafka (KRaft)</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">ML Stack</h3>
+      <p class="text-sm font-semibold text-white mt-1">PyTorch LSTM & DQN</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">SDN Control</h3>
+      <p class="text-sm font-semibold text-white mt-1">Mininet & Ryu (os-ken)</p>
+    </div>
+  </section>
+
+  {/* Core Content */}
+  <div class="prose prose-invert max-w-none text-slate-300 space-y-8 text-[15px] leading-relaxed">
+    
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">System Concept</h2>
+      <p>
+        Traditional Software-Defined Networks (SDN) monitor traffic and apply routing changes <em>reactively</em> once congestion has already occurred. This project introduces a decoupled, streaming-first architecture that predicts queue spikes ahead of time, scaling up switch polling rate and installing proactive OpenFlow rules to steer traffic away from congestion points.
+      </p>
+    </div>
+
+    {/* Simulation Interactive Demo Section */}
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Interactive Telemetry Simulation</h2>
+      <p class="mb-6">
+        Below is a browser-based simulation of our SDN pipeline. Click <strong>"Inject Traffic Spike"</strong> to watch simulated switch queues climb. You will see the LSTM risk engine detect the spike, escalate polling frequency to intensive mode (1s), and route the path around the bottleneck.
+      </p>
+      
+      <SdnTelemetryDemo client:load />
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Core Architecture</h2>
+      <p>
+        The system decouples data telemetry, inference, and switch rule modification into independent microservices running on a Python 3.12 stack:
+      </p>
+      
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>SDN Control Plane:</strong> Built using <em>os-ken</em> (compatible Ryu fork) running alongside Open vSwitch in Mininet. It publishes port stats to a Kafka topic and maintains an under 30MB control footprint.</li>
+        <li><strong>Kafka Event Bus:</strong> KRaft-mode broker handling standard messages on <code>network-telemetry</code> and <code>network-control</code> topics.</li>
+        <li><strong>Inference Service:</strong> FastAPI microservice managing PyTorch models. An LSTM network evaluates sliding windows of port metrics to predict 5-step-ahead queues, and a DQN agent selects polling rates based on predicted risk.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Edge Optimization & MLOps</h2>
+      <p>
+        To run prediction pipelines on low-power edge switches, we optimized the PyTorch networks using <strong>ONNX Runtime</strong> and <strong>Dynamic INT8 Quantization</strong>:
+      </p>
+      
+      <div class="grid sm:grid-cols-3 gap-4 mt-4">
+        <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-4 text-center">
+          <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">PyTorch Baseline</span>
+          <p class="text-lg font-bold text-white mt-1">0.175 ms latency</p>
+          <p class="text-xs text-slate-500">791 KB size</p>
+        </div>
+        <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-4 text-center">
+          <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">ONNX FP32</span>
+          <p class="text-lg font-bold text-blue-400 mt-1">0.058 ms latency</p>
+          <p class="text-xs text-slate-400">66.8% speedup</p>
+        </div>
+        <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-4 text-center">
+          <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">ONNX INT8 Quantized</span>
+          <p class="text-lg font-bold text-emerald-400 mt-1">0.054 ms latency</p>
+          <p class="text-xs text-emerald-400">72.9% smaller (214 KB)</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-16 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/" class="hover:text-blue-400 transition">&larr; Back to Home</a>
+    <span>CSCI 4930 HL1</span>
+  </div>
+
+</div>

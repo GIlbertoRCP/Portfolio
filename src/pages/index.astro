@@ -1,49 +1,270 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout>
+  <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 space-y-24">
+
+    <!-- Hero Section -->
+    <section class="mt-8 md:mt-12 space-y-6 relative">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/60 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">
+        <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping"></span>
+        Available for Internships & Co-ops
+      </div>
+      
+      <h1 class="text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-white leading-[1.1]">
+        Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Gilberto Romero</span>
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-slate-400 leading-relaxed max-w-2xl font-sans">
+        I am a Computer Science student at <strong class="text-slate-200">CU Denver</strong> specializing in bridging the gap between hardware-integrated robotics (embedded systems) and modern software architecture (distributed systems, ML, and web apps).
+      </p>
+
+      <!-- Key Metrics Badge Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 max-w-3xl">
+        <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
+          <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Education</span>
+          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">CU Denver CS</span>
+        </div>
+        <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
+          <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Specialty</span>
+          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">IoT & Full-Stack</span>
+        </div>
+        <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
+          <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Portfolio Work</span>
+          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">4 Major Projects</span>
+        </div>
+        <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
+          <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Interactions</span>
+          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">Playable Web Demos</span>
+        </div>
+      </div>
+
+      <div class="flex gap-4 pt-4">
+        <a href="#projects" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-xl transition duration-300 shadow-lg shadow-blue-900/25 text-sm">
+          Explore Projects
+        </a>
+        <a href="/about" class="px-6 py-3 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white font-medium rounded-xl transition duration-300 text-sm">
+          About Me
+        </a>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="pt-12 space-y-8 scroll-mt-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-slate-900 pb-4">
+        <div>
+          <h2 class="text-3xl font-display font-extrabold text-white">Featured Projects</h2>
+          <p class="text-xs text-slate-400 mt-1">Select a category below to filter. Interactive browser-demos inside each page.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap bg-slate-950 p-1 border border-slate-900 rounded-xl max-w-full">
+          <button data-filter="all" class="filter-tab px-4 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 text-white shadow transition-all duration-200">
+            All Work
+          </button>
+          <button data-filter="ml" class="filter-tab px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-all duration-200">
+            Machine Learning
+          </button>
+          <button data-filter="embedded" class="filter-tab px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-all duration-200">
+            Embedded Systems
+          </button>
+          <button data-filter="web" class="filter-tab px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-all duration-200">
+            Web Apps
+          </button>
+        </div>
+      </div>
+      
+      <!-- Project Cards Grid -->
+      <div class="grid md:grid-cols-2 gap-6" id="projects-grid">
+        
+        <!-- Project 1: Predictive SDN -->
+        <article data-category="ml" class="project-card border border-slate-900 hover:border-slate-800 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-2xl pointer-events-none rounded-full"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase">CSCI 4930 HL1</span>
+            <span class="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-[0_0_8px_#3b82f6]"></span>
+          </div>
+          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-blue-400 transition">Predictive SDN Self-Healing</h3>
+          <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
+            Traffic engineering pipeline using PyTorch LSTM forecasts, stable-baselines3 DQN agents, and Apache Kafka to reroute traffic dynamically.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Kafka</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">LSTM / DQN</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Mininet</span>
+          </div>
+          <a href="/projects/predictive-sdn" class="text-blue-400 font-semibold text-xs hover:text-blue-300 transition mt-auto inline-flex items-center gap-1">
+            View Project Details &amp; Live Simulation <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+
+        <!-- Project 2: F1 Oracle -->
+        <article data-category="ml" class="project-card border border-slate-900 hover:border-slate-800 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 blur-2xl pointer-events-none rounded-full"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold tracking-widest text-purple-400 uppercase">Machine Learning</span>
+            <span class="w-2.5 h-2.5 bg-purple-500 rounded-full shadow-[0_0_8px_#a855f7]"></span>
+          </div>
+          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-purple-400 transition">F1 Oracle Prediction Platform</h3>
+          <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
+            Machine Learning race predictions utilizing XGBRanker pairwise ranking on FastF1 timing telemetry, paired with Monte Carlo simulators.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">FastF1</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">XGBoost</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">FastAPI</span>
+          </div>
+          <a href="/projects/f1-oracle" class="text-purple-400 font-semibold text-xs hover:text-purple-300 transition mt-auto inline-flex items-center gap-1">
+            View Project Details &amp; Monte Carlo <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+
+        <!-- Project 3: Bomb Squad Robot -->
+        <article data-category="embedded" class="project-card border border-slate-900 hover:border-slate-800 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-red-500/5 blur-2xl pointer-events-none rounded-full"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase">Embedded Systems</span>
+            <span class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_8px_#ef4444]"></span>
+          </div>
+          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-red-400 transition">Wireless EOD disposal Rover</h3>
+          <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
+            A distributed 3-node wireless system running ESP-NOW to steer a 4-DOF Mecanum rover, incorporating claw shaking sensor parameters.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">ESP32</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">ESP-NOW</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">C++</span>
+          </div>
+          <a href="/projects/bomb-squad-robot" class="text-red-400 font-semibold text-xs hover:text-red-300 transition mt-auto inline-flex items-center gap-1">
+            View Project Details &amp; Node Schematics <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+
+        <!-- Project 4: Tap-Tap Trivia -->
+        <article data-category="web" class="project-card border border-slate-900 hover:border-slate-800 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-500/5 blur-2xl pointer-events-none rounded-full"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold tracking-widest text-yellow-400 uppercase">Web App</span>
+            <span class="w-2.5 h-2.5 bg-yellow-500 rounded-full shadow-[0_0_8px_#eab308]"></span>
+          </div>
+          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-yellow-400 transition">Tap-Tap Trivia Multiplayer</h3>
+          <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
+            A real-time multiplayer buzzer quiz lobby built using Next.js App Router, featuring scoring based on millisecond response latencies.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Next.js</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Prisma</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Framer Motion</span>
+          </div>
+          <a href="/projects/tap-tap-trivia" class="text-yellow-400 font-semibold text-xs hover:text-yellow-300 transition mt-auto inline-flex items-center gap-1">
+            View Project Details &amp; Playable Quiz <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Skills Matrix Section -->
+    <section class="space-y-8">
+      <div>
+        <h2 class="text-3xl font-display font-extrabold text-white">Technical Core Matrix</h2>
+        <p class="text-xs text-slate-400 mt-1">Structured view of my engineering languages, runtimes, and hardware tooling.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+        
+        <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-400 font-display">Languages</span>
+          <ul class="space-y-1.5 text-xs text-slate-300">
+            <li class="flex justify-between"><span>C++</span> <span class="text-slate-500 font-mono text-[10px]">Embedded</span></li>
+            <li class="flex justify-between"><span>Python</span> <span class="text-slate-500 font-mono text-[10px]">Data &amp; ML</span></li>
+            <li class="flex justify-between"><span>TypeScript</span> <span class="text-slate-500 font-mono text-[10px]">Full Stack</span></li>
+            <li class="flex justify-between"><span>C#</span> <span class="text-slate-500 font-mono text-[10px]">Systems</span></li>
+            <li class="flex justify-between"><span>SQL</span> <span class="text-slate-500 font-mono text-[10px]">Database</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400 font-display">Machine Learning</span>
+          <ul class="space-y-1.5 text-xs text-slate-300">
+            <li class="flex justify-between"><span>PyTorch</span> <span class="text-slate-500 font-mono text-[10px]">LSTMs</span></li>
+            <li class="flex justify-between"><span>XGBoost</span> <span class="text-slate-500 font-mono text-[10px]">Ranking</span></li>
+            <li class="flex justify-between"><span>Stable Baselines3</span> <span class="text-slate-500 font-mono text-[10px]">RL (DQN)</span></li>
+            <li class="flex justify-between"><span>ONNX Runtime</span> <span class="text-slate-500 font-mono text-[10px]">Optimization</span></li>
+            <li class="flex justify-between"><span>Scikit-Learn</span> <span class="text-slate-500 font-mono text-[10px]">Analytics</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-yellow-400 font-display">Full Stack &amp; Ops</span>
+          <ul class="space-y-1.5 text-xs text-slate-300">
+            <li class="flex justify-between"><span>Next.js / React</span> <span class="text-slate-500 font-mono text-[10px]">Client</span></li>
+            <li class="flex justify-between"><span>FastAPI</span> <span class="text-slate-500 font-mono text-[10px]">API Engine</span></li>
+            <li class="flex justify-between"><span>Apache Kafka</span> <span class="text-slate-500 font-mono text-[10px]">Streaming</span></li>
+            <li class="flex justify-between"><span>Docker / Compose</span> <span class="text-slate-500 font-mono text-[10px]">Ops</span></li>
+            <li class="flex justify-between"><span>Prisma ORM</span> <span class="text-slate-500 font-mono text-[10px]">Database</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-red-400 font-display">IoT &amp; Hardware</span>
+          <ul class="space-y-1.5 text-xs text-slate-300">
+            <li class="flex justify-between"><span>ESP32 MCUs</span> <span class="text-slate-500 font-mono text-[10px]">Processors</span></li>
+            <li class="flex justify-between"><span>ESP-NOW Link</span> <span class="text-slate-500 font-mono text-[10px]">P2P Protocol</span></li>
+            <li class="flex justify-between"><span>FreeRTOS</span> <span class="text-slate-500 font-mono text-[10px]">Multitasking</span></li>
+            <li class="flex justify-between"><span>MPU6050</span> <span class="text-slate-500 font-mono text-[10px]">Accelerometers</span></li>
+            <li class="flex justify-between"><span>I2C / SPI / PWM</span> <span class="text-slate-500 font-mono text-[10px]">Interfaces</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  // Simple, fast client-side project filtering script
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('.project-card');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Toggle tab classes
+      tabs.forEach(t => {
+        t.classList.remove('bg-blue-600', 'text-white', 'shadow');
+        t.classList.add('text-slate-400', 'hover:text-slate-200');
+      });
+      tab.classList.add('bg-blue-600', 'text-white', 'shadow');
+      tab.classList.remove('text-slate-400', 'hover:text-slate-200');
+
+      const filter = tab.getAttribute('data-filter');
+
+      // Filter cards with a simple fade-out/fade-in
+      cards.forEach((card: any) => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+          }, 10);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 200);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .project-card {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.2s, background-color 0.2s;
+  }
+</style>
