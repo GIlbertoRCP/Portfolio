@@ -4,19 +4,19 @@ import { useState, useRef, useEffect } from 'react';
 const PORTFOLIO_DATA = {
   greetings: {
     patterns: ['hi', 'hello', 'hey', 'greetings', 'hola', 'yo'],
-    response: "Hi there! I'm Gilberto's AI assistant. Feel free to ask me about his project work (like the F1 Oracle or the Self-Healing SDN System), his engineering skills, or his computer science studies at CU Denver!"
+    response: "Hi there! I'm Gilberto's AI assistant. Feel free to ask me about his primary ML project work (like the F1 Oracle or the Self-Healing SDN System), his coursework projects (the EOD Robot or Trivia app), his engineering skills, or his computer science studies at CU Denver!"
   },
   about: {
     patterns: ['who are you', 'about gilberto', 'who is gilberto', 'bio', 'background'],
-    response: "Gilberto Romero-Cano is a Computer Science student at CU Denver. He specializing in bridging the gap between hardware-integrated robotics (embedded systems) and modern software architecture (distributed systems, ML, and web apps). He loves building things that are both fun to play with and technically rigorous!"
+    response: "Gilberto Romero-Cano is a Computer Science student at CU Denver. He specializes in bridging the gap between hardware-integrated robotics (embedded systems) and modern software architecture (distributed systems, ML, and web apps). He loves building systems that combine data science with optimized engineering practices."
   },
   skills: {
     patterns: ['skills', 'tech stack', 'languages', 'frameworks', 'technologies', 'tools', 'code'],
-    response: "Here is Gilberto's tech stack:\n\n• **Languages:** C++, Python, Javascript, TypeScript, C#, SQL\n• **Frameworks:** React, Next.js, Astro, FastAPI, Streamlit, Ryu/os-ken (SDN)\n• **Machine Learning:** PyTorch, Stable Baselines3 (DQN), XGBoost, scikit-learn, ONNX Runtime\n• **Infrastructure & IoT:** Docker, Apache Kafka, Git, ESP-NOW wireless protocol, MPU6050 Accelerometer\n\nHe is comfortable writing everything from microcontroller firmware in C++ to real-time event-streaming pipelines in Python!"
+    response: "Here is Gilberto's tech stack:\n\n• **Languages:** Python, C++, TypeScript, Javascript, C#, SQL\n• **Machine Learning:** PyTorch, XGBoost, Stable Baselines3 (DQN), scikit-learn, ONNX Runtime\n• **Full-Stack & Distributed:** FastAPI, React, Next.js, Astro, Apache Kafka, Docker, Prisma ORM\n• **Hardware & IoT:** ESP32 microcontrollers, ESP-NOW wireless protocols, FreeRTOS tasking, and MPU6050 Accelerometers."
   },
   education: {
     patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study'],
-    response: "Gilberto is currently pursuing his degree in Computer Science at the University of Colorado Denver (CU Denver). Relevant coursework includes Embedded Systems (CSCI 4930), Operating Systems, Software Engineering, and Advanced Machine Learning."
+    response: "Gilberto is currently pursuing his degree in Computer Science at the University of Colorado Denver (CU Denver). Relevant coursework includes Operating Systems, Software Engineering, Advanced Machine Learning, and Embedded Systems."
   },
   contact: {
     patterns: ['contact', 'email', 'hire', 'resume', 'github', 'reach out', 'social'],
@@ -24,7 +24,7 @@ const PORTFOLIO_DATA = {
   },
   sdn: {
     patterns: ['sdn', 'telemetry', 'kafka', 'self-healing', 'mininet', 'congestion', 'lstm', 'dqn', 'networking'],
-    response: "Gilberto built a **Predictive SDN Self-Healing System** for CSCI 4930 HL1 at CU Denver. Key highlights:\n\n• **Event-Driven Architecture:** Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• **AI Predictive Self-Healing:** Uses an LSTM model in PyTorch to forecast congestion. When congestion risk exceeds 70%, a DQN reinforcement learning agent scales up polling, and installs flow rules to reroute traffic automatically.\n• **Edge Optimization:** Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and speedup inference latency by 69%.\n\n👉 Read the detailed [SDN Case Study](/projects/predictive-sdn) to test the interactive telemetry simulation widget!"
+    response: "Gilberto built a **Predictive SDN Self-Healing System** for CSCI 4930 HL1 at CU Denver. Key highlights:\n\n• **Event-Driven Architecture:** Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• **AI Predictive Self-Healing:** Uses an LSTM model in PyTorch to forecast congestion. When congestion risk exceeds 70%, a DQN reinforcement learning agent scales up polling, and installs flow rules to reroute traffic automatically.\n• **Edge Optimization:** Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and speeding up inference latency by 69%.\n\n👉 Read the detailed [SDN Case Study](/projects/predictive-sdn) to test the interactive telemetry simulation widget!"
   },
   f1: {
     patterns: ['f1', 'oracle', 'prediction', 'telemetry', 'fastf1', 'xgboost', 'monte carlo', 'race'],
@@ -40,7 +40,7 @@ const PORTFOLIO_DATA = {
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],
-    response: "Gilberto has four featured projects on this portfolio:\n\n1. **Predictive SDN Self-Healing System** — Event-driven telemetry using Kafka and LSTM/DQN models.\n2. **F1 Oracle** — Race outcome predictions using XGBRanker on FastF1 data.\n3. **Bomb Squad EOD Robot** — Distributed wireless nodes using ESP32 & ESP-NOW.\n4. **Tap-Tap Trivia** — A real-time multiplayer trivia game in Next.js.\n\nWhich one would you like to hear more about? I can link you to their interactive case study pages!"
+    response: "Gilberto has four featured projects on this portfolio. His primary engineering focuses are:\n\n1. **Predictive SDN Self-Healing System** — Event-driven telemetry using Kafka and LSTM/DQN models.\n2. **F1 Oracle** — Race outcome predictions using XGBRanker on FastF1 data.\n\nHe has also built two other supporting projects:\n3. **Bomb Squad EOD Robot** — Distributed wireless nodes using ESP32 & ESP-NOW.\n4. **Tap-Tap Trivia** — A real-time multiplayer trivia game in Next.js.\n\nWhich one would you like to hear more about? I can link you to their interactive case study pages!"
   }
 };
 
@@ -76,7 +76,7 @@ function getBotResponse(query) {
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'ai', content: "Hi! I'm Gilberto's AI assistant. Ask me about his embedded systems projects, his tech stack, or his coursework at CU Denver!" }
+    { role: 'ai', content: "Hi! I'm Gilberto's AI assistant. Ask me about his machine learning projects, his tech stack, or his coursework at CU Denver!" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
