@@ -256,7 +256,7 @@ export default function TriviaDemo() {
               🔄 Play Again
             </button>
             <a 
-              href="/projects/tap-tap-trivia"
+              href="/portfolio/projects/tap-tap-trivia"
               className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1"
             >
               🎮 Go to Trivia Case Study
