@@ -1,7 +1,7 @@
 ---
 layout: '../../layouts/Layout.astro'
 title: 'Tap-Tap Trivia — Real-time Multiplayer App'
-description: 'Multiplayer trivia lobby and trivia buzzer game using Next.js App Router, Framer Motion, and Prisma.'
+description: 'Multiplayer trivia buzzer mobile app using React Native, Git coordination, and mobile responsive layout.'
 ---
 import TriviaDemo from '../../components/TriviaDemo.jsx';
 
@@ -10,14 +10,14 @@ import TriviaDemo from '../../components/TriviaDemo.jsx';
   {/* Project Header */}
   <header class="mb-12 border-b border-slate-900 pb-8">
     <div class="flex gap-2 mb-4">
-      <span class="px-2.5 py-1 bg-yellow-950/80 border border-yellow-500/20 rounded-full text-xs font-semibold text-yellow-400">Web App & Multiplayer</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">Full Stack Project</span>
+      <span class="px-2.5 py-1 bg-yellow-950/80 border border-yellow-500/20 rounded-full text-xs font-semibold text-yellow-400">Mobile Development &amp; Systems</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">CU Denver Group Project</span>
     </div>
     <h1 class="text-4xl font-display font-extrabold text-white mb-4">
       Tap-Tap Trivia — Real-time Multiplayer App
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed">
-      A fast-paced multiplayer lobby buzzer game featuring real-time state synchronization, animated scoring widgets, and keyboard accessibility.
+      A fast-paced multiplayer mobile trivia game featuring responsive UI layouts, real-time timing verification, and collaborative team development workflows.
     </p>
   </header>
 
@@ -25,19 +25,19 @@ import TriviaDemo from '../../components/TriviaDemo.jsx';
   <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-950/40 border border-slate-900 rounded-2xl p-6">
     <div>
       <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Project Role</h3>
-      <p class="text-sm font-semibold text-white mt-1">Full-Stack Web Developer</p>
+      <p class="text-sm font-semibold text-white mt-1">Frontend &amp; Team Coordinator</p>
     </div>
     <div>
       <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Framework Core</h3>
-      <p class="text-sm font-semibold text-white mt-1">Next.js (App Router)</p>
+      <p class="text-sm font-semibold text-white mt-1">React Native</p>
     </div>
     <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Database / ORM</h3>
-      <p class="text-sm font-semibold text-white mt-1">PostgreSQL & Prisma</p>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Version Control</h3>
+      <p class="text-sm font-semibold text-white mt-1">Git &amp; GitHub</p>
     </div>
     <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">UX Animations</h3>
-      <p class="text-sm font-semibold text-white mt-1">Framer Motion, CSS Triggers</p>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Development Model</h3>
+      <p class="text-sm font-semibold text-white mt-1">Agile &amp; Scrum</p>
     </div>
   </section>
 
@@ -47,7 +47,7 @@ import TriviaDemo from '../../components/TriviaDemo.jsx';
     <div>
       <h2 class="text-2xl font-display font-extrabold text-white mb-3">Project Concept</h2>
       <p>
-        Building real-time web applications with tight timer constraints poses significant state-sync challenges. <strong>Tap-Tap Trivia</strong> is a multiplayer quiz platform where users enter a room lobby, wait for the host, and race to hit the buzzer first. Scores are computed dynamically based on the exact millisecond response latency.
+        Building real-time mobile applications with tight timer constraints poses significant state-sync and layout challenge. <strong>Tap-Tap Trivia</strong> is a group project where users enter a multiplayer room, wait for the questions to load, and race to hit the answer first. Response times are calculated down to the millisecond to determine point allocations.
       </p>
     </div>
 
@@ -62,22 +62,22 @@ import TriviaDemo from '../../components/TriviaDemo.jsx';
     </div>
 
     <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">System Engineering & Sync</h2>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">System Engineering &amp; Team Coordination</h2>
       <p>
-        Multiplayer rooms require strong transactional guarantees. We built the sync layer with:
+        Coordinating development across multiple code contributors and targets requires structure. Key highlights:
       </p>
       
       <ul class="list-disc pl-6 space-y-2 mt-2">
-        <li><strong>Dynamic Room Routing:</strong> Leverages Next.js parallel layouts (<code>(public)</code> and <code>(host)</code> namespaces) to split host dashboards from general player join views.</li>
-        <li><strong>State Polling Loop:</strong> Implements a client-side polling ticker checking <code>/api/rooms/[roomId]/state</code>, syncing question changes and timer bars under 100ms lag thresholds.</li>
-        <li><strong>Millisecond Timing verification:</strong> When a user clicks or presses a key, the client captures the precise timestamp relative to the round start, sending the payload to the database to prevent network latency cheating.</li>
+        <li><strong>Responsive Mobile Interface:</strong> Architected a responsive React Native front-end using flexible layouts and relative dimensions, optimizing presentation and touch zones across varied phone screen form factors.</li>
+        <li><strong>Agile Team Coordination:</strong> Managed collaborative development for a 5-person student team. Delegated features, set code standards, and conducted reviews using Git and Agile workflows to resolve complex merge conflicts and maintain a stable master branch.</li>
+        <li><strong>Buzzer Timing &amp; State:</strong> Implemented precise client-side click captures and compared timestamp records to sync quiz responses accurately.</li>
       </ul>
     </div>
 
     <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">User Interface & Design</h2>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">User Interface &amp; Design</h2>
       <p>
-        The game uses a high-vibrancy aesthetic with rich indigo-purple gradients, bouncy hover effects, and spring animations powered by <strong>Framer Motion</strong>. AnimatePresence is used to smoothly transition between question slides and leaderboard tables.
+        The game uses a high-vibrancy aesthetic with rich indigo-purple gradients, bouncy hover effects, and spring animations. We ensured touch responsiveness is immediate, keeping input latency to a minimum for a fair competitive play experience.
       </p>
     </div>
 

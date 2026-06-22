@@ -4,43 +4,51 @@ import { useState, useRef, useEffect } from 'react';
 const PORTFOLIO_DATA = {
   greetings: {
     patterns: ['hi', 'hello', 'hey', 'greetings', 'hola', 'yo'],
-    response: "Hi there! I'm Gilberto's AI assistant. Feel free to ask me about his primary ML project work (like the F1 Oracle or the Self-Healing SDN System), his coursework projects (the EOD Robot or Trivia app), his engineering skills, or his computer science studies at CU Denver!"
+    response: "Hi there! I'm Gilberto's AI assistant. Feel free to ask me about his primary ML project work (like the F1 Oracle, the Predictive Network Telemetry System, or the Humanoid Locomotion Project), his coursework projects (the EOD Robot, Trivia app, or E-Commerce Cart Simulation), his engineering skills, or his computer science studies at CU Denver!"
   },
   about: {
     patterns: ['who are you', 'about gilberto', 'who is gilberto', 'bio', 'background'],
-    response: "Gilberto Romero-Cano is a Computer Science student at CU Denver. He specializes in bridging the gap between hardware-integrated robotics (embedded systems) and modern software architecture (distributed systems, ML, and web apps). He loves building systems that combine data science with optimized engineering practices."
+    response: "Gilberto Romero-Cano is a Computer Science student at CU Denver. He specializes in software architecture, backend development, and machine learning. He has experience building end-to-end applications, from data modeling and predictive pipeline implementation in Python to engineering scalable backends using C# and FastAPI."
   },
   skills: {
     patterns: ['skills', 'tech stack', 'languages', 'frameworks', 'technologies', 'tools', 'code'],
-    response: "Here is Gilberto's tech stack:\n\n• **Languages:** Python, C++, TypeScript, Javascript, C#, SQL\n• **Machine Learning:** PyTorch, XGBoost, Stable Baselines3 (DQN), scikit-learn, ONNX Runtime\n• **Full-Stack & Distributed:** FastAPI, React, Next.js, Astro, Apache Kafka, Docker, Prisma ORM\n• **Hardware & IoT:** ESP32 microcontrollers, ESP-NOW wireless protocols, FreeRTOS tasking, and MPU6050 Accelerometers."
+    response: "Here is Gilberto's tech stack:\n\n• **Languages:** Python, C++, C, C#, JavaScript, TypeScript, SQL\n• **Frameworks & Libraries:** FastAPI, Pandas, NumPy, Scikit-learn, React Native, Tailwind CSS, Vercel\n• **Developer Tools:** Git (Version Control), GitHub, Docker, Postman, Linux Bash/Shell, VS Code, IntelliJ, PyCharm, Android Studio, Emacs, Mininet\n• **Specialties & Systems:** Machine Learning (PyTorch, XGBoost, Stable Baselines3), IoT/Hardware (ESP32, ESP-NOW, FreeRTOS, MPU6050)"
   },
   education: {
     patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study'],
-    response: "Gilberto is currently pursuing his degree in Computer Science at the University of Colorado Denver (CU Denver). Relevant coursework includes Operating Systems, Software Engineering, Advanced Machine Learning, and Embedded Systems."
+    response: "Gilberto is pursuing his Bachelor of Science in Computer Science at the University of Colorado Denver (Expected Graduation: May 2027). Relevant coursework includes Data Structures & Algorithms, Machine Learning, Software Engineering, Computer Networks, Operating Systems, and Databases."
   },
   contact: {
     patterns: ['contact', 'email', 'hire', 'resume', 'github', 'reach out', 'social'],
-    response: "You can connect with Gilberto or see more of his code here:\n\n• **GitHub:** [github.com/GIlbertoRCP](https://github.com/GIlbertoRCP)\n• **Portfolio Code:** Visit his repositories to inspect code details.\n\n*(Feel free to check out his interactive project case studies on this site!)*"
+    response: "You can reach out to Gilberto or connect with him here:\n\n• **Location:** Denver, CO\n• **Phone:** (720) 693-6526\n• **Email:** gilbertorcp712@gmail.com\n• **LinkedIn:** [linkedin.com/in/gromerocano/](https://linkedin.com/in/gromerocano/)\n• **GitHub:** [github.com/GIlbertoRCP](https://github.com/GIlbertoRCP)\n\n*(Feel free to check out his interactive project case studies on this site!)*"
   },
   sdn: {
-    patterns: ['sdn', 'telemetry', 'kafka', 'self-healing', 'mininet', 'congestion', 'lstm', 'dqn', 'networking'],
-    response: "Gilberto built a **Predictive SDN Self-Healing System** for CSCI 4930 HL1 at CU Denver. Key highlights:\n\n• **Event-Driven Architecture:** Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• **AI Predictive Self-Healing:** Uses an LSTM model in PyTorch to forecast congestion. When congestion risk exceeds 70%, a DQN reinforcement learning agent scales up polling, and installs flow rules to reroute traffic automatically.\n• **Edge Optimization:** Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and speeding up inference latency by 69%.\n\n👉 Read the detailed [SDN Case Study](/portfolio/projects/predictive-sdn) to test the interactive telemetry simulation widget!"
+    patterns: ['sdn', 'telemetry', 'kafka', 'self-healing', 'mininet', 'congestion', 'lstm', 'dqn', 'networking', 'predictive network'],
+    response: "Gilberto built a **Predictive Network Telemetry System** (Predictive SDN) for CSCI 4930 HL1 at CU Denver. Key highlights:\n\n• **Event-Driven Architecture:** Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• **AI Predictive Self-Healing:** Uses an LSTM model in PyTorch to forecast congestion. When congestion risk exceeds 70%, a DQN reinforcement learning agent scales up polling, and installs flow rules to reroute traffic automatically.\n• **Edge Optimization:** Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and speeding up inference latency by 69%.\n\nRead the detailed [SDN Case Study](/portfolio/projects/predictive-sdn) to test the interactive telemetry simulation widget!"
   },
   f1: {
     patterns: ['f1', 'oracle', 'prediction', 'telemetry', 'fastf1', 'xgboost', 'monte carlo', 'race'],
-    response: "The **F1 Oracle** is an end-to-end telemetry and prediction platform. Key features:\n\n• **Pairwise Ranker Model:** Trains an `XGBRanker` model on historical FastF1 telemetry to output driver finishing order probabilities.\n• **Telemetry Analytics:** Includes sector-by-sector aero setup profiles, head-to-head speed/throttle comparisons, and ERS efficiency proxies.\n• **Stochastic Simulator:** Runs a client-side Monte Carlo simulation (1,000 runs) taking into account driver crash risk, starting grids, and safety cars.\n\n👉 Read the detailed [F1 Oracle Case Study](/portfolio/projects/f1-oracle) to run matchups on the interactive simulation widget!"
+    response: "The **F1 Oracle** is an end-to-end telemetry and prediction platform. Key features:\n\n• **Pairwise Ranker Model:** Trains an `XGBRanker` model on historical FastF1 telemetry to output driver finishing order probabilities.\n• **Telemetry Analytics:** Includes sector-by-sector aero setup profiles, head-to-head speed/throttle comparisons, and ERS efficiency proxies.\n• **Stochastic Simulator:** Runs a client-side Monte Carlo simulation (1,000 runs) taking into account driver crash risk, starting grids, and safety cars.\n\nRead the detailed [F1 Oracle Case Study](/portfolio/projects/f1-oracle) to run matchups on the interactive simulation widget!"
+  },
+  locomotion: {
+    patterns: ['locomotion', 'mujoco', 'ppo', 'bipedal', 'humanoid', 'reinforcement learning', 'penguin slide', 'motor control', 'rl'],
+    response: "The **Humanoid Locomotion** project is a 3D bipedal simulation trained in MuJoCo using Proximal Policy Optimization (PPO):\n\n• **Bionic Model:** Modified humanoid capsules and densities to enable natural acceleration and controlled falling.\n• **Vertical LiDAR:** Implemented a custom 5-point rangefinder array with a Python VisionObservationWrapper to concatenate depth readings into the observation space.\n• **Penguin Slide:** Emergent reward hacking behavior discovered by the agent to negotiate a steep ramp.\n\nRead the detailed [Locomotion Case Study](/portfolio/projects/motor-control-locomotion) to view the simulation video showcase!"
   },
   robot: {
     patterns: ['robot', 'bomb', 'embedded', 'esp32', 'esp-now', 'mecanum', 'rover', 'servo', 'hardware', 'eod'],
-    response: "The **EOD Trainer Robot** is a wireless bomb disposal simulation system built on three distributed ESP32 nodes:\n\n• **ESP-NOW Link:** Custom low-latency packet delivery between the Controller remote, Rover robot, and Bomb target node.\n• **Rover Specs:** 4-DOF robotic arm, Mecanum wheels for holonomic movement, MPU6050 accelerometer to enforce tremor/shaking penalties.\n• **Interactive Topology:** Renders power distribution and logic pathways.\n\n👉 Read the detailed [EOD Robot Case Study](/portfolio/projects/bomb-squad-robot) to interact with the draggable routing schematic!"
+    response: "The **EOD Trainer Robot** is a wireless bomb disposal simulation system built on three distributed ESP32 nodes:\n\n• **ESP-NOW Link:** Custom low-latency packet delivery between the Controller remote, Rover robot, and Bomb target node.\n• **Rover Specs:** 4-DOF robotic arm, Mecanum wheels for holonomic movement, MPU6050 accelerometer to enforce tremor/shaking penalties.\n• **Interactive Topology:** Renders power distribution and logic pathways.\n\nRead the detailed [EOD Robot Case Study](/portfolio/projects/bomb-squad-robot) to interact with the draggable routing schematic!"
   },
   trivia: {
-    patterns: ['trivia', 'tap', 'multiplayer', 'next.js', 'framer motion', 'prisma', 'postgres'],
-    response: "The **Tap-Tap Trivia** app is a real-time multiplayer trivia game built using Next.js, Framer Motion, and Prisma:\n\n• **Multiplayer Lobby:** Syncs player states and room lobbies in real time.\n• **Engaging UX:** Fast-paced buzzer mechanics with score values scaling dynamically on player reaction times.\n• **Mini Quiz Demo:** Visitors can play a mini version directly in the portfolio.\n\n👉 Read the detailed [Tap-Tap Trivia Case Study](/portfolio/projects/tap-tap-trivia) to try the playable demo quiz!"
+    patterns: ['trivia', 'tap', 'multiplayer', 'react native', 'agile', 'group', 'team'],
+    response: "The **Tap-Tap Trivia** app is a responsive React Native multiplayer mobile trivia game built for a 5-person group semester project at CU Denver:\n\n• **Responsive Mobile UI:** Architected mobile layouts optimizing presentation across varying iOS/Android screen form factors.\n• **Team Coordination:** Managed collaborative team development using Git and Agile methodologies, resolving merge conflicts to maintain a stable master branch.\n• **Verification:** Syncs player states and captures precise buzzer click timings to prevent network exploitation.\n\nRead the detailed [Tap-Tap Trivia Case Study](/portfolio/projects/tap-tap-trivia) to try the playable demo!"
+  },
+  cart: {
+    patterns: ['cart', 'ecommerce', 'e-commerce', 'c#', 'oop', 'inheritance', 'polymorphism', 'generic', 'collections'],
+    response: "The **E-Commerce Cart Simulation** is a C#/.NET system that implements a modular product catalog:\n\n• **Object-Oriented Design:** Uses inheritance and polymorphism to integrate digital, physical, and subscription products.\n• **Polymorphic Shipping:** Subclasses override shipping methods (e.g. physical weight-based fees vs zero-cost digital downloads).\n• **Generic Collections:** Utilizes generic Lists to optimize data handling and run real-time cart calculations.\n\nRead the detailed [E-Commerce Case Study](/portfolio/projects/ecommerce-cart) to try the interactive object simulation!"
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],
-    response: "Gilberto has four featured projects on this portfolio. His primary engineering focuses are:\n\n1. **Predictive SDN Self-Healing System** — Event-driven telemetry using Kafka and LSTM/DQN models.\n2. **F1 Oracle** — Race outcome predictions using XGBRanker on FastF1 data.\n\nHe has also built two other supporting projects:\n3. **Bomb Squad EOD Robot** — Distributed wireless nodes using ESP32 & ESP-NOW.\n4. **Tap-Tap Trivia** — A real-time multiplayer trivia game in Next.js.\n\nWhich one would you like to hear more about? I can link you to their interactive case study pages!"
+    response: "Gilberto has six featured projects on this portfolio. His primary engineering focuses are:\n\n1. **Predictive Network Telemetry System** — Event-driven telemetry using Kafka and LSTM/DQN models.\n2. **F1 Oracle** — Race outcome predictions using XGBRanker on FastF1 data.\n3. **Humanoid Locomotion** — 3D bipedal simulation using PPO RL in MuJoCo.\n\nHe has also built supporting projects:\n4. **E-Commerce Cart Simulation** — Modular product catalog in C# implementing OOP concepts.\n5. **Bomb Squad EOD Robot** — Distributed wireless nodes using ESP32 & ESP-NOW.\n6. **Tap-Tap Trivia** — A React Native mobile quiz app coordinated using Agile/Git.\n\nWhich one would you like to hear more about? I can link you to their case study pages!"
   }
 };
 
@@ -67,7 +75,7 @@ function getBotResponse(query) {
 
   // Fallback response if no keywords matched
   if (!bestMatch || maxMatches === 0) {
-    bestMatch = "I'm not sure I have that exact detail, but I can tell you about Gilberto's projects (F1 Oracle, SDN System, EOD Robot, or Trivia App), list his skills, or link you to his GitHub repository. What would you like to explore?";
+    bestMatch = "I'm not sure I have that exact detail, but I can tell you about Gilberto's projects (F1 Oracle, SDN System, Humanoid Locomotion, E-Commerce Cart, EOD Robot, or Trivia App), list his skills, or link you to his GitHub repository. What would you like to explore?";
   }
 
   return bestMatch;

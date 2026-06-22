@@ -1,0 +1,123 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'E-Commerce Cart Simulation'
+description: 'Object-Oriented Programming (OOP) cart model in C# with polymorphic shipping calculations and generic collection tracking.'
+---
+import CartSimulation from '../../components/CartSimulation.jsx';
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8">
+    <div class="flex gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-blue-950/80 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">Object-Oriented Design</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">CU Denver Coursework</span>
+    </div>
+    <h1 class="text-4xl font-display font-extrabold text-white mb-4">
+      E-Commerce Cart Simulation
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed">
+      A modular catalog and dynamic checkout system written in C# demonstrating polymorphism, inheritance structures, and generic collection performance tuning.
+    </p>
+  </header>
+
+  {/* Project Specifications Grid */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-950/40 border border-slate-900 rounded-2xl p-6">
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Project Focus</h3>
+      <p class="text-sm font-semibold text-white mt-1">OOP Design Patterns</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Language</h3>
+      <p class="text-sm font-semibold text-white mt-1">C# / .NET</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Collections</h3>
+      <p class="text-sm font-semibold text-white mt-1">Generic List&lt;Product&gt;</p>
+    </div>
+    <div>
+      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Polymorphism</h3>
+      <p class="text-sm font-semibold text-white mt-1">Method Overriding</p>
+    </div>
+  </section>
+
+  {/* Core Content */}
+  <div class="prose prose-invert max-w-none text-slate-300 space-y-8 text-[15px] leading-relaxed">
+    
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Project Concept</h2>
+      <p>
+        Representing product rules inside a unified shopping cart system is a classic application of software architecture. In this system, different product categories (Digital, Physical, and Subscription) require distinct pricing formulas and logistics requirements. Using inheritance, we decoupled these details from the central cart collection classes, making the inventory system easily extendable.
+      </p>
+    </div>
+
+    {/* Simulation Interactive Demo Section */}
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Playable C# System Simulation</h2>
+      <p class="mb-6">
+        Test the object-oriented structure below. You can select products of various types to instantiate and load them into the C# Generic List collection. The simulation logs actions in real-time, calling polymorphic methods like `CalculateShipping()` depending on the product subclass.
+      </p>
+      
+      <CartSimulation client:load />
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Architectural Implementation</h2>
+      <p>
+        The backend code leverages several key object-oriented structures:
+      </p>
+      
+      <ul class="list-disc pl-6 space-y-2 mt-2">
+        <li><strong>Base Class and Inheritance:</strong> A base class <code>Product</code> defines common properties such as Name and Price, alongside a virtual method <code>CalculateShipping()</code>. Subclasses (<code>PhysicalProduct</code>, <code>DigitalProduct</code>, and <code>SubscriptionProduct</code>) inherit from the base and extend specific behavior.</li>
+        <li><strong>Polymorphism in calculations:</strong> Subclasses override the virtual shipping method. For instance, <code>PhysicalProduct</code> computes weight-based shipping fees ($5.00 per kg), whereas <code>DigitalProduct</code> and <code>SubscriptionProduct</code> return zero immediately since they do not require physical freight.</li>
+        <li><strong>C# Generic Collections:</strong> Implemented a <code>List&lt;Product&gt;</code> to manage the shopping cart instance. This generic container avoids box-unbox performance penalties and exposes LINQ methods for real-time calculations.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-display font-extrabold text-white mb-3">OOP Structure Snippet</h2>
+      <p>
+        Below is a simplified representation of the C# domain model implemented for the catalog:
+      </p>
+      
+      <pre class="bg-slate-950/80 border border-slate-850 p-4 rounded-xl text-xs text-slate-300 font-mono overflow-x-auto leading-relaxed">
+{`public abstract class Product
+{
+    public string Name { get; set; }
+    public double Price { get; set; }
+
+    protected Product(string name, double price)
+    {
+        Name = name;
+        Price = price;
+    }
+
+    public abstract double CalculateShipping();
+}
+
+public class PhysicalProduct : Product
+{
+    public double Weight { get; set; }
+
+    public PhysicalProduct(string name, double price, double weight) 
+        : base(name, price)
+    {
+        Weight = weight;
+    }
+
+    public override double CalculateShipping()
+    {
+        return Weight * 5.00; // $5.00 per kg
+    }
+}`}
+      </pre>
+    </div>
+
+  </div>
+
+  <div class="mt-16 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/portfolio/" class="hover:text-blue-400 transition">&larr; Back to Home</a>
+    <span>E-Commerce Cart Simulation</span>
+  </div>
+
+</div>

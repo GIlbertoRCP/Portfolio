@@ -82,28 +82,28 @@ import F1Simulation from '../../components/F1Simulation.jsx';
       
       <div class="grid sm:grid-cols-2 gap-6 pt-4">
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">⏱️ Fuel-Corrected Pace</div>
+          <div class="text-purple-400 font-bold text-sm">Fuel-Corrected Pace</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
             Subtracts estimated lap fuel burning weights (adjusted dynamically for tracks, e.g. Monaco vs Spa) and applies a penalty coefficient (~0.03s per kg) to find a driver's true pace.
           </p>
         </div>
         
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">📈 Tyre Degradation Rate</div>
+          <div class="text-purple-400 font-bold text-sm">Tyre Degradation Rate</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
             Computes the linear regression slope of lap times vs. tyre age across stints of at least 5 clean laps.
           </p>
         </div>
 
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">⚡ ERS Efficiency Proxy</div>
+          <div class="text-purple-400 font-bold text-sm">ERS Efficiency Proxy</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
             Calculates the ratio of full-throttle time to braking recovery time during a driver's best push lap relative to the field median.
           </p>
         </div>
 
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">🔋 Asymmetric PU Deployment</div>
+          <div class="text-purple-400 font-bold text-sm">Asymmetric PU Deployment</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
             Calculates Sector 1/Sector 3 ratios to detect battery starvation and ERS clipping.
           </p>

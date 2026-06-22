@@ -1,0 +1,208 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Humanoid Locomotion over Uneven Terrain'
+description: 'Deep Reinforcement Learning (PPO) 3D bipedal agent trained in MuJoCo physics engine to navigate obstacles.'
+---
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-emerald-950/80 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-400">Deep Reinforcement Learning</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Motor Control Project</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Locomotion over Uneven Terrain using Deep RL
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      A 3D bipedal bionic humanoid agent trained using Proximal Policy Optimization (PPO) inside the MuJoCo physics engine to walk across complex obstacles, utilizing a custom vertical LiDAR sensing array and iterative reward shaping.
+    </p>
+  </header>
+
+  {/* Technical Specifications Table */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
+      <p class="text-sm font-semibold text-white">ML &amp; Physics Researcher</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Physics Engine</span>
+      <p class="text-sm font-semibold text-white">MuJoCo (3D Dynamics)</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">RL Algorithm</span>
+      <p class="text-sm font-semibold text-white">PPO (160M+ Steps)</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Sensing Array</span>
+      <p class="text-sm font-semibold text-white">Custom 5-Point LiDAR</p>
+    </div>
+  </section>
+
+  {/* Video Showcase Section */}
+  <section class="space-y-4 mb-16">
+    <h2 class="text-2xl font-display font-extrabold text-white">Locomotion Simulation Showcase</h2>
+    <p class="text-sm text-slate-400">
+      Below is the video demo showing the trained 3D bipedal agent successfully walking over obstacles, navigating the steep ramp, and exhibiting its learned locomotion behavior.
+    </p>
+    <div class="bg-slate-950/80 border border-slate-850 rounded-2xl p-4 flex justify-center shadow-inner">
+      <video 
+        src="/portfolio/motor-control-locomotion.mp4" 
+        class="w-full max-w-2xl rounded-xl border border-slate-800 shadow-2xl"
+        controls 
+        autoplay 
+        muted 
+        loop
+        playsinline
+      >
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
+    
+    {/* Section 1: Abstract */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-400 text-xl font-mono">01/</span> Project Abstract
+      </h2>
+      <p>
+        Locomotion over uneven terrain represents a core challenge in robotics and artificial intelligence. This project details the implementation of a 3D bipedal humanoid agent trained to navigate complex, uneven terrain. By leveraging Proximal Policy Optimization (PPO), the agent underwent 160 million steps of training to bridge the gap between static gaits and dynamic controlled falling.
+      </p>
+      <p>
+        Key milestones include transitioning from standard biped models to a custom bionic variant, designing a rangefinder LiDAR array for obstacle perception, and observing the emergent "Penguin Slide" behavior—a mathematical local optimum discovered by the agent to negotiate a steep ramp.
+      </p>
+    </div>
+
+    {/* Section 2: Implementation */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-400 text-xl font-mono">02/</span> Technical Approach &amp; Physics
+      </h2>
+      <p>
+        To create natural movements, the simulation was developed inside the <strong>MuJoCo</strong> physics engine, employing two key modifications:
+      </p>
+      
+      <ul class="list-disc pl-6 space-y-3 mt-2">
+        <li>
+          <strong class="text-white">Bionic Humanoid Model:</strong> The default humanoid structure was modified by thinning the limb capsules and reducing leg density. This adjustment minimized bulk, allowing for higher leg acceleration and more realistic controlled falling dynamics.
+        </li>
+        <li>
+          <strong class="text-white">Sensing via 5-Point LiDAR:</strong> To prevent the network from simply memorizing specific tracks, a vertical LiDAR rangefinder array was attached to the torso. It fans out vertically to scan the path ahead. A Python <code>VisionObservationWrapper</code> concatenates these range measurements directly into the neural network observation space.
+        </li>
+      </ul>
+    </div>
+
+    {/* Section 3: Hyperparameters */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-400 text-xl font-mono">03/</span> Hyperparameter Strategy
+      </h2>
+      <p>
+        The PPO algorithm was tuned to guarantee learning stability over the 160M+ step process:
+      </p>
+
+      <div class="overflow-x-auto border border-slate-800 rounded-xl bg-slate-950/40">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-slate-800 bg-slate-900/60 font-mono text-slate-400">
+              <th class="p-3 font-semibold">Hyperparameter</th>
+              <th class="p-3 font-semibold">Value</th>
+              <th class="p-3 font-semibold">Purpose</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-900 font-sans text-slate-300">
+            <tr>
+              <td class="p-3 font-semibold font-mono text-slate-200">Clip Range</td>
+              <td class="p-3 font-mono text-emerald-400">0.2</td>
+              <td class="p-3">Prevents catastrophic policy shifts by restricting update bounds.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold font-mono text-slate-200">Entropy Coef</td>
+              <td class="p-3 font-mono text-emerald-400">0.005</td>
+              <td class="p-3">Encourages model exploration to discover stable gaits.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold font-mono text-slate-200">Batch Size</td>
+              <td class="p-3 font-mono text-emerald-400">10,240</td>
+              <td class="p-3">Reduces step noise generated from the complex 3D physics environment.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold font-mono text-slate-200">Learning Rate</td>
+              <td class="p-3 font-mono text-emerald-400">0.00005</td>
+              <td class="p-3">Allows policy fine-tuning without destabilizing learned gaits.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* Section 4: Training and Failures */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-400 text-xl font-mono">04/</span> Training Evolution &amp; Failure Modes
+      </h2>
+      <p>
+        Rather than executing a single continuous run, training was structured using a <strong>chunking method</strong> of 10M to 15M steps per phase. This enabled parallel execution across trials and let us inspect training states. During initial phases, three interesting failure modes were resolved through iterative reward shaping:
+      </p>
+      
+      <div class="grid sm:grid-cols-3 gap-6 pt-4">
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">Hot Stove Paralysis</h4>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Over-penalizing joint acceleration caused the model to value inactivity over movement pain, choosing to collapse immediately.
+          </p>
+        </div>
+        
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">The Drunken Crab</h4>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Before adding lateral velocity penalties, the agent discovered walking sideways was more stable than moving forward, shuffling clumsily.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2">
+          <h4 class="text-xs font-bold text-white uppercase tracking-wider">The RL Suicide</h4>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Setting high fall penalties caused the agent to dive headfirst into the ground to terminate the episode early and minimize penalty accrual.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Section 5: Penguin Slide */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-400 text-xl font-mono">05/</span> Emergent "Penguin Slide" Behavior
+      </h2>
+      <p>
+        In later stages, the agent discovered a fascinating reward hack to negotiate the steepest downward ramp: instead of stepping or leaping onto the landing zone, it dropped to its knees and used forward inertia to slide down.
+      </p>
+      <p>
+        Attempts to penalize this slide resulted in a steep performance decline; the neural network struggled to un-learn this established local optimum without forgetting basic walking policies.
+      </p>
+    </div>
+
+    {/* Section 6: Limitations */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-400 text-xl font-mono">06/</span> Limitations &amp; Future Directions
+      </h2>
+      <p>
+        While robust, the current controller lacks a <strong>standing up recovery policy</strong>. If the agent completes a slide or encounters an off-balance fall, it cannot return to a normal walking gait. Implementing hierarchical policies where a lower-level network recovers standing posture remains a subject for future development.
+      </p>
+    </div>
+
+  </div>
+
+  {/* Page Navigation */}
+  <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/portfolio/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
+    <span>Motor Control Locomotion Project</span>
+  </div>
+
+</div>

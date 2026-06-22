@@ -64,22 +64,22 @@ const sensorStyle = {
 };
 
 const initialNodes = [
-  { id: 'battery', data: { label: '🔋 12V LiPo Battery' }, position: { x: 300, y: 0 }, style: batteryStyle },
+  { id: 'battery', data: { label: '12V LiPo Battery' }, position: { x: 300, y: 0 }, style: batteryStyle },
   
   // Power Management
-  { id: 'buck', data: { label: '⚡ LM2596 Buck Converter (5V)' }, position: { x: 100, y: 140 }, style: logicPowerStyle },
+  { id: 'buck', data: { label: 'LM2596 Buck Converter (5V)' }, position: { x: 100, y: 140 }, style: logicPowerStyle },
   
   // Controller
-  { id: 'esp32', data: { label: '🧠 ESP32 Controller Node\n(Handheld Remote / Game State)' }, position: { x: 80, y: 300 }, style: esp32Style },
-  { id: 'lvlshift', data: { label: '🔌 Level Shifter (3.3V <-> 5V)' }, position: { x: -160, y: 310 }, style: logicPowerStyle },
+  { id: 'esp32', data: { label: 'ESP32 Controller Node\n(Handheld Remote / Game State)' }, position: { x: 80, y: 300 }, style: esp32Style },
+  { id: 'lvlshift', data: { label: 'Level Shifter (3.3V <-> 5V)' }, position: { x: -160, y: 310 }, style: logicPowerStyle },
   
   // Mobility System
-  { id: 'driver', data: { label: '⚙️ L298N Motor Driver' }, position: { x: 520, y: 140 }, style: highPowerStyle },
-  { id: 'motors', data: { label: '🚗 4x Mecanum DC Motors' }, position: { x: 520, y: 290 }, style: highPowerStyle },
+  { id: 'driver', data: { label: 'L298N Motor Driver' }, position: { x: 520, y: 140 }, style: highPowerStyle },
+  { id: 'motors', data: { label: '4x Mecanum DC Motors' }, position: { x: 520, y: 290 }, style: highPowerStyle },
 
   // Peripherals
-  { id: 'servos', data: { label: '🦾 4-DOF Robotic Arm Servos' }, position: { x: 100, y: 460 }, style: logicPowerStyle },
-  { id: 'mpu', data: { label: '📳 MPU6050 Tremor Accelerometer' }, position: { x: 380, y: 460 }, style: sensorStyle },
+  { id: 'servos', data: { label: '4-DOF Robotic Arm Servos' }, position: { x: 100, y: 460 }, style: logicPowerStyle },
+  { id: 'mpu', data: { label: 'MPU6050 Tremor Accelerometer' }, position: { x: 380, y: 460 }, style: sensorStyle },
 ];
 
 const initialEdges = [
@@ -105,7 +105,7 @@ export default function RobotDiagram() {
   return (
     <div className="w-full h-[500px] border border-slate-800/80 bg-slate-950/40 rounded-2xl overflow-hidden relative shadow-inner">
       <div className="absolute top-4 left-4 z-10 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-lg text-xs text-slate-400 font-medium">
-        ℹ️ Nodes are draggable! Hover or drag components to inspect paths.
+        Nodes are draggable! Hover or drag components to inspect paths.
       </div>
       <ReactFlow 
         nodes={nodes} 

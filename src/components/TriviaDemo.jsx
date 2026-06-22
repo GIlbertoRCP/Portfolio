@@ -132,7 +132,9 @@ export default function TriviaDemo() {
       {gameState === 'start' && (
         <div className="text-center py-8 space-y-6">
           <div className="w-16 h-16 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-2xl flex items-center justify-center mx-auto text-3xl font-bold animate-bounce">
-            ⚡
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+            </svg>
           </div>
           <div className="space-y-2">
             <h4 className="text-xl font-display font-bold text-white">Tap-Tap Trivia Mini Quiz</h4>
@@ -142,7 +144,7 @@ export default function TriviaDemo() {
             onClick={startGame}
             className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-semibold shadow-md shadow-blue-900/15 transition-all hover:scale-105"
           >
-            🕹️ Start Quiz Demo
+            Start Quiz Demo
           </button>
         </div>
       )}
@@ -216,13 +218,13 @@ export default function TriviaDemo() {
                 <span className={`text-xs font-bold uppercase tracking-wider ${
                   selectedOptId === activeQuestion.correctId ? 'text-emerald-400' : 'text-red-400'
                 }`}>
-                  {selectedOptId === activeQuestion.correctId ? '✨ Correct Answer!' : '❌ Incorrect Answer'}
+                  {selectedOptId === activeQuestion.correctId ? 'Correct Answer!' : 'Incorrect Answer'}
                 </span>
                 <button 
                   onClick={nextQuestion}
                   className="px-4 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold shadow transition"
                 >
-                  {currentIdx === QUESTIONS.length - 1 ? 'Finish Quiz 🏁' : 'Next Question ➡️'}
+                  {currentIdx === QUESTIONS.length - 1 ? 'Finish Quiz' : 'Next Question'}
                 </button>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed font-mono">
@@ -237,7 +239,9 @@ export default function TriviaDemo() {
       {gameState === 'end' && (
         <div className="text-center py-6 space-y-6">
           <div className="w-16 h-16 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto text-3xl font-bold animate-pulse">
-            🏆
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
           </div>
           <div className="space-y-2">
             <h4 className="text-xl font-display font-bold text-white">Quiz Finished!</h4>
@@ -253,13 +257,13 @@ export default function TriviaDemo() {
               onClick={startGame}
               className="px-5 py-2 border border-slate-800 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition"
             >
-              🔄 Play Again
+              Play Again
             </button>
             <a 
               href="/portfolio/projects/tap-tap-trivia"
               className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1"
             >
-              🎮 Go to Trivia Case Study
+              Go to Trivia Case Study
             </a>
           </div>
         </div>

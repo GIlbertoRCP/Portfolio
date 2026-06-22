@@ -87,12 +87,12 @@ export default function F1Simulation() {
 
       // Add a simulated race incident log
       if (trackCondition === 'Wet') {
-        logs.push('🚨 Incident: Heavy rain in Sector 3 triggers yellow flag on lap 24.');
-        logs.push('🌧️ Pit Strategy: Dynamic switch to Intermediate tyres detected.');
+        logs.push('Incident: Heavy rain in Sector 3 triggers yellow flag on lap 24.');
+        logs.push('Pit Strategy: Dynamic switch to Intermediate tyres detected.');
       } else if (safetyCarRisk === 'High' && Math.random() > 0.3) {
-        logs.push('🚨 Incident: Debris on main straight triggers Safety Car deployment.');
+        logs.push('Incident: Debris on main straight triggers Safety Car deployment.');
       } else {
-        logs.push('🟢 Clean Race: Green flag conditions maintained.');
+        logs.push('Clean Race: Green flag conditions maintained.');
       }
       
       logs.push('[Success] Monte Carlo simulation complete. Resolving win distribution...');
@@ -116,7 +116,7 @@ export default function F1Simulation() {
       {/* Simulation Header */}
       <div>
         <h4 className="text-lg font-display font-bold text-white flex items-center gap-2">
-          🏎️ F1 Setup & Monte Carlo Predictive Engine
+          F1 Setup &amp; Monte Carlo Predictive Engine
         </h4>
         <p className="text-xs text-slate-400">Match up drivers on FastF1 telemetries or run stochastic Monte Carlo trials.</p>
       </div>
@@ -140,10 +140,10 @@ export default function F1Simulation() {
             </select>
             {/* Specs */}
             <div className="text-[11px] text-slate-400 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800/30">
-              <div>🏎️ PU: <span className="text-slate-200">{driverA.pu}</span></div>
-              <div>⚡ ERS Index: <span className="text-slate-200">{driverA.ers}</span></div>
-              <div>📈 Tyre Deg: <span className="text-slate-200">{driverA.tyredeg} s/lap</span></div>
-              <div>⏱️ Base Pace: <span className="text-slate-200">+{driverA.pace}s</span></div>
+              <div>PU: <span className="text-slate-200">{driverA.pu}</span></div>
+              <div>ERS Index: <span className="text-slate-200">{driverA.ers}</span></div>
+              <div>Tyre Deg: <span className="text-slate-200">{driverA.tyredeg} s/lap</span></div>
+              <div>Base Pace: <span className="text-slate-200">+{driverA.pace}s</span></div>
             </div>
           </div>
 
@@ -175,10 +175,10 @@ export default function F1Simulation() {
             </select>
             {/* Specs */}
             <div className="text-[11px] text-slate-400 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800/30">
-              <div>🏎️ PU: <span className="text-slate-200">{driverB.pu}</span></div>
-              <div>⚡ ERS Index: <span className="text-slate-200">{driverB.ers}</span></div>
-              <div>📈 Tyre Deg: <span className="text-slate-200">{driverB.tyredeg} s/lap</span></div>
-              <div>⏱️ Base Pace: <span className="text-slate-200">+{driverB.pace}s</span></div>
+              <div>PU: <span className="text-slate-200">{driverB.pu}</span></div>
+              <div>ERS Index: <span className="text-slate-200">{driverB.ers}</span></div>
+              <div>Tyre Deg: <span className="text-slate-200">{driverB.tyredeg} s/lap</span></div>
+              <div>Base Pace: <span className="text-slate-200">+{driverB.pace}s</span></div>
             </div>
           </div>
         </div>
@@ -233,7 +233,7 @@ export default function F1Simulation() {
             disabled={isSimulating}
             className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold transition shadow-md shadow-blue-900/10 disabled:opacity-50"
           >
-            {isSimulating ? '⌛ Simulating...' : '🚀 Execute 1,000 Trials'}
+            {isSimulating ? 'Simulating...' : 'Execute 1,000 Trials'}
           </button>
         </div>
       </div>
@@ -283,7 +283,7 @@ export default function F1Simulation() {
               {simLogs.map((log, i) => (
                 <div key={i} className="flex gap-2">
                   <span className="text-slate-600">[{i + 1}]</span>
-                  <span className={log.includes('🚨') ? 'text-amber-400' : log.includes('🟢') ? 'text-emerald-400' : 'text-slate-300'}>
+                  <span className={log.includes('Incident:') ? 'text-amber-400' : log.includes('Clean Race:') ? 'text-emerald-400' : 'text-slate-300'}>
                     {log}
                   </span>
                 </div>

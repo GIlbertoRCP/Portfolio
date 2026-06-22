@@ -127,13 +127,13 @@ export default function SdnTelemetryDemo() {
             disabled={isSpiking || activePath === 's2'}
             className="px-3.5 py-1.5 bg-red-600/90 hover:bg-red-500 text-white rounded-lg text-xs font-semibold shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            ⚠️ Inject Traffic Spike
+            Inject Traffic Spike
           </button>
           <button 
             onClick={resetSim}
             className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition"
           >
-            🔄 Reset Simulation
+            Reset Simulation
           </button>
         </div>
       </div>
@@ -188,7 +188,7 @@ export default function SdnTelemetryDemo() {
                 {pollingRate}s
               </span>
               <span className="text-xs text-slate-500 font-mono">
-                {pollingRate === 1 ? '🔥 Intensive Mode' : '❄️ Standby Mode'}
+                {pollingRate === 1 ? 'Intensive Mode' : 'Standby Mode'}
               </span>
             </div>
           </div>
@@ -310,9 +310,9 @@ export default function SdnTelemetryDemo() {
 
         <div className="text-center text-xs font-semibold py-1 px-3.5 bg-slate-900 border border-slate-800 rounded-full">
           {activePath === 's1' ? (
-            <span className="text-blue-400">🟢 Flow Routed via Core Primary (s1)</span>
+            <span className="text-blue-400">Flow Routed via Core Primary (s1)</span>
           ) : (
-            <span className="text-emerald-400">🛡️ Self-Healed: Flow Rerouted to Backup Core (s2)</span>
+            <span className="text-emerald-400">Self-Healed: Flow Rerouted to Backup Core (s2)</span>
           )}
         </div>
       </div>

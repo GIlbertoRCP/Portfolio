@@ -10,16 +10,24 @@ import Layout from '../layouts/Layout.astro';
     <section class="mt-8 md:mt-12 space-y-6 relative">
       <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-950/60 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">
         <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping"></span>
-        Available for Internships & Co-ops
+        Available for Internships &amp; Co-ops
       </div>
       
       <h1 class="text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-white leading-[1.1]">
-        Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Gilberto Romero</span>
+        Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">Gilberto Romero-Cano</span>
       </h1>
       
-      <p class="text-lg sm:text-xl text-slate-400 leading-relaxed max-w-2xl font-sans">
-        I am a Computer Science student at <strong class="text-slate-200">CU Denver</strong> specializing in machine learning, distributed event streaming pipelines, and hardware-integrated embedded systems.
+      <p class="text-lg sm:text-xl text-slate-400 leading-relaxed max-w-3xl font-sans">
+        Computer Science student at <strong class="text-slate-200">CU Denver</strong> with a strong foundation in software architecture, backend development, and machine learning. Experienced in building end-to-end applications, from data modeling in Python to engineering scalable backends in C# and FastAPI.
       </p>
+
+      <!-- Contact Info Row -->
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-400 font-mono pt-2">
+        <div class="flex items-center gap-1">Denver, CO</div>
+        <div class="flex items-center gap-1"><a href="tel:7206936526" class="hover:text-blue-400 transition">(720) 693-6526</a></div>
+        <div class="flex items-center gap-1"><a href="mailto:gilbertorcp712@gmail.com" class="hover:text-blue-400 transition">gilbertorcp712@gmail.com</a></div>
+        <div class="flex items-center gap-1"><a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">linkedin.com/in/gromerocano/</a></div>
+      </div>
 
       <!-- Key Metrics Badge Grid -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 max-w-3xl">
@@ -29,11 +37,11 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
           <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Specialty</span>
-          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">ML & Embedded</span>
+          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">ML &amp; Architecture</span>
         </div>
         <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
           <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Portfolio Work</span>
-          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">4 Major Systems</span>
+          <span class="text-slate-200 text-sm font-semibold mt-0.5 block">5 Major Systems</span>
         </div>
         <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-3.5">
           <span class="text-slate-500 text-[10px] uppercase tracking-wider font-bold block">Interactions</span>
@@ -55,12 +63,12 @@ import Layout from '../layouts/Layout.astro';
     <section id="projects" class="pt-12 space-y-6 scroll-mt-20">
       <div class="border-b border-slate-900 pb-4">
         <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-blue-500/10 border border-blue-500/30 rounded text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2">Primary Core Focus</div>
-        <h2 class="text-3xl font-display font-extrabold text-white">Featured ML & Telemetry Systems</h2>
+        <h2 class="text-3xl font-display font-extrabold text-white">Featured ML &amp; Telemetry Systems</h2>
         <p class="text-xs text-slate-400 mt-1">Deep, end-to-end applications demonstrating machine learning models and distributed infrastructure.</p>
       </div>
       
       <!-- Primary Grid -->
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-3 gap-6">
         
         <!-- Project 1: Predictive SDN -->
         <article class="project-card border border-blue-900/40 hover:border-blue-500/50 rounded-2xl p-6 transition-all duration-300 bg-blue-950/5 hover:bg-blue-950/15 flex flex-col group relative overflow-hidden shadow-lg shadow-blue-950/5">
@@ -69,9 +77,9 @@ import Layout from '../layouts/Layout.astro';
             <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase">CSCI 4930 HL1</span>
             <span class="w-2.5 h-2.5 bg-blue-500 rounded-full shadow-[0_0_8px_#3b82f6]"></span>
           </div>
-          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-blue-400 transition">Predictive SDN Self-Healing</h3>
+          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-blue-400 transition">Predictive Network Telemetry System</h3>
           <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
-            Traffic engineering pipeline using PyTorch LSTM forecasts, stable-baselines3 DQN agents, and Apache Kafka to reroute traffic dynamically.
+            Traffic engineering pipeline using PyTorch LSTM forecasts, Stable-Baselines3 DQN agents, and Apache Kafka to reroute traffic dynamically.
           </p>
           <div class="flex flex-wrap gap-1.5 mb-6">
             <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Kafka</span>
@@ -104,19 +112,40 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </article>
 
+        <!-- Project 3: Humanoid Locomotion -->
+        <article class="project-card border border-emerald-900/40 hover:border-emerald-500/50 rounded-2xl p-6 transition-all duration-300 bg-emerald-950/5 hover:bg-emerald-950/15 flex flex-col group relative overflow-hidden shadow-lg shadow-emerald-950/5">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-2xl pointer-events-none rounded-full"></div>
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold tracking-widest text-emerald-400 uppercase">Reinforcement Learning</span>
+            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-[0_0_8px_#10b981]"></span>
+          </div>
+          <h3 class="text-xl font-display font-extrabold text-white mb-2 group-hover:text-emerald-400 transition">Humanoid Locomotion</h3>
+          <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
+            3D bipedal bionic humanoid agent trained using Proximal Policy Optimization (PPO) in MuJoCo physics engine across 160 million simulation steps.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">MuJoCo</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">PPO (RL)</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">5-Point LiDAR</span>
+          </div>
+          <a href="/portfolio/projects/motor-control-locomotion" class="text-emerald-400 font-semibold text-xs hover:text-emerald-300 transition mt-auto inline-flex items-center gap-1">
+            View Project Details &amp; Video Showcase <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+
       </div>
     </section>
 
     <!-- Secondary Systems & Coursework Section -->
     <section class="space-y-6">
       <div class="border-b border-slate-900 pb-4">
-        <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Systems &amp; Web Coursework</div>
+        <div class="inline-flex items-center gap-1.5 px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Systems &amp; Coursework</div>
         <h2 class="text-2xl font-display font-extrabold text-white font-semibold">Other Engineering Projects</h2>
-        <p class="text-xs text-slate-400 mt-1">Robotics integration and multiplayer app routing architectures developed at CU Denver.</p>
+        <p class="text-xs text-slate-400 mt-1">Robotics, mobile development, and object-oriented systems architectures.</p>
       </div>
 
       <!-- Secondary Grid -->
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-3 gap-6">
         
         <!-- Project 3: Bomb Squad Robot -->
         <article class="project-card border border-slate-900 hover:border-slate-850 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
@@ -140,19 +169,38 @@ import Layout from '../layouts/Layout.astro';
         <!-- Project 4: Tap-Tap Trivia -->
         <article class="project-card border border-slate-900 hover:border-slate-850 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
           <div class="flex justify-between items-start mb-4">
-            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Web App</span>
+            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Mobile App</span>
           </div>
-          <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-blue-400 transition">Tap-Tap Trivia Multiplayer</h3>
+          <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-blue-400 transition">Tap-Tap Trivia (Group Semester App)</h3>
           <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
-            A real-time multiplayer buzzer quiz lobby built using Next.js App Router, featuring scoring based on millisecond response latencies.
+            A responsive React Native front-end buzzer mobile app developed using Git and Agile workflows to coordinate team merges.
           </p>
           <div class="flex flex-wrap gap-1.5 mb-6">
-            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Next.js</span>
-            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Prisma</span>
-            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Framer Motion</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">React Native</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Git / Agile</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">Mobile Dev</span>
           </div>
           <a href="/portfolio/projects/tap-tap-trivia" class="text-slate-400 font-semibold text-xs hover:text-white transition mt-auto inline-flex items-center gap-1">
             View Project Details &amp; Playable Quiz <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </article>
+
+        <!-- Project 5: E-Commerce Cart Simulation -->
+        <article class="project-card border border-slate-900 hover:border-slate-850 rounded-2xl p-6 transition-all duration-300 bg-slate-950/20 hover:bg-slate-950/40 flex flex-col group relative overflow-hidden">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">C# &amp; OOP</span>
+          </div>
+          <h3 class="text-lg font-display font-bold text-white mb-2 group-hover:text-blue-400 transition">E-Commerce Cart Simulation</h3>
+          <p class="text-slate-400 mb-6 flex-grow text-xs leading-relaxed">
+            Modular catalog system using OOP inheritance and polymorphism to integrate digital, physical, and subscription products with Generic Collections.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-6">
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">C#</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">.NET</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-[10px] font-medium text-slate-400">OOP</span>
+          </div>
+          <a href="/portfolio/projects/ecommerce-cart" class="text-slate-400 font-semibold text-xs hover:text-white transition mt-auto inline-flex items-center gap-1">
+            View Project Details &amp; Playable Cart <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
           </a>
         </article>
 
@@ -171,44 +219,48 @@ import Layout from '../layouts/Layout.astro';
         <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
           <span class="text-xs font-bold uppercase tracking-wider text-blue-400 font-display">Languages</span>
           <ul class="space-y-1.5 text-xs text-slate-300">
-            <li class="flex justify-between"><span>Python</span> <span class="text-slate-500 font-mono text-[10px]">Data &amp; ML</span></li>
+            <li class="flex justify-between"><span>C#</span> <span class="text-slate-500 font-mono text-[10px]">OOP Catalog</span></li>
             <li class="flex justify-between"><span>C++</span> <span class="text-slate-500 font-mono text-[10px]">Embedded</span></li>
-            <li class="flex justify-between"><span>TypeScript</span> <span class="text-slate-500 font-mono text-[10px]">Full Stack</span></li>
-            <li class="flex justify-between"><span>C#</span> <span class="text-slate-500 font-mono text-[10px]">Systems</span></li>
-            <li class="flex justify-between"><span>SQL</span> <span class="text-slate-500 font-mono text-[10px]">Database</span></li>
+            <li class="flex justify-between"><span>C</span> <span class="text-slate-500 font-mono text-[10px]">Systems</span></li>
+            <li class="flex justify-between"><span>Python</span> <span class="text-slate-500 font-mono text-[10px]">ML &amp; Data</span></li>
+            <li class="flex justify-between"><span>JavaScript</span> <span class="text-slate-500 font-mono text-[10px]">Web Apps</span></li>
+            <li class="flex justify-between"><span>SQL</span> <span class="text-slate-500 font-mono text-[10px]">Databases</span></li>
           </ul>
         </div>
 
         <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
-          <span class="text-xs font-bold uppercase tracking-wider text-purple-400 font-display">Machine Learning</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400 font-display">Frameworks &amp; Libs</span>
           <ul class="space-y-1.5 text-xs text-slate-300">
-            <li class="flex justify-between"><span>PyTorch</span> <span class="text-slate-500 font-mono text-[10px]">LSTMs</span></li>
-            <li class="flex justify-between"><span>XGBoost</span> <span class="text-slate-500 font-mono text-[10px]">Ranking</span></li>
-            <li class="flex justify-between"><span>Stable Baselines3</span> <span class="text-slate-500 font-mono text-[10px]">RL (DQN)</span></li>
-            <li class="flex justify-between"><span>ONNX Runtime</span> <span class="text-slate-500 font-mono text-[10px]">Optimization</span></li>
-            <li class="flex justify-between"><span>Scikit-Learn</span> <span class="text-slate-500 font-mono text-[10px]">Analytics</span></li>
-          </ul>
-        </div>
-
-        <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
-          <span class="text-xs font-bold uppercase tracking-wider text-yellow-400 font-display">Full Stack &amp; Ops</span>
-          <ul class="space-y-1.5 text-xs text-slate-300">
-            <li class="flex justify-between"><span>Next.js / React</span> <span class="text-slate-500 font-mono text-[10px]">Client</span></li>
             <li class="flex justify-between"><span>FastAPI</span> <span class="text-slate-500 font-mono text-[10px]">API Engine</span></li>
-            <li class="flex justify-between"><span>Apache Kafka</span> <span class="text-slate-500 font-mono text-[10px]">Streaming</span></li>
-            <li class="flex justify-between"><span>Docker / Compose</span> <span class="text-slate-500 font-mono text-[10px]">Ops</span></li>
-            <li class="flex justify-between"><span>Prisma ORM</span> <span class="text-slate-500 font-mono text-[10px]">Database</span></li>
+            <li class="flex justify-between"><span>Pandas / NumPy</span> <span class="text-slate-500 font-mono text-[10px]">Data Prep</span></li>
+            <li class="flex justify-between"><span>Scikit-learn</span> <span class="text-slate-500 font-mono text-[10px]">Models</span></li>
+            <li class="flex justify-between"><span>React Native</span> <span class="text-slate-500 font-mono text-[10px]">Mobile UI</span></li>
+            <li class="flex justify-between"><span>Tailwind CSS</span> <span class="text-slate-500 font-mono text-[10px]">Styling</span></li>
+            <li class="flex justify-between"><span>Vercel</span> <span class="text-slate-500 font-mono text-[10px]">Hosting</span></li>
           </ul>
         </div>
 
         <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
-          <span class="text-xs font-bold uppercase tracking-wider text-red-400 font-display">IoT &amp; Hardware</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-yellow-400 font-display">Developer Tools</span>
+          <ul class="space-y-1.5 text-xs text-slate-300">
+            <li class="flex justify-between"><span>Git / GitHub</span> <span class="text-slate-500 font-mono text-[10px]">VCS</span></li>
+            <li class="flex justify-between"><span>Docker</span> <span class="text-slate-500 font-mono text-[10px]">Containers</span></li>
+            <li class="flex justify-between"><span>Postman</span> <span class="text-slate-500 font-mono text-[10px]">APIs</span></li>
+            <li class="flex justify-between"><span>Linux Bash</span> <span class="text-slate-500 font-mono text-[10px]">Scripts</span></li>
+            <li class="flex justify-between"><span>VS Code / Emacs</span> <span class="text-slate-500 font-mono text-[10px]">Editors</span></li>
+            <li class="flex justify-between"><span>Mininet</span> <span class="text-slate-500 font-mono text-[10px]">Network Emul</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-950/40 border border-slate-900 rounded-2xl p-5 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-red-400 font-display">Specialty &amp; Systems</span>
           <ul class="space-y-1.5 text-xs text-slate-300">
             <li class="flex justify-between"><span>ESP32 MCUs</span> <span class="text-slate-500 font-mono text-[10px]">Processors</span></li>
             <li class="flex justify-between"><span>ESP-NOW Link</span> <span class="text-slate-500 font-mono text-[10px]">P2P Protocol</span></li>
-            <li class="flex justify-between"><span>FreeRTOS</span> <span class="text-slate-500 font-mono text-[10px]">Multitasking</span></li>
-            <li class="flex justify-between"><span>MPU6050</span> <span class="text-slate-500 font-mono text-[10px]">Accelerometers</span></li>
-            <li class="flex justify-between"><span>I2C / SPI / PWM</span> <span class="text-slate-500 font-mono text-[10px]">Interfaces</span></li>
+            <li class="flex justify-between"><span>FreeRTOS</span> <span class="text-slate-500 font-mono text-[10px]">Multitask</span></li>
+            <li class="flex justify-between"><span>PyTorch</span> <span class="text-slate-500 font-mono text-[10px]">LSTMs</span></li>
+            <li class="flex justify-between"><span>Stable Baselines3</span> <span class="text-slate-500 font-mono text-[10px]">DQN (RL)</span></li>
+            <li class="flex justify-between"><span>ONNX Runtime</span> <span class="text-slate-500 font-mono text-[10px]">Optimized</span></li>
           </ul>
         </div>
 

@@ -8,13 +8,25 @@ import Layout from '../layouts/Layout.astro';
     
     <!-- Profile Summary -->
     <section class="space-y-6">
-      <h1 class="text-4xl font-display font-extrabold text-white">About Me</h1>
-      <p class="text-lg text-slate-400 leading-relaxed font-sans">
-        Hi! I'm Gilberto Romero-Cano, a Computer Science student at the <strong>University of Colorado Denver</strong>.
-      </p>
-      <p class="text-slate-300 leading-relaxed">
-        I've always been drawn to the intersection of hardware and software. I love understanding how electric currents and logic gates translate into high-level programming instructions, and how these systems can be coordinated using distributed, modern cloud architectures.
-      </p>
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-900 pb-6">
+        <div>
+          <h1 class="text-4xl font-display font-extrabold text-white">Gilberto Romero-Cano</h1>
+          <p class="text-lg text-blue-400 font-sans mt-1">Computer Science Student &amp; Software Developer</p>
+        </div>
+        <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-4 text-xs font-mono text-slate-300 space-y-1.5 md:min-w-[280px] shadow-md shadow-black/20">
+          <p>Denver, CO</p>
+          <p><a href="tel:7206936526" class="hover:text-blue-400 transition">(720) 693-6526</a></p>
+          <p><a href="mailto:gilbertorcp712@gmail.com" class="hover:text-blue-400 transition">gilbertorcp712@gmail.com</a></p>
+          <p><a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">linkedin.com/in/gromerocano/</a></p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h2 class="text-xl font-display font-extrabold text-white">Career Summary</h2>
+        <p class="text-slate-300 leading-relaxed text-[15px]">
+          Computer Science student with a strong foundation in software architecture, backend development, and machine learning. Experienced in building end-to-end applications, from data modeling and predictive pipeline implementation in Python to engineering scalable backends using C# and FastAPI. Passionate about solving problems, managing Linux/Docker environments, and translating raw data into functional software solutions.
+        </p>
+      </div>
     </section>
 
     <!-- Education Timeline -->
@@ -25,21 +37,21 @@ import Layout from '../layouts/Layout.astro';
         
         <div class="relative">
           <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-slate-950"></div>
-          <span class="text-xs text-slate-500 font-bold font-mono">EXPECTED GRADUATION 2027</span>
-          <h4 class="text-base font-semibold text-white mt-1">B.S. in Computer Science</h4>
+          <span class="text-xs text-slate-500 font-bold font-mono">EXPECTED GRADUATION: MAY 2027</span>
+          <h4 class="text-base font-semibold text-white mt-1">Bachelor of Science in Computer Science</h4>
           <p class="text-xs text-slate-400 font-medium">University of Colorado Denver</p>
-          <p class="text-xs text-slate-400 mt-2 font-mono">
-            Focus: Software Engineering, Distributed Systems, ML Inference, and Embedded IoT Systems.
-          </p>
-        </div>
-
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 border-4 border-slate-950"></div>
-          <span class="text-xs text-slate-500 font-bold font-mono">KEY COMPLETED COURSEWORK</span>
-          <h4 class="text-base font-semibold text-white mt-1">CSCI 4930: Embedded Systems</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-            Hands-on work developing firmware for node arrays using microcontrollers. Built physical sensors, tremor-detection accelerometer loops, and P2P communication systems.
-          </p>
+          
+          <div class="mt-4">
+            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Relevant Coursework</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Data Structures &amp; Algorithms</span>
+              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Machine Learning</span>
+              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Software Engineering</span>
+              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Computer Networks</span>
+              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Operating Systems</span>
+              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Databases</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -48,14 +60,14 @@ import Layout from '../layouts/Layout.astro';
     <!-- Technical Focus Areas -->
     <section class="space-y-6">
       <h2 class="text-2xl font-display font-extrabold text-white">Technical Core Philosophy</h2>
-      <p class="text-slate-300 leading-relaxed">
+      <p class="text-slate-300 leading-relaxed text-[15px]">
         I believe that modern computer science demands versatility. I don't confine myself to one layer of the technology stack:
       </p>
       
       <div class="grid sm:grid-cols-2 gap-6 mt-4">
         <div class="bg-slate-950/40 border border-slate-900 rounded-xl p-5 space-y-2">
           <h4 class="text-sm font-bold text-white flex items-center gap-2">
-            <span class="text-blue-400">🤖</span> IoT &amp; Hardware Integration
+            <span class="text-blue-400 font-semibold font-mono">/</span> IoT &amp; Hardware Integration
           </h4>
           <p class="text-xs text-slate-400 leading-relaxed">
             Comfortable flashing C++ microcontrollers, wiring analog peripherals, and routing telemetry queues across wireless peer-to-peer radio meshes (like ESP-NOW).
@@ -64,7 +76,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="bg-slate-950/40 border border-slate-900 rounded-xl p-5 space-y-2">
           <h4 class="text-sm font-bold text-white flex items-center gap-2">
-            <span class="text-purple-400">📈</span> Data Pipelines &amp; ML
+            <span class="text-purple-400 font-semibold font-mono">/</span> Data Pipelines &amp; ML
           </h4>
           <p class="text-xs text-slate-400 leading-relaxed">
             Experienced with event-streaming brokers like Apache Kafka, deep learning libraries in PyTorch, and optimization techniques (dynamic ONNX compilation and INT8 quantization).
