@@ -13,7 +13,7 @@ export default defineConfig({
   
   // Set the base path to match your repository name on GitHub (e.g. '/portfolio')
   // If deploying to a personal user page (https://GIlbertoRCP.github.io/), set base to '/'
-  base: '/portfolio',
+  base: '/Portfolio',
   
   integrations: [
     mdx(), 
