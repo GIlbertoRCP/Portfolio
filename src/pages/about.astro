@@ -8,22 +8,36 @@ import Layout from '../layouts/Layout.astro';
     
     <!-- Profile Summary -->
     <section class="space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-900 pb-6">
+      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 border-b border-slate-850 pb-8">
         <div>
-          <h1 class="text-4xl font-display font-extrabold text-white">Gilberto Romero-Cano</h1>
-          <p class="text-lg text-blue-400 font-sans mt-1">Computer Science Student &amp; Software Developer</p>
+          <h1 class="text-4xl font-display font-extrabold text-white uppercase tracking-tight">Gilberto Romero-Cano</h1>
+          <p class="text-xs font-mono text-blue-400 uppercase tracking-widest mt-1.5">// COMPUTER SCIENCE STUDENT &amp; DEVELOPER</p>
         </div>
-        <div class="bg-slate-900/40 border border-slate-900 rounded-xl p-4 text-xs font-mono text-slate-300 space-y-1.5 md:min-w-[280px] shadow-md shadow-black/20">
-          <p>Denver, CO</p>
-          <p><a href="tel:7206936526" class="hover:text-blue-400 transition">(720) 693-6526</a></p>
-          <p><a href="mailto:gilbertorcp712@gmail.com" class="hover:text-blue-400 transition">gilbertorcp712@gmail.com</a></p>
-          <p><a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">linkedin.com/in/gromerocano/</a></p>
+        
+        <!-- Technical Profile Data Block -->
+        <div class="bg-slate-950 border border-slate-850 p-4 text-[11px] font-mono text-slate-400 space-y-2 md:min-w-[280px] shadow-flat-slate select-none">
+          <div class="flex justify-between border-b border-slate-900 pb-1.5">
+            <span class="text-slate-650 text-slate-500">LOCATION:</span>
+            <span class="text-slate-200">DENVER, CO</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-900 pb-1.5">
+            <span class="text-slate-650 text-slate-500">TELEPHONE:</span>
+            <a href="tel:7206936526" class="text-slate-200 hover:text-blue-450 hover:text-blue-400 transition">(720) 693-6526</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-900 pb-1.5">
+            <span class="text-slate-650 text-slate-500">EMAIL:</span>
+            <a href="mailto:gilbertorcp712@gmail.com" class="text-slate-200 hover:text-blue-450 hover:text-blue-400 transition">gilbertorcp712@gmail.com</a>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-650 text-slate-500">LINKEDIN:</span>
+            <a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="text-slate-200 hover:text-blue-450 hover:text-blue-400 transition">gromerocano</a>
+          </div>
         </div>
       </div>
 
       <div class="space-y-4">
-        <h2 class="text-xl font-display font-extrabold text-white">Career Summary</h2>
-        <p class="text-slate-300 leading-relaxed text-[15px]">
+        <h2 class="text-lg font-mono font-bold text-white uppercase tracking-wider">// 01 // CAREER SUMMARY</h2>
+        <p class="text-slate-400 leading-relaxed text-sm">
           Computer Science student with a strong foundation in software architecture, backend development, and machine learning. Experienced in building end-to-end applications, from data modeling and predictive pipeline implementation in Python to engineering scalable backends using C# and FastAPI. Passionate about solving problems, managing Linux/Docker environments, and translating raw data into functional software solutions.
         </p>
       </div>
@@ -31,25 +45,27 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Education Timeline -->
     <section class="space-y-6">
-      <h2 class="text-2xl font-display font-extrabold text-white">Education &amp; Coursework</h2>
+      <h2 class="text-lg font-mono font-bold text-white uppercase tracking-wider">// 02 // EDUCATION &amp; COURSEWORK</h2>
       
-      <div class="border-l-2 border-slate-900 pl-6 space-y-8">
+      <div class="border-l border-dashed border-slate-800 pl-6 space-y-8 ml-1.5 select-none">
         
         <div class="relative">
-          <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-blue-500 border-4 border-slate-950"></div>
-          <span class="text-xs text-slate-500 font-bold font-mono">EXPECTED GRADUATION: MAY 2027</span>
-          <h4 class="text-base font-semibold text-white mt-1">Bachelor of Science in Computer Science</h4>
-          <p class="text-xs text-slate-400 font-medium">University of Colorado Denver</p>
+          <!-- Square timeline node -->
+          <div class="absolute -left-[30.5px] top-1.5 w-2 h-2 bg-blue-500 border border-slate-950"></div>
+          
+          <span class="text-[10px] text-slate-500 font-bold font-mono">EXPECTED GRADUATION: MAY 2027</span>
+          <h4 class="text-sm font-bold text-white mt-1 uppercase tracking-tight">Bachelor of Science in Computer Science</h4>
+          <p class="text-xs text-slate-500">University of Colorado Denver</p>
           
           <div class="mt-4">
-            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block mb-2">Relevant Coursework</span>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Data Structures &amp; Algorithms</span>
-              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Machine Learning</span>
-              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Software Engineering</span>
-              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Computer Networks</span>
-              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Operating Systems</span>
-              <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-300 font-medium">Databases</span>
+            <span class="text-[9px] text-slate-600 font-bold uppercase font-mono block mb-2">// RELEVANT_COURSEWORK</span>
+            <div class="flex flex-wrap gap-2 font-mono text-[9px]">
+              <span class="px-2.5 py-1 bg-slate-950 border border-slate-850 text-slate-400">DATA STRUCTURES &amp; ALGORITHMS</span>
+              <span class="px-2.5 py-1 bg-slate-950 border border-slate-850 text-slate-400">MACHINE LEARNING</span>
+              <span class="px-2.5 py-1 bg-slate-950 border border-slate-850 text-slate-400">SOFTWARE ENGINEERING</span>
+              <span class="px-2.5 py-1 bg-slate-950 border border-slate-850 text-slate-400">COMPUTER NETWORKS</span>
+              <span class="px-2.5 py-1 bg-slate-950 border border-slate-850 text-slate-400">OPERATING SYSTEMS</span>
+              <span class="px-2.5 py-1 bg-slate-950 border border-slate-850 text-slate-400">DATABASES</span>
             </div>
           </div>
         </div>
@@ -59,26 +75,28 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- Technical Focus Areas -->
     <section class="space-y-6">
-      <h2 class="text-2xl font-display font-extrabold text-white">Technical Core Philosophy</h2>
-      <p class="text-slate-300 leading-relaxed text-[15px]">
+      <h2 class="text-lg font-mono font-bold text-white uppercase tracking-wider">// 03 // TECHNICAL CORE PHILOSOPHY</h2>
+      <p class="text-slate-400 leading-relaxed text-sm">
         I believe that modern computer science demands versatility. I don't confine myself to one layer of the technology stack:
       </p>
       
       <div class="grid sm:grid-cols-2 gap-6 mt-4">
-        <div class="bg-slate-950/40 border border-slate-900 rounded-xl p-5 space-y-2">
-          <h4 class="text-sm font-bold text-white flex items-center gap-2">
-            <span class="text-blue-400 font-semibold font-mono">/</span> IoT &amp; Hardware Integration
+        <!-- Philosophy Card 1 -->
+        <div class="bg-[#0f1115] border border-slate-850 p-5 space-y-3 shadow-flat-slate">
+          <h4 class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
+            <span class="text-blue-500 font-bold">/</span> IOT &amp; HARDWARE INTEGRATION
           </h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
             Comfortable flashing C++ microcontrollers, wiring analog peripherals, and routing telemetry queues across wireless peer-to-peer radio meshes (like ESP-NOW).
           </p>
         </div>
 
-        <div class="bg-slate-950/40 border border-slate-900 rounded-xl p-5 space-y-2">
-          <h4 class="text-sm font-bold text-white flex items-center gap-2">
-            <span class="text-purple-400 font-semibold font-mono">/</span> Data Pipelines &amp; ML
+        <!-- Philosophy Card 2 -->
+        <div class="bg-[#0f1115] border border-slate-855 border-slate-850 p-5 space-y-3 shadow-flat-slate">
+          <h4 class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
+            <span class="text-purple-500 font-bold">/</span> DATA PIPELINES &amp; ML
           </h4>
-          <p class="text-xs text-slate-400 leading-relaxed">
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
             Experienced with event-streaming brokers like Apache Kafka, deep learning libraries in PyTorch, and optimization techniques (dynamic ONNX compilation and INT8 quantization).
           </p>
         </div>
@@ -86,10 +104,10 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- Call to action -->
-    <section class="pt-6 border-t border-slate-900 flex justify-between items-center">
-      <span class="text-xs text-slate-500 font-mono">Denver, Colorado</span>
-      <a href="https://github.com/GIlbertoRCP" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-400 hover:underline font-semibold flex items-center gap-1">
-        Inspect GitHub Repositories &rarr;
+    <section class="pt-6 border-t border-slate-850 flex justify-between items-center select-none font-mono text-[10px]">
+      <span class="text-slate-500">DENVER, COLORADO</span>
+      <a href="https://github.com/GIlbertoRCP" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-bold flex items-center gap-1">
+        [INSPECT GITHUB REPOSITORIES] &rarr;
       </a>
     </section>
 

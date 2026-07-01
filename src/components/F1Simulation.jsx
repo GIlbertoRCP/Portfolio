@@ -22,7 +22,6 @@ export default function F1Simulation() {
 
   // Bradley-Terry probability calculation
   const getWinProbability = (da, db) => {
-    // base ratings based on speed, deg, and pace
     const ratingA = (10 - da.pace * 10) + (da.speedTrap - 325) * 0.4 - (da.tyredeg * 50) + (da.ers * 5);
     const ratingB = (10 - db.pace * 10) + (db.speedTrap - 325) * 0.4 - (db.tyredeg * 50) + (db.ers * 5);
     
@@ -36,10 +35,9 @@ export default function F1Simulation() {
   // Monte Carlo simulation runner
   const runMonteCarlo = () => {
     setIsSimulating(true);
-    setSimLogs(['Initializing 1,000 stochastic trials...', 'Injecting starting grid anchor weights...']);
+    setSimLogs(['[STOCHASTIC] INITIALIZING 1,000 TRIAL ITERATIONS...', '[STOCHASTIC] INJECTING COEF WEIGHTS FROM QUALITY GRID...']);
     
     setTimeout(() => {
-      // Setup base odds & modifiers based on track
       let crashRate = 0.02;
       let varianceFactor = 0.05;
       
@@ -52,32 +50,28 @@ export default function F1Simulation() {
       }
 
       const logs = [
-        `[Setup] Track state: ${trackCondition} | Safety Car probability: ${safetyCarRisk}`,
-        '[Simulation] Applying Bradley-Terry logistic matchup equations...',
-        '[Stochastic] Sampling fuel load detrending and Tyre Life degradation...'
+        `[SETUP] TRACK STATE: ${trackCondition.toUpperCase()} // SAFETY CAR PROBABILITY: ${safetyCarRisk.toUpperCase()}`,
+        '[SIMULATION] RESOLVING RADIAL MATCHUP Preferential Odds...',
+        '[SIMULATION] COMPILING STOCHASTIC TYRE LIFE DEGRADATION DECAY...'
       ];
 
-      // Run simulation trials
       const wins = DRIVERS.reduce((acc, curr) => ({ ...acc, [curr.id]: 0 }), {});
       const dnfs = DRIVERS.reduce((acc, curr) => ({ ...acc, [curr.id]: 0 }), {});
 
       for (let i = 0; i < 1000; i++) {
         const scores = DRIVERS.map(d => {
-          // Check DNF
           const isDnf = Math.random() < (crashRate + (d.tyredeg * 0.2));
           if (isDnf) {
             dnfs[d.id]++;
             return { id: d.id, score: -999 };
           }
           
-          // Random normal-like performance score (lower pace = better)
           const basePerf = d.pace;
           const randomFactor = (Math.random() - 0.5) * varianceFactor;
           const score = basePerf + randomFactor;
           return { id: d.id, score };
         });
 
-        // Sort score ascending (lowest score/pace delta wins)
         scores.sort((a, b) => a.score - b.score);
         const winnerId = scores[0].id;
         if (scores[0].score !== -999) {
@@ -85,19 +79,16 @@ export default function F1Simulation() {
         }
       }
 
-      // Add a simulated race incident log
       if (trackCondition === 'Wet') {
-        logs.push('Incident: Heavy rain in Sector 3 triggers yellow flag on lap 24.');
-        logs.push('Pit Strategy: Dynamic switch to Intermediate tyres detected.');
+        logs.push('INCIDENT: DEBRIS/RAIN IN SECTOR 3 TRIGGERS PIT INTERMEDIATES.');
       } else if (safetyCarRisk === 'High' && Math.random() > 0.3) {
-        logs.push('Incident: Debris on main straight triggers Safety Car deployment.');
+        logs.push('INCIDENT: SPECTATOR OR CLUTCH FAULT TRIGGERS FULL SAFETY CAR.');
       } else {
-        logs.push('Clean Race: Green flag conditions maintained.');
+        logs.push('INCIDENT: GREEN FLAG CONTINUITY THROUGHOUT ENTIRE SECTOR.');
       }
       
-      logs.push('[Success] Monte Carlo simulation complete. Resolving win distribution...');
+      logs.push('[STOCHASTIC] GAUSSIAN RUN CONCLUDED SUCCESSFULLY.');
 
-      // Formatting results
       const results = DRIVERS.map(d => ({
         ...d,
         winPercent: Math.round((wins[d.id] / 1000) * 100),
@@ -111,74 +102,79 @@ export default function F1Simulation() {
   };
 
   return (
-    <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-8 select-none font-sans">
+    <div className="w-full bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate space-y-8 select-none font-mono text-xs">
       
       {/* Simulation Header */}
-      <div>
-        <h4 className="text-lg font-display font-bold text-white flex items-center gap-2">
-          F1 Setup &amp; Monte Carlo Predictive Engine
-        </h4>
-        <p className="text-xs text-slate-400">Match up drivers on FastF1 telemetries or run stochastic Monte Carlo trials.</p>
+      <div className="border-b border-slate-850 pb-3 flex justify-between items-center">
+        <div>
+          <h4 className="text-sm font-bold text-white font-mono uppercase tracking-wider">
+            [SYS_UNIT // F1_MONTE_CARLO_SIMULATOR]
+          </h4>
+          <p className="text-[10px] text-slate-500 mt-1">Evaluates pairwise preferences on telemetry data blocks.</p>
+        </div>
+        <div className="text-[10px] text-slate-500 uppercase">
+          REF: F1-ORACLE-MC-04
+        </div>
       </div>
 
       {/* Part 1: Bradley-Terry Matchup Matrix */}
-      <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-5 space-y-4">
-        <h5 className="text-sm font-semibold text-slate-300">Pairwise Head-to-Head Win Probability</h5>
+      <div className="border border-slate-850 bg-slate-950 p-5 space-y-4">
+        <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">// STEP_01 // PAIRWISE COMPARATOR MATRIX</h5>
         
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col sm:flex-row items-stretch gap-6">
           {/* Driver A Selection */}
-          <div className="w-full sm:w-2/5 space-y-2">
-            <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Driver A</label>
+          <div className="w-full sm:w-2/5 space-y-3">
+            <label className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">DRIVER_A [REF]</label>
             <select 
               value={driverA.id} 
               onChange={(e) => setDriverA(DRIVERS.find(d => d.id === e.target.value))}
-              className="w-full bg-slate-900 border border-slate-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+              className="w-full bg-[#0f1115] border border-slate-800 text-white rounded-none px-3 py-2 text-xs focus:outline-none focus:border-blue-500 font-mono"
             >
               {DRIVERS.map(d => (
-                <option key={d.id} value={d.id} disabled={d.id === driverB.id}>{d.name} ({d.team})</option>
+                <option key={d.id} value={d.id} disabled={d.id === driverB.id}>{d.name.toUpperCase()} ({d.team.toUpperCase()})</option>
               ))}
             </select>
             {/* Specs */}
-            <div className="text-[11px] text-slate-400 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800/30">
-              <div>PU: <span className="text-slate-200">{driverA.pu}</span></div>
-              <div>ERS Index: <span className="text-slate-200">{driverA.ers}</span></div>
-              <div>Tyre Deg: <span className="text-slate-200">{driverA.tyredeg} s/lap</span></div>
-              <div>Base Pace: <span className="text-slate-200">+{driverA.pace}s</span></div>
+            <div className="text-[10px] text-slate-450 text-slate-400 space-y-1.5 bg-[#0f1115]/50 p-3 border border-slate-900">
+              <div className="flex justify-between"><span>POWER_UNIT:</span> <span className="text-slate-200">{driverA.pu}</span></div>
+              <div className="flex justify-between"><span>ERS_EFFICIENCY:</span> <span className="text-slate-200">{driverA.ers}</span></div>
+              <div className="flex justify-between"><span>TYRE_DEG_COEF:</span> <span className="text-slate-200">+{driverA.tyredeg}s</span></div>
+              <div className="flex justify-between"><span>PACE_DELTA:</span> <span className="text-slate-200">+{driverA.pace}s</span></div>
             </div>
           </div>
 
           {/* Probability Indicator */}
-          <div className="flex flex-col items-center justify-center space-y-2 w-full sm:w-1/5 py-4">
-            <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Victory Odds</div>
-            <div className="flex items-center gap-1.5 font-display font-extrabold text-2xl">
+          <div className="flex flex-col items-center justify-center space-y-3 w-full sm:w-1/5 py-4 border-y sm:border-y-0 sm:border-x border-slate-900 px-4">
+            <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">PROB_DISTRIBUTION</div>
+            <div className="flex items-center gap-1.5 font-mono font-bold text-lg">
               <span className="text-blue-400">{probA}%</span>
-              <span className="text-slate-600 text-xs">vs</span>
+              <span className="text-slate-600 text-xs font-normal">v</span>
               <span className="text-purple-400">{probB}%</span>
             </div>
-            <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden flex">
-              <div className="h-full bg-blue-500" style={{ width: `${probA}%` }}></div>
-              <div className="h-full bg-purple-500" style={{ width: `${probB}%` }}></div>
+            <div className="w-full bg-slate-900 h-3 border border-slate-850 flex">
+              <div className="h-full bg-blue-600" style={{ width: `${probA}%` }}></div>
+              <div className="h-full bg-purple-600" style={{ width: `${probB}%` }}></div>
             </div>
           </div>
 
           {/* Driver B Selection */}
-          <div className="w-full sm:w-2/5 space-y-2">
-            <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Driver B</label>
+          <div className="w-full sm:w-2/5 space-y-3">
+            <label className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">DRIVER_B [COMP]</label>
             <select 
               value={driverB.id} 
               onChange={(e) => setDriverB(DRIVERS.find(d => d.id === e.target.value))}
-              className="w-full bg-slate-900 border border-slate-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500"
+              className="w-full bg-[#0f1115] border border-slate-800 text-white rounded-none px-3 py-2 text-xs focus:outline-none focus:border-blue-500 font-mono"
             >
               {DRIVERS.map(d => (
-                <option key={d.id} value={d.id} disabled={d.id === driverA.id}>{d.name} ({d.team})</option>
+                <option key={d.id} value={d.id} disabled={d.id === driverA.id}>{d.name.toUpperCase()} ({d.team.toUpperCase()})</option>
               ))}
             </select>
             {/* Specs */}
-            <div className="text-[11px] text-slate-400 space-y-1 bg-slate-900/50 p-3 rounded-lg border border-slate-800/30">
-              <div>PU: <span className="text-slate-200">{driverB.pu}</span></div>
-              <div>ERS Index: <span className="text-slate-200">{driverB.ers}</span></div>
-              <div>Tyre Deg: <span className="text-slate-200">{driverB.tyredeg} s/lap</span></div>
-              <div>Base Pace: <span className="text-slate-200">+{driverB.pace}s</span></div>
+            <div className="text-[10px] text-slate-400 space-y-1.5 bg-[#0f1115]/50 p-3 border border-slate-900">
+              <div className="flex justify-between"><span>POWER_UNIT:</span> <span className="text-slate-200">{driverB.pu}</span></div>
+              <div className="flex justify-between"><span>ERS_EFFICIENCY:</span> <span className="text-slate-200">{driverB.ers}</span></div>
+              <div className="flex justify-between"><span>TYRE_DEG_COEF:</span> <span className="text-slate-200">+{driverB.tyredeg}s</span></div>
+              <div className="flex justify-between"><span>PACE_DELTA:</span> <span className="text-slate-200">+{driverB.pace}s</span></div>
             </div>
           </div>
         </div>
@@ -187,19 +183,19 @@ export default function F1Simulation() {
 
       {/* Part 2: Monte Carlo Simulator Controls */}
       <div className="space-y-4">
-        <h5 className="text-sm font-semibold text-slate-300">Run Monte Carlo Simulation (1,000 Runs)</h5>
+        <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">// STEP_02 // STOCHASTIC PARAMETERS &amp; MONTE CARLO SETUP</h5>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
           <div>
-            <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-2">Track Condition</label>
-            <div className="flex bg-slate-950 p-1 border border-slate-800 rounded-lg">
+            <label className="text-[9px] text-slate-550 text-slate-500 font-bold uppercase tracking-wider block mb-2">TRACK_STATE</label>
+            <div className="flex border border-slate-850 p-0.5 bg-slate-950">
               {['Dry', 'Damp', 'Wet'].map((cond) => (
                 <button
                   key={cond}
                   onClick={() => setTrackCondition(cond)}
-                  className={`flex-1 text-center py-1 text-xs font-semibold rounded-md transition ${
+                  className={`flex-1 text-center py-1 text-[9px] font-bold uppercase tracking-wider transition ${
                     trackCondition === cond 
-                      ? 'bg-blue-600 text-white shadow' 
+                      ? 'bg-blue-600 text-white' 
                       : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
@@ -210,15 +206,15 @@ export default function F1Simulation() {
           </div>
 
           <div>
-            <label className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mb-2">Safety Car Risk</label>
-            <div className="flex bg-slate-950 p-1 border border-slate-800 rounded-lg">
+            <label className="text-[9px] text-slate-500 font-bold uppercase tracking-wider block mb-2">SAFETY_CAR_SCENARIO</label>
+            <div className="flex border border-slate-850 p-0.5 bg-slate-950">
               {['Low', 'Medium', 'High'].map((risk) => (
                 <button
                   key={risk}
                   onClick={() => setSafetyCarRisk(risk)}
-                  className={`flex-1 text-center py-1 text-xs font-semibold rounded-md transition ${
+                  className={`flex-1 text-center py-1 text-[9px] font-bold uppercase tracking-wider transition ${
                     safetyCarRisk === risk 
-                      ? 'bg-blue-600 text-white shadow' 
+                      ? 'bg-blue-600 text-white' 
                       : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
@@ -231,44 +227,44 @@ export default function F1Simulation() {
           <button
             onClick={runMonteCarlo}
             disabled={isSimulating}
-            className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold transition shadow-md shadow-blue-900/10 disabled:opacity-50"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white border border-blue-500 font-bold transition shadow-flat-slate disabled:opacity-50 text-[10px] uppercase tracking-wider"
           >
-            {isSimulating ? 'Simulating...' : 'Execute 1,000 Trials'}
+            {isSimulating ? 'SIMULATION_RUNNING...' : 'EXECUTE 1,000 TRIALS'}
           </button>
         </div>
       </div>
 
       {/* Part 3: Simulation Output */}
       {(simResults || isSimulating) && (
-        <div className="grid md:grid-cols-2 gap-6 bg-slate-950/40 border border-slate-800/80 rounded-xl p-5">
+        <div className="grid md:grid-cols-2 gap-6 bg-slate-950 border border-slate-850 p-5 shadow-inner">
           
           {/* Win Probability leaderboard */}
           <div className="space-y-4">
-            <h6 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-800 pb-2">Predicted Finishing Distribution</h6>
+            <h6 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-900 pb-2">// OUT // FINISHING_ORDER_DISTR</h6>
             {isSimulating ? (
-              <div className="space-y-4 py-8 animate-pulse flex flex-col items-center justify-center">
-                <div className="w-10 h-10 border-4 border-t-blue-500 border-slate-800 rounded-full animate-spin"></div>
-                <span className="text-xs text-slate-500 font-semibold font-mono">Running Box-Muller normal transforms...</span>
+              <div className="space-y-3 py-8 flex flex-col items-center justify-center text-center">
+                <div className="w-6 h-6 border-2 border-t-blue-500 border-slate-800 animate-spin"></div>
+                <span className="text-[10px] text-slate-500 font-mono">SAMPLING COVARIANCE SCATTER...</span>
               </div>
             ) : (
               <div className="space-y-3">
                 {simResults.map((res, index) => (
                   <div key={res.id} className="space-y-1">
-                    <div className="flex justify-between items-center text-xs">
-                      <div className="flex items-center gap-2">
-                        <span className="text-slate-500 w-4">#{index + 1}</span>
-                        <span className="font-semibold text-slate-200">{res.name}</span>
-                        <span className="text-[10px] text-slate-500 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800/50">{res.team}</span>
+                    <div className="flex justify-between items-center text-[10px]">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-slate-600">[{index + 1}]</span>
+                        <span className="font-bold text-slate-200">{res.name.toUpperCase()}</span>
+                        <span className="text-[8px] text-slate-500 border border-slate-900 px-1">{res.team.toUpperCase()}</span>
                       </div>
-                      <div className="flex gap-4">
-                        <span className="font-mono text-slate-400 text-[11px]">DNF: {res.dnfPercent}%</span>
-                        <span className="font-bold text-blue-400 font-mono">{res.winPercent}% win</span>
+                      <div className="flex gap-3">
+                        <span className="text-slate-550 text-slate-500">DNF: {res.dnfPercent}%</span>
+                        <span className="font-bold text-blue-400">{res.winPercent}% WIN</span>
                       </div>
                     </div>
                     {/* Win Bar */}
-                    <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden flex">
-                      <div className="bg-blue-500 h-full rounded-full" style={{ width: `${res.winPercent}%` }}></div>
-                      <div className="bg-red-500/40 h-full" style={{ width: `${res.dnfPercent}%` }}></div>
+                    <div className="w-full bg-[#0f1115] h-2 border border-slate-900 flex">
+                      <div className="bg-blue-600 h-full" style={{ width: `${res.winPercent}%` }}></div>
+                      <div className="bg-red-700/50 h-full" style={{ width: `${res.dnfPercent}%` }}></div>
                     </div>
                   </div>
                 ))}
@@ -277,13 +273,13 @@ export default function F1Simulation() {
           </div>
 
           {/* Incident logs */}
-          <div className="space-y-4 border-l border-slate-800/50 pl-6">
-            <h6 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-800 pb-2">Stochastic Run Log</h6>
-            <div className="space-y-2 h-[180px] overflow-y-auto font-mono text-[11px] text-slate-400">
+          <div className="space-y-4 border-t md:border-t-0 md:border-l border-slate-850 pt-4 md:pt-0 md:pl-6">
+            <h6 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 border-b border-slate-900 pb-2">// OUT // TRIAL_LOG_STREAM</h6>
+            <div className="space-y-1.5 h-[160px] overflow-y-auto font-mono text-[10px] text-slate-450 text-slate-500">
               {simLogs.map((log, i) => (
-                <div key={i} className="flex gap-2">
-                  <span className="text-slate-600">[{i + 1}]</span>
-                  <span className={log.includes('Incident:') ? 'text-amber-400' : log.includes('Clean Race:') ? 'text-emerald-400' : 'text-slate-300'}>
+                <div key={i} className="flex gap-1.5 leading-tight">
+                  <span className="text-slate-700">[{i + 1}]</span>
+                  <span className={log.includes('INCIDENT:') ? 'text-amber-500 font-semibold' : log.includes('[STOCHASTIC]') ? 'text-emerald-500' : 'text-slate-400'}>
                     {log}
                   </span>
                 </div>

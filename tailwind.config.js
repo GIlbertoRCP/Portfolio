@@ -6,6 +6,14 @@ export default {
         fontFamily: {
           sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
           display: ['Outfit', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+        },
+        boxShadow: {
+          'flat-sm': '1.5px 1.5px 0px 0px currentColor',
+          'flat-md': '3px 3px 0px 0px currentColor',
+          'flat-lg': '5px 5px 0px 0px currentColor',
+          'flat-slate': '4px 4px 0px 0px #1e293b',
+          'flat-slate-sm': '2px 2px 0px 0px #1e293b',
         },
         colors: {
           slate: {

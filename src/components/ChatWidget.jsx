@@ -4,59 +4,56 @@ import { useState, useRef, useEffect } from 'react';
 const PORTFOLIO_DATA = {
   greetings: {
     patterns: ['hi', 'hello', 'hey', 'greetings', 'hola', 'yo'],
-    response: "Hi there! I'm Gilberto's AI assistant. Feel free to ask me about his primary ML project work (like the F1 Oracle, the Predictive Network Telemetry System, or the Humanoid Locomotion Project), his coursework projects (the EOD Robot, Trivia app, or E-Commerce Cart Simulation), his engineering skills, or his computer science studies at CU Denver!"
+    response: "HI THERE! I'M GILBERTO'S DIAGNOSTIC ASSISTANT. YOU CAN ASK ME ABOUT HIS PRIMARY ML SYSTEMS (F1 ORACLE, PREDICTIVE NETWORK TELEMETRY, OR HUMANOID LOCOMOTION), HIS EMBEDDED EOD ROBOT, TRIVIA QUIZ APP, OR E-COMMERCE SIMULATOR. YOU CAN ALSO ASK FOR HIS TECH STACK OR HIS COMPUTER SCIENCE STUDIES AT CU DENVER!"
   },
   about: {
     patterns: ['who are you', 'about gilberto', 'who is gilberto', 'bio', 'background'],
-    response: "Gilberto Romero-Cano is a Computer Science student at CU Denver. He specializes in software architecture, backend development, and machine learning. He has experience building end-to-end applications, from data modeling and predictive pipeline implementation in Python to engineering scalable backends using C# and FastAPI."
+    response: "GILBERTO ROMERO-CANO IS A COMPUTER SCIENCE STUDENT AT CU DENVER SPECIALIZING IN SOFTWARE ARCHITECTURE, BACKEND ENGINEERING, AND MACHINE LEARNING PIPELINES. HE DEPLOYS SCALABLE DATA PLATFORMS FROM FASTAPI BACKENDS IN PYTHON TO OBJECT-ORIENTED STRUCTURES IN C#."
   },
   skills: {
     patterns: ['skills', 'tech stack', 'languages', 'frameworks', 'technologies', 'tools', 'code'],
-    response: "Here is Gilberto's tech stack:\n\n• **Languages:** Python, C++, C, C#, JavaScript, TypeScript, SQL\n• **Frameworks & Libraries:** FastAPI, Pandas, NumPy, Scikit-learn, React Native, Tailwind CSS, Vercel\n• **Developer Tools:** Git (Version Control), GitHub, Docker, Postman, Linux Bash/Shell, VS Code, IntelliJ, PyCharm, Android Studio, Emacs, Mininet\n• **Specialties & Systems:** Machine Learning (PyTorch, XGBoost, Stable Baselines3), IoT/Hardware (ESP32, ESP-NOW, FreeRTOS, MPU6050)"
+    response: "GILBERTO'S TECHNICAL PROFILE SPECIFICATIONS:\n\n• LANGUAGES: Python, C++, C, C#, JavaScript, TypeScript, SQL\n• FRAMEWORKS/LIBS: FastAPI, Pandas, NumPy, Scikit-learn, React Native, Tailwind CSS, Vercel\n• DEV TOOLING: Git, GitHub, Docker, Postman, Linux Bash/Shell, VS Code, Emacs, Mininet\n• SPECIALTIES: Machine Learning (PyTorch, XGBoost, Stable Baselines3), IoT/Embedded (ESP32, ESP-NOW, FreeRTOS, MPU6050)"
   },
   education: {
     patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study'],
-    response: "Gilberto is pursuing his Bachelor of Science in Computer Science at the University of Colorado Denver (Expected Graduation: May 2027). Relevant coursework includes Data Structures & Algorithms, Machine Learning, Software Engineering, Computer Networks, Operating Systems, and Databases."
+    response: "GILBERTO IS PURSUING A BACHELOR OF SCIENCE IN COMPUTER SCIENCE AT THE UNIVERSITY OF COLORADO DENVER (GRADUATION: MAY 2027). RELEVANT COURSEWORK INCLUDES DATA STRUCTURES & ALGORITHMS, MACHINE LEARNING, SOFTWARE ENGINEERING, NETWORKING, AND OPERATING SYSTEMS."
   },
   contact: {
     patterns: ['contact', 'email', 'hire', 'resume', 'github', 'reach out', 'social'],
-    response: "You can reach out to Gilberto or connect with him here:\n\n• **Location:** Denver, CO\n• **Phone:** (720) 693-6526\n• **Email:** gilbertorcp712@gmail.com\n• **LinkedIn:** [linkedin.com/in/gromerocano/](https://linkedin.com/in/gromerocano/)\n• **GitHub:** [github.com/GIlbertoRCP](https://github.com/GIlbertoRCP)\n\n*(Feel free to check out his interactive project case studies on this site!)*"
+    response: "CONNECTION CHANNELS FOR G. ROMERO-CANO:\n\n• LOCATION: Denver, CO\n• PHONE: (720) 693-6526\n• MAIL: gilbertorcp712@gmail.com\n• LINKEDIN: [linkedin.com/in/gromerocano/](https://linkedin.com/in/gromerocano/)\n• GITHUB: [github.com/GIlbertoRCP](https://github.com/GIlbertoRCP)\n\n(FEEL FREE TO INITIATE INTERACTIVE WORKFLOW DEMOS ON THIS PORTFOLIO FOR MORE DETAILS.)"
   },
   sdn: {
     patterns: ['sdn', 'telemetry', 'kafka', 'self-healing', 'mininet', 'congestion', 'lstm', 'dqn', 'networking', 'predictive network'],
-    response: "Gilberto built a **Predictive Network Telemetry System** (Predictive SDN) for CSCI 4930 HL1 at CU Denver. Key highlights:\n\n• **Event-Driven Architecture:** Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• **AI Predictive Self-Healing:** Uses an LSTM model in PyTorch to forecast congestion. When congestion risk exceeds 70%, a DQN reinforcement learning agent scales up polling, and installs flow rules to reroute traffic automatically.\n• **Edge Optimization:** Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and speeding up inference latency by 69%.\n\nRead the detailed [SDN Case Study](/Portfolio/projects/predictive-sdn) to test the interactive telemetry simulation widget!"
+    response: "PREDICTIVE NETWORK TELEMETRY SYSTEM CORE HIGHLIGHTS:\n\n• EVENT-DRIVEN BUS: Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• SELF-HEALING ENGINE: Uses a PyTorch LSTM model to forecast congestion. When risk exceeds 70%, a DQN RL agent scales up polling frequency and installs flow rules to reroute traffic.\n• EDGE COMPILING: Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and inference latency by 69%.\n\nREAD DETAILS: [SDN Case Study](/Portfolio/projects/predictive-sdn) TO TEST THE TELEMETRY SIMULATOR PANEL!"
   },
   f1: {
     patterns: ['f1', 'oracle', 'prediction', 'telemetry', 'fastf1', 'xgboost', 'monte carlo', 'race'],
-    response: "The **F1 Oracle** is an end-to-end telemetry and prediction platform. Key features:\n\n• **Pairwise Ranker Model:** Trains an `XGBRanker` model on historical FastF1 telemetry to output driver finishing order probabilities.\n• **Telemetry Analytics:** Includes sector-by-sector aero setup profiles, head-to-head speed/throttle comparisons, and ERS efficiency proxies.\n• **Stochastic Simulator:** Runs a client-side Monte Carlo simulation (1,000 runs) taking into account driver crash risk, starting grids, and safety cars.\n\nRead the detailed [F1 Oracle Case Study](/Portfolio/projects/f1-oracle) to run matchups on the interactive simulation widget!"
+    response: "F1 ORACLE PREDICTION PLATFORM CORE HIGHLIGHTS:\n\n• PREFERENCE RANKER: Trains an XGBRanker model on FastF1 historical telemetries to predict driver placement probabilities.\n• TELEMETRY ENGINEERING: Subtracts fuel burning weights and estimates linear tyre-degradation rates across stints.\n• STOCHASTIC SIMULATION: Runs a client-side Monte Carlo simulator (1,000 runs) factoring in safety cars and track wetness parameters.\n\nREAD DETAILS: [F1 Oracle Case Study](/Portfolio/projects/f1-oracle) TO RUN match-ups!"
   },
   locomotion: {
     patterns: ['locomotion', 'mujoco', 'ppo', 'bipedal', 'humanoid', 'reinforcement learning', 'penguin slide', 'motor control', 'rl'],
-    response: "The **Humanoid Locomotion** project is a 3D bipedal simulation trained in MuJoCo using Proximal Policy Optimization (PPO):\n\n• **Bionic Model:** Modified humanoid capsules and densities to enable natural acceleration and controlled falling.\n• **Vertical LiDAR:** Implemented a custom 5-point rangefinder array with a Python VisionObservationWrapper to concatenate depth readings into the observation space.\n• **Penguin Slide:** Emergent reward hacking behavior discovered by the agent to negotiate a steep ramp.\n\nRead the detailed [Locomotion Case Study](/Portfolio/projects/motor-control-locomotion) to view the simulation video showcase!"
+    response: "HUMANOID LOCOMOTION PROJECT CORE HIGHLIGHTS:\n\n• BIONIC MODEL: Modified humanoid density parameters to enable controlled acceleration in MuJoCo physics engine.\n• DEPTH SENSING: Configured a 5-point vertical rangefinder (LiDAR) array, concatenating spatial readings via a VisionObservationWrapper.\n• EMERGENT REWARD HACKING: Agent discovered a 'penguin slide' maneuver to navigate steep descents.\n\nREAD DETAILS: [Locomotion Case Study](/Portfolio/projects/motor-control-locomotion) TO VIEW SIMULATION DEMO SCATTER!"
   },
   robot: {
     patterns: ['robot', 'bomb', 'embedded', 'esp32', 'esp-now', 'mecanum', 'rover', 'servo', 'hardware', 'eod'],
-    response: "The **EOD Trainer Robot** is a wireless bomb disposal simulation system built on three distributed ESP32 nodes:\n\n• **ESP-NOW Link:** Custom low-latency packet delivery between the Controller remote, Rover robot, and Bomb target node.\n• **Rover Specs:** 4-DOF robotic arm, Mecanum wheels for holonomic movement, MPU6050 accelerometer to enforce tremor/shaking penalties.\n• **Interactive Topology:** Renders power distribution and logic pathways.\n\nRead the detailed [EOD Robot Case Study](/Portfolio/projects/bomb-squad-robot) to interact with the draggable routing schematic!"
+    response: "EOD TRAINER ROBOT CORE HIGHLIGHTS:\n\n• ESP-NOW DIRECT: Connectionless packet delivery between Controller remote, Rover robot, and Bomb target node under 20ms.\n• PHYSICAL SPECS: 4-DOF robotic claw servos, holonomic Mecanum driving, MPU6050 accelerometer to enforce tremor/shaking penalties.\n\nREAD DETAILS: [EOD Robot Case Study](/Portfolio/projects/bomb-squad-robot) TO DRAG SCHEMATICS!"
   },
   trivia: {
     patterns: ['trivia', 'tap', 'multiplayer', 'react native', 'agile', 'group', 'team'],
-    response: "The **Tap-Tap Trivia** app is a responsive React Native multiplayer mobile trivia game built for a 5-person group semester project at CU Denver:\n\n• **Responsive Mobile UI:** Architected mobile layouts optimizing presentation across varying iOS/Android screen form factors.\n• **Team Coordination:** Managed collaborative team development using Git and Agile methodologies, resolving merge conflicts to maintain a stable master branch.\n• **Verification:** Syncs player states and captures precise buzzer click timings to prevent network exploitation.\n\nRead the detailed [Tap-Tap Trivia Case Study](/Portfolio/projects/tap-tap-trivia) to try the playable demo!"
+    response: "TAP-TAP TRIVIA MOBILE CORE HIGHLIGHTS:\n\n• MULTIPLAYER: Responsive React Native quiz app built for a group project at CU Denver.\n• COLLABORATIVE GIT: Coordinated branch merges and resolved conflicts to maintain stable version controls.\n• TIMING VERIFICATION: Captures precise buzzer ticks to prevent network exploit latency.\n\nREAD DETAILS: [Trivia Case Study](/Portfolio/projects/tap-tap-trivia) TO BUZZ DEMO!"
   },
   cart: {
     patterns: ['cart', 'ecommerce', 'e-commerce', 'c#', 'oop', 'inheritance', 'polymorphism', 'generic', 'collections'],
-    response: "The **E-Commerce Cart Simulation** is a C#/.NET system that implements a modular product catalog:\n\n• **Object-Oriented Design:** Uses inheritance and polymorphism to integrate digital, physical, and subscription products.\n• **Polymorphic Shipping:** Subclasses override shipping methods (e.g. physical weight-based fees vs zero-cost digital downloads).\n• **Generic Collections:** Utilizes generic Lists to optimize data handling and run real-time cart calculations.\n\nRead the detailed [E-Commerce Case Study](/Portfolio/projects/ecommerce-cart) to try the interactive object simulation!"
+    response: "E-COMMERCE CART CORE HIGHLIGHTS:\n\n• OBJECT-ORIENTED: Implements product subclasses (digital, physical, subscription) in C#/.NET.\n• POLYMORPHISM: Overrides shipping charges (e.g. zero digital download fees vs physical weight coefficients).\n• GENERIC LISTS: Implements generic Collections to manage memory objects and calculate cart parameters.\n\nREAD DETAILS: [E-Commerce Case Study](/Portfolio/projects/ecommerce-cart) TO INSTANTIATE PRODUCT INSTANCES!"
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],
-    response: "Gilberto has six featured projects on this portfolio. His primary engineering focuses are:\n\n1. **Predictive Network Telemetry System** — Event-driven telemetry using Kafka and LSTM/DQN models.\n2. **F1 Oracle** — Race outcome predictions using XGBRanker on FastF1 data.\n3. **Humanoid Locomotion** — 3D bipedal simulation using PPO RL in MuJoCo.\n\nHe has also built supporting projects:\n4. **E-Commerce Cart Simulation** — Modular product catalog in C# implementing OOP concepts.\n5. **Bomb Squad EOD Robot** — Distributed wireless nodes using ESP32 & ESP-NOW.\n6. **Tap-Tap Trivia** — A React Native mobile quiz app coordinated using Agile/Git.\n\nWhich one would you like to hear more about? I can link you to their case study pages!"
+    response: "GILBERTO'S PORTFOLIO CONTAINS SIX COMPLETED SYSTEMS:\n\n1. PREDICTIVE SDN TELEMETRY - Event-driven Mininet monitoring using Kafka and LSTM/DQN.\n2. F1 ORACLE - Pairwise driver finishing XGBRanker platform.\n3. HUMANOID LOCOMOTION - 3D bipedal PPO training in MuJoCo.\n4. WIRELESS EOD ROBOT - ESP-NOW direct mesh remote and mecanum rover.\n5. TAP-TAP TRIVIA - React Native multiplayer quiz client.\n6. C# OOP CATALOG - Polymorphic e-commerce cart simulation.\n\nSELECT ANY OPTION FOR DETAILED FILE SPECIFICATIONS."
   }
 };
 
-// Simple intent classifier matching user query words with keywords
 function getBotResponse(query) {
   const normalizedQuery = query.toLowerCase().trim();
-  
-  // Find matching intents based on patterns
   let bestMatch = null;
   let maxMatches = 0;
 
@@ -73,9 +70,8 @@ function getBotResponse(query) {
     }
   }
 
-  // Fallback response if no keywords matched
   if (!bestMatch || maxMatches === 0) {
-    bestMatch = "I'm not sure I have that exact detail, but I can tell you about Gilberto's projects (F1 Oracle, SDN System, Humanoid Locomotion, E-Commerce Cart, EOD Robot, or Trivia App), list his skills, or link you to his GitHub repository. What would you like to explore?";
+    bestMatch = "QUERY LOGGED. COMMAND UNRECOGNIZED. CHOOSE SUB-SYSTEM METRICS: F1 ORACLE, PREDICTIVE SDN, HUMANOID LOCOMOTION, EOD ROBOT, TRIVIA GAME, C# OOP CATALOG, SKILLS OR GITHUB CONTROLLER.";
   }
 
   return bestMatch;
@@ -84,13 +80,12 @@ function getBotResponse(query) {
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'ai', content: "Hi! I'm Gilberto's AI assistant. Ask me about his machine learning projects, his tech stack, or his coursework at CU Denver!" }
+    { role: 'ai', content: "CONSOLE PORT: DIAGNOSTICS READY. ASK ME ABOUT GILBERTO'S MACHINE LEARNING MODELS, EMBEDDED ROBOTICS, OR TECH MATRIX SPECIFICATIONS." }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Auto-scroll to the newest message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -99,13 +94,12 @@ export default function ChatWidget() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage = { role: 'user', content: input };
+    const userMessage = { role: 'user', content: input.toUpperCase() };
     setMessages((prev) => [...prev, userMessage]);
     const currentInput = input;
     setInput('');
     setIsLoading(true);
 
-    // Simulate realistic AI thinking/typing latency
     setTimeout(() => {
       const replyText = getBotResponse(currentInput);
       const aiResponse = { 
@@ -114,39 +108,38 @@ export default function ChatWidget() {
       };
       setMessages((prev) => [...prev, aiResponse]);
       setIsLoading(false);
-    }, 700);
+    }, 600);
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div className="fixed bottom-6 right-6 z-50 font-mono text-xs">
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-80 sm:w-96 bg-slate-900/95 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[28rem] backdrop-blur-md transition-all duration-300">
+        <div className="mb-3 w-80 sm:w-96 bg-[#0f1115] border border-slate-850 rounded-none shadow-flat-slate flex flex-col h-[28rem] overflow-hidden select-none transition-all duration-200">
+          
           {/* Header */}
-          <div className="bg-slate-950/90 px-4 py-3.5 border-b border-slate-800 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-              <h3 className="text-sm font-display font-semibold text-slate-100">GRC Portfolio Assistant</h3>
+          <div className="bg-slate-950 px-4 py-2.5 border-b border-slate-850 flex justify-between items-center text-[10px]">
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none"></span>
+              <h3 className="font-bold text-slate-200 uppercase tracking-wider">GRC // DIAGNOSTIC_ASSISTANT</h3>
             </div>
             <button 
               onClick={() => setIsOpen(false)}
-              className="text-slate-400 hover:text-white transition p-1 hover:bg-slate-800 rounded-lg"
-              aria-label="Close chat"
+              className="text-slate-500 hover:text-white transition-colors"
+              aria-label="Close diagnostic logs"
             >
               ✕
             </button>
           </div>
 
           {/* Messages Area */}
-          <div className="flex-grow p-4 overflow-y-auto flex flex-col gap-3 bg-slate-900/40">
+          <div className="flex-grow p-4 overflow-y-auto flex flex-col gap-3.5 bg-slate-950/20">
             {messages.map((msg, idx) => {
-              // Convert simple markdown links [text](url) to HTML for render
               const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
               const hasLinks = linkRegex.test(msg.content);
               
               let renderedContent = msg.content;
               if (hasLinks) {
-                // Parse links safely since it's hardcoded portfolio data
                 const parts = [];
                 let lastIndex = 0;
                 linkRegex.lastIndex = 0;
@@ -158,10 +151,10 @@ export default function ChatWidget() {
                     <a 
                       key={match.index} 
                       href={match[2]} 
-                      className="text-blue-400 hover:underline font-semibold"
+                      className="text-blue-400 hover:underline font-bold"
                       {...(match[2].startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
-                      {match[1]}
+                      {match[1].toUpperCase()}
                     </a>
                   );
                   lastIndex = linkRegex.lastIndex;
@@ -169,7 +162,6 @@ export default function ChatWidget() {
                 parts.push(msg.content.substring(lastIndex));
                 renderedContent = parts;
               } else {
-                // Render paragraphs/newlines
                 renderedContent = msg.content.split('\n').map((line, i) => (
                   <span key={i}>
                     {line}
@@ -181,42 +173,42 @@ export default function ChatWidget() {
               return (
                 <div 
                   key={idx} 
-                  className={`max-w-[85%] p-3.5 rounded-xl text-sm leading-relaxed ${
+                  className={`p-3 max-w-[85%] border leading-relaxed ${
                     msg.role === 'user' 
-                      ? 'bg-blue-600 text-white self-end rounded-br-none shadow-md shadow-blue-900/10' 
-                      : 'bg-slate-800/90 text-slate-100 self-start rounded-bl-none border border-slate-700/50 shadow-sm'
+                      ? 'bg-blue-950/40 border-blue-500/30 text-blue-400 self-end rounded-none shadow-flat-slate-sm' 
+                      : 'bg-slate-950 border-slate-850 text-slate-300 self-start rounded-none'
                   }`}
                 >
                   {renderedContent}
                 </div>
               );
             })}
+            
             {isLoading && (
-              <div className="bg-slate-800/90 text-slate-400 text-xs px-4 py-3.5 rounded-xl self-start rounded-bl-none flex gap-1 items-center border border-slate-700/50">
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+              <div className="bg-slate-950 text-slate-500 px-3 py-2 border border-slate-850 self-start rounded-none flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 bg-slate-500 animate-pulse"></span>
+                <span>FETCHING_LOGS...</span>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input Form */}
-          <form onSubmit={handleSend} className="p-3 bg-slate-950/90 border-t border-slate-800 flex gap-2">
+          <form onSubmit={handleSend} className="p-2.5 bg-slate-950 border-t border-slate-850 flex gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about my projects..."
-              className="flex-grow bg-slate-900 text-white text-sm rounded-xl px-4 py-2 border border-slate-800 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+              placeholder="ENTER SYSTEM QUERY..."
+              className="flex-grow bg-[#0c0d12] text-white text-xs rounded-none px-3 py-2 border border-slate-800 focus:outline-none focus:border-blue-500 font-mono"
               disabled={isLoading}
             />
             <button 
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-500 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-blue-900/20"
+              className="bg-blue-600 hover:bg-blue-700 border border-blue-500 text-white px-3 py-2 rounded-none font-bold transition shadow-flat-slate-sm disabled:opacity-50 text-[10px] uppercase tracking-wider"
             >
-              Send
+              QUERY
             </button>
           </form>
         </div>
@@ -226,12 +218,11 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-blue-600 hover:bg-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 shadow-blue-600/10 hover:shadow-blue-500/20 border border-blue-400/20"
-          aria-label="Open chat assistant"
+          className="bg-[#0f1115] border border-slate-850 hover:bg-slate-900 text-white font-mono rounded-none px-4 py-2 text-[10px] font-bold shadow-flat-slate flex items-center gap-2 select-none"
+          aria-label="Open diagnostics assistant"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
+          <span className="w-1.5 h-1.5 bg-emerald-500 animate-pulse"></span>
+          [SYS_DIAGNOSTICS]
         </button>
       )}
     </div>

@@ -19,14 +19,11 @@ export default function SdnTelemetryDemo() {
       setDataPoints((prev) => {
         let nextVal;
         if (isSpiking) {
-          // Increase queue depth
           const lastVal = prev[prev.length - 1];
           nextVal = Math.min(100, Math.floor(lastVal + Math.random() * 15 + 5));
         } else if (activePath === 's2') {
-          // Recovering/flat on backup path
           nextVal = Math.max(5, Math.floor(10 + Math.random() * 10));
         } else {
-          // Normal background traffic
           nextVal = Math.max(5, Math.floor(15 + (Math.random() - 0.5) * 8));
         }
         return [...prev.slice(1), nextVal];
@@ -54,20 +51,16 @@ export default function SdnTelemetryDemo() {
     const latestQueue = dataPoints[dataPoints.length - 1];
     const latestLatency = latencyPoints[latencyPoints.length - 1];
     
-    // Simple heuristic simulating the LSTM predictions
     let risk = Math.floor((latestQueue / 100) * 60 + (latestLatency / 250) * 40);
     risk = Math.max(5, Math.min(99, risk));
     setCongestionRisk(risk);
 
     // Self-healing rules
     if (risk >= 70 && activePath === 's1' && !isSpiking) {
-      // Transition state
       setStatus('Congested');
     } else if (risk >= 70 && activePath === 's1' && isSpiking) {
-      // Self-healing triggers!
       setStatus('Self-Healing');
       
-      // After a brief pause, complete the healing
       setTimeout(() => {
         setActivePath('s2');
         setPollingRate(1); // Scale up polling frequency (Intensive Mode)
@@ -75,7 +68,6 @@ export default function SdnTelemetryDemo() {
         setStatus('Rerouted & Recovered');
       }, 1000);
     } else if (activePath === 's2' && risk < 30) {
-      // Allow fallback to normal state after some time
       setStatus('Rerouted (Stable)');
     }
   }, [dataPoints, latencyPoints]);
@@ -94,7 +86,6 @@ export default function SdnTelemetryDemo() {
     setLatencyPoints([15, 22, 18, 25, 20, 16, 24, 21, 28, 30]);
   };
 
-  // Helper to generate SVG path from values
   const getSvgPath = (points, maxVal) => {
     const width = 340;
     const height = 90;
@@ -110,28 +101,27 @@ export default function SdnTelemetryDemo() {
   };
 
   return (
-    <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6 select-none font-sans">
+    <div className="w-full bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate space-y-6 select-none font-mono text-xs">
       
       {/* Simulation Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-850 pb-4">
         <div>
-          <h4 className="text-lg font-display font-bold text-white flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping"></span>
-            Real-Time SDN Self-Healing Simulator
+          <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+            [SYS_UNIT // SDN_SELF_HEALING_CONSOLE]
           </h4>
-          <p className="text-xs text-slate-400">Interact with the controllers to simulate congestion forecasting & traffic rerouting.</p>
+          <p className="text-[10px] text-slate-500 mt-1">Simulates event-driven Kafka queuing & predictive traffic rerouting.</p>
         </div>
         <div className="flex gap-2">
           <button 
             onClick={triggerSpike}
             disabled={isSpiking || activePath === 's2'}
-            className="px-3.5 py-1.5 bg-red-600/90 hover:bg-red-500 text-white rounded-lg text-xs font-semibold shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-1.5 bg-red-650 bg-red-700 hover:bg-red-600 text-white border border-red-500 hover:border-red-400 font-bold transition shadow-flat-slate disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider text-[10px]"
           >
             Inject Traffic Spike
           </button>
           <button 
             onClick={resetSim}
-            className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition"
+            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-850 text-slate-300 border border-slate-800 font-bold transition shadow-flat-slate uppercase tracking-wider text-[10px]"
           >
             Reset Simulation
           </button>
@@ -144,33 +134,33 @@ export default function SdnTelemetryDemo() {
         {/* Metric panels */}
         <div className="space-y-4">
           
-          <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
-            <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">System Status</span>
-            <div className="flex justify-between items-end mt-2">
-              <span className={`text-lg font-bold font-display ${
-                status.includes('Healthy') ? 'text-emerald-400' :
+          <div className="bg-slate-950 border border-slate-850 p-4 flex flex-col justify-between shadow-flat-slate-sm">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">[SYS_STATUS]</span>
+            <div className="flex justify-between items-end mt-3">
+              <span className={`text-base font-bold uppercase tracking-wide ${
+                status.includes('Healthy') ? 'text-emerald-500' :
                 status.includes('Spike') || status.includes('Congested') ? 'text-amber-500' :
-                status.includes('Healing') ? 'text-red-400 animate-pulse' : 'text-blue-400'
+                status.includes('Healing') ? 'text-red-500 animate-pulse' : 'text-blue-500'
               }`}>
                 {status}
               </span>
-              <span className="text-[10px] text-slate-500 font-mono">Kafka-ready</span>
+              <span className="text-[8px] text-slate-600">KAFKA_BUS</span>
             </div>
           </div>
 
-          <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
-            <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">LSTM Congestion Risk</span>
-            <div className="flex justify-between items-end mt-2">
-              <span className={`text-2xl font-display font-extrabold ${
-                congestionRisk > 70 ? 'text-red-400 animate-pulse' :
-                congestionRisk > 40 ? 'text-amber-400' : 'text-emerald-400'
+          <div className="bg-slate-950 border border-slate-850 p-4 flex flex-col justify-between shadow-flat-slate-sm">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">[LSTM_CONGESTION_RISK]</span>
+            <div className="flex justify-between items-end mt-3">
+              <span className={`text-xl font-bold ${
+                congestionRisk > 70 ? 'text-red-500 animate-pulse' :
+                congestionRisk > 40 ? 'text-amber-500' : 'text-emerald-500'
               }`}>
                 {congestionRisk}%
               </span>
-              <span className="text-xs text-slate-400 font-mono">Limit: 70%</span>
+              <span className="text-[9px] text-slate-600">LIMIT: 70%</span>
             </div>
             {/* Progress bar */}
-            <div className="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+            <div className="w-full bg-[#0f1115] h-2 border border-slate-900 mt-3 flex">
               <div 
                 className={`h-full transition-all duration-300 ${
                   congestionRisk > 70 ? 'bg-red-500' :
@@ -181,14 +171,14 @@ export default function SdnTelemetryDemo() {
             </div>
           </div>
 
-          <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
-            <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">DQN Polling Frequency</span>
-            <div className="flex justify-between items-end mt-2">
-              <span className="text-2xl font-display font-extrabold text-blue-400">
-                {pollingRate}s
+          <div className="bg-slate-950 border border-slate-850 p-4 flex flex-col justify-between shadow-flat-slate-sm">
+            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">[DQN_POLL_RATE]</span>
+            <div className="flex justify-between items-end mt-3">
+              <span className="text-xl font-bold text-blue-500">
+                {pollingRate}S
               </span>
-              <span className="text-xs text-slate-500 font-mono">
-                {pollingRate === 1 ? 'Intensive Mode' : 'Standby Mode'}
+              <span className="text-[9px] text-slate-650 text-slate-500 uppercase">
+                {pollingRate === 1 ? 'INTENSIVE' : 'STANDBY'}
               </span>
             </div>
           </div>
@@ -199,18 +189,21 @@ export default function SdnTelemetryDemo() {
         <div className="md:col-span-2 space-y-4">
           
           {/* Chart 1: Queue Depth */}
-          <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-semibold text-slate-300">OpenFlow Switch Queue Depth</span>
-              <span className="text-[10px] text-slate-500 font-mono">Latest: {dataPoints[dataPoints.length - 1]} packets</span>
+          <div className="bg-slate-950 border border-slate-850 p-4">
+            <div className="flex justify-between items-center mb-2 text-[10px]">
+              <span className="font-bold text-slate-400">OPENFLOW_QUEUE_DEPTH</span>
+              <span className="text-slate-600">LATEST: {dataPoints[dataPoints.length - 1]} PKTS</span>
             </div>
-            <div className="h-[90px] w-full relative">
+            <div className="h-[90px] w-full relative border border-slate-900 bg-[#0c0d12]">
+              {/* Subtle background reference lines */}
+              <div className="absolute top-[30px] left-0 right-0 border-t border-slate-950 border-dashed"></div>
+              <div className="absolute top-[60px] left-0 right-0 border-t border-slate-950 border-dashed"></div>
               <svg className="w-full h-full" preserveAspectRatio="none">
                 <path 
                   d={getSvgPath(dataPoints, 100)} 
                   fill="none" 
                   stroke={isSpiking ? '#ef4444' : '#3b82f6'} 
-                  strokeWidth="2.5"
+                  strokeWidth="2"
                   className="transition-all duration-300"
                 />
               </svg>
@@ -218,18 +211,21 @@ export default function SdnTelemetryDemo() {
           </div>
 
           {/* Chart 2: Latency */}
-          <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-semibold text-slate-300">Flow Transmission Latency (RTT)</span>
-              <span className="text-[10px] text-slate-500 font-mono">Latest: {latencyPoints[latencyPoints.length - 1]} ms</span>
+          <div className="bg-slate-950 border border-slate-850 p-4">
+            <div className="flex justify-between items-center mb-2 text-[10px]">
+              <span className="font-bold text-slate-400">FLOW_LATENCY_RTT</span>
+              <span className="text-slate-600">LATEST: {latencyPoints[latencyPoints.length - 1]} MS</span>
             </div>
-            <div className="h-[90px] w-full relative">
+            <div className="h-[90px] w-full relative border border-slate-900 bg-[#0c0d12]">
+              {/* Subtle background reference lines */}
+              <div className="absolute top-[30px] left-0 right-0 border-t border-slate-950 border-dashed"></div>
+              <div className="absolute top-[60px] left-0 right-0 border-t border-slate-950 border-dashed"></div>
               <svg className="w-full h-full" preserveAspectRatio="none">
                 <path 
                   d={getSvgPath(latencyPoints, 250)} 
                   fill="none" 
                   stroke={isSpiking ? '#f59e0b' : '#10b981'} 
-                  strokeWidth="2.5"
+                  strokeWidth="2"
                   className="transition-all duration-300"
                 />
               </svg>
@@ -241,17 +237,17 @@ export default function SdnTelemetryDemo() {
       </div>
 
       {/* Visual Network Path Map */}
-      <div className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 flex flex-col items-center justify-center space-y-4">
-        <span className="text-xs font-semibold text-slate-400 self-start">Active Controller Path</span>
+      <div className="bg-slate-950 border border-slate-850 p-4 flex flex-col items-center justify-center space-y-4">
+        <span className="text-[10px] font-bold text-slate-400 self-start uppercase">// ACTIVE CONTROLLER PATH TOPOLOGY</span>
         
         <div className="flex items-center justify-between w-full max-w-lg relative py-6">
           
           {/* Node 1: Ingress */}
           <div className="flex flex-col items-center z-10">
-            <div className="w-12 h-12 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center font-bold text-slate-300 shadow">
+            <div className="w-12 h-10 bg-[#0f1115] border border-slate-850 flex items-center justify-center font-bold text-slate-300 shadow">
               s3
             </div>
-            <span className="text-[10px] text-slate-500 font-mono mt-1">Ingress</span>
+            <span className="text-[9px] text-slate-655 text-slate-500 font-mono mt-1 uppercase">INGRESS</span>
           </div>
 
           {/* Connections Grid */}
@@ -261,8 +257,8 @@ export default function SdnTelemetryDemo() {
             <div className="absolute top-2.5 left-6 right-6 h-0.5 pointer-events-none">
               <div className={`h-full w-full transition-all duration-500 ${
                 activePath === 's1' 
-                  ? 'bg-blue-500 shadow-[0_0_10px_#3b82f6] animate-pulse' 
-                  : 'bg-slate-800'
+                  ? 'bg-blue-500' 
+                  : 'bg-slate-900'
               }`}></div>
             </div>
 
@@ -270,27 +266,27 @@ export default function SdnTelemetryDemo() {
             <div className="absolute bottom-2.5 left-6 right-6 h-0.5 pointer-events-none">
               <div className={`h-full w-full transition-all duration-500 ${
                 activePath === 's2' 
-                  ? 'bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse' 
-                  : 'bg-slate-800'
+                  ? 'bg-emerald-500' 
+                  : 'bg-slate-900'
               }`}></div>
             </div>
 
             {/* Path Nodes */}
             <div className="flex justify-center gap-12 w-full">
               {/* Primary Switch */}
-              <div className={`w-12 h-10 border rounded-lg flex items-center justify-center text-xs font-bold transition-all duration-300 z-10 ${
+              <div className={`w-12 h-10 border flex items-center justify-center text-xs font-bold transition-all duration-300 z-10 rounded-none ${
                 activePath === 's1' 
-                  ? 'bg-blue-950/80 border-blue-500 text-blue-300 shadow-[0_0_10px_rgba(59,130,246,0.3)]' 
-                  : 'bg-slate-900 border-slate-800 text-slate-500'
+                  ? 'bg-blue-950/80 border-blue-500 text-blue-300' 
+                  : 'bg-[#0f1115] border-slate-850 text-slate-600'
               }`}>
                 s1
               </div>
 
               {/* Backup Switch */}
-              <div className={`w-12 h-10 border rounded-lg flex items-center justify-center text-xs font-bold transition-all duration-300 z-10 ${
+              <div className={`w-12 h-10 border flex items-center justify-center text-xs font-bold transition-all duration-300 z-10 rounded-none ${
                 activePath === 's2' 
-                  ? 'bg-emerald-950/80 border-emerald-500 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)]' 
-                  : 'bg-slate-900 border-slate-800 text-slate-500'
+                  ? 'bg-emerald-950/80 border-emerald-500 text-emerald-300' 
+                  : 'bg-[#0f1115] border-slate-850 text-slate-600'
               }`}>
                 s2
               </div>
@@ -300,19 +296,19 @@ export default function SdnTelemetryDemo() {
 
           {/* Node 4: Egress */}
           <div className="flex flex-col items-center z-10">
-            <div className="w-12 h-12 bg-slate-900 border border-slate-800 rounded-xl flex items-center justify-center font-bold text-slate-300 shadow">
+            <div className="w-12 h-10 bg-[#0f1115] border border-slate-850 flex items-center justify-center font-bold text-slate-300 shadow">
               s4
             </div>
-            <span className="text-[10px] text-slate-500 font-mono mt-1">Egress</span>
+            <span className="text-[9px] text-slate-500 font-mono mt-1 uppercase">EGRESS</span>
           </div>
 
         </div>
 
-        <div className="text-center text-xs font-semibold py-1 px-3.5 bg-slate-900 border border-slate-800 rounded-full">
+        <div className="text-center font-bold py-1 px-3.5 bg-slate-900 border border-slate-850 text-[10px] uppercase select-none">
           {activePath === 's1' ? (
-            <span className="text-blue-400">Flow Routed via Core Primary (s1)</span>
+            <span className="text-blue-400">FLOW_PATH: VIA_CORE_PRIMARY (s1)</span>
           ) : (
-            <span className="text-emerald-400">Self-Healed: Flow Rerouted to Backup Core (s2)</span>
+            <span className="text-emerald-400 font-bold">FLOW_PATH: SELF_HEALED_VIA_BACKUP (s2)</span>
           )}
         </div>
       </div>

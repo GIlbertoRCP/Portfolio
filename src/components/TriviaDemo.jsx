@@ -31,8 +31,8 @@ const QUESTIONS = [
     options: [
       { id: 1, text: 'Running on a cluster of GPUs' },
       { id: 2, text: 'Dynamic INT8 Quantization & ONNX Compile' },
-      { id: 3, text: 'Pruning 99% of the neural layers' },
-      { id: 4, text: 'Rewriting PyTorch in raw assembly' },
+      { id: 3, text: 'Pruning 99% of the layers' },
+      { id: 4, text: 'Rewriting PyTorch in assembly' },
     ],
     correctId: 2,
     explanation: "By quantizing parameters to 8-bit integers (INT8) and compiling to ONNX Runtime, Gilberto achieved a 73% size reduction and a 69% latency speedup!"
@@ -46,14 +46,12 @@ export default function TriviaDemo() {
   const [score, setScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   
-  // Countdown Timer
-  const [timeLeftMs, setTimeLeftMs] = useState(15000); // 15 seconds per question
+  const [timeLeftMs, setTimeLeftMs] = useState(15000);
   const [timerStartTs, setTimerStartTs] = useState(null);
   const timerRef = useRef(null);
 
   const activeQuestion = QUESTIONS[currentIdx];
 
-  // Start question timer
   useEffect(() => {
     if (gameState === 'playing') {
       setTimerStartTs(Date.now());
@@ -63,7 +61,7 @@ export default function TriviaDemo() {
         setTimeLeftMs((prev) => {
           if (prev <= 100) {
             clearInterval(timerRef.current);
-            handleAnswerSelect(null); // Time out
+            handleAnswerSelect(null);
             return 0;
           }
           return Math.max(0, 15000 - (Date.now() - timerStartTs));
@@ -74,7 +72,6 @@ export default function TriviaDemo() {
     return () => clearInterval(timerRef.current);
   }, [gameState, currentIdx, timerStartTs]);
 
-  // Keyboard shortcut listener (1..4)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (gameState !== 'playing' || selectedOptId !== null) return;
@@ -97,7 +94,7 @@ export default function TriviaDemo() {
   };
 
   const handleAnswerSelect = (optionId) => {
-    if (selectedOptId !== null) return; // Answered already
+    if (selectedOptId !== null) return;
     
     clearInterval(timerRef.current);
     setSelectedOptId(optionId);
@@ -106,7 +103,6 @@ export default function TriviaDemo() {
     const isCorrect = optionId === activeQuestion.correctId;
     if (isCorrect) {
       setCorrectAnswers((prev) => prev + 1);
-      // Response-time based scoring (max 1000, drops on elapsed time)
       const elapsedMs = 15000 - timeLeftMs;
       const earned = Math.max(200, Math.round(1000 - (elapsedMs / 15000) * 800));
       setScore((prev) => prev + earned);
@@ -126,23 +122,23 @@ export default function TriviaDemo() {
   const timePct = timeLeftMs / 15000;
 
   return (
-    <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6 select-none font-sans max-w-2xl mx-auto">
+    <div className="w-full bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate space-y-6 select-none font-mono text-xs max-w-2xl mx-auto">
       
       {/* Start screen */}
       {gameState === 'start' && (
         <div className="text-center py-8 space-y-6">
-          <div className="w-16 h-16 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-2xl flex items-center justify-center mx-auto text-3xl font-bold animate-bounce">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-            </svg>
+          <div className="w-12 h-12 bg-slate-900 text-blue-400 border border-slate-800 flex items-center justify-center mx-auto text-lg font-bold shadow-flat-slate-sm font-mono select-none">
+            [?]
           </div>
           <div className="space-y-2">
-            <h4 className="text-xl font-display font-bold text-white">Tap-Tap Trivia Mini Quiz</h4>
-            <p className="text-sm text-slate-400 max-w-sm mx-auto">Test your knowledge on the core systems Gilberto engineered. Dynamic scores count down on your buzzer response time!</p>
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider">[SYS_UNIT // TAP_TAP_TRIVIA_QUIZ]</h4>
+            <p className="text-[11px] text-slate-450 text-slate-500 max-w-md mx-auto leading-relaxed">
+              Test your knowledge on the core systems Gilberto engineered. Scores decrement dynamically relative to your response latency.
+            </p>
           </div>
           <button 
             onClick={startGame}
-            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-semibold shadow-md shadow-blue-900/15 transition-all hover:scale-105"
+            className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 border border-blue-500 text-white font-bold transition shadow-flat-slate uppercase tracking-wider text-[10px]"
           >
             Start Quiz Demo
           </button>
@@ -153,29 +149,29 @@ export default function TriviaDemo() {
       {(gameState === 'playing' || gameState === 'feedback') && (
         <div className="space-y-6">
           {/* Header Progress */}
-          <div className="flex justify-between items-center text-xs text-slate-400 font-semibold uppercase tracking-wider">
-            <span>Question {currentIdx + 1} of {QUESTIONS.length}</span>
-            <span className="font-mono text-blue-400">Score: {score}</span>
+          <div className="flex justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+            <span>QUESTION {currentIdx + 1} OF {QUESTIONS.length}</span>
+            <span className="text-blue-400">SCORE: {score}</span>
           </div>
 
           {/* Time Limit Indicator */}
           {gameState === 'playing' && (
             <div className="flex items-center gap-3">
-              <div className="flex-grow bg-slate-950 h-2 border border-slate-800/80 rounded-full overflow-hidden">
+              <div className="flex-grow bg-[#0c0d12] h-3 border border-slate-850 overflow-hidden flex">
                 <div 
                   className={`h-full transition-all duration-75 ${
-                    timePct < 0.3 ? 'bg-red-500' : timePct < 0.6 ? 'bg-amber-500' : 'bg-emerald-500'
+                    timePct < 0.3 ? 'bg-red-650 bg-red-600' : timePct < 0.6 ? 'bg-amber-600 bg-amber-500' : 'bg-emerald-600 bg-emerald-500'
                   }`}
                   style={{ width: `${timePct * 100}%` }}
                 ></div>
               </div>
-              <span className="text-xs font-mono text-slate-400 min-w-10 text-right">{(timeLeftMs / 1000).toFixed(1)}s</span>
+              <span className="text-[10px] font-mono text-slate-400 min-w-10 text-right">{(timeLeftMs / 1000).toFixed(1)}S</span>
             </div>
           )}
 
           {/* Question stem */}
-          <div className="bg-slate-950/40 border border-slate-800/60 rounded-xl p-4 min-h-[80px] flex items-center justify-center">
-            <p className="text-slate-100 font-medium text-center text-[15px] leading-relaxed">{activeQuestion.stem}</p>
+          <div className="bg-slate-950 border border-slate-850 p-4 min-h-[80px] flex items-center justify-center">
+            <p className="text-slate-200 font-bold text-center text-xs leading-relaxed">{activeQuestion.stem.toUpperCase()}</p>
           </div>
 
           {/* Option list */}
@@ -185,14 +181,14 @@ export default function TriviaDemo() {
               const isCorrect = opt.id === activeQuestion.correctId;
               const answered = selectedOptId !== null;
 
-              let btnStyle = "bg-slate-950/60 border-slate-800/80 text-slate-300 hover:bg-slate-900/60 hover:text-white";
+              let btnStyle = "bg-slate-950 border-slate-850 text-slate-300 hover:bg-slate-900 hover:text-white shadow-flat-slate-sm";
               if (answered) {
                 if (isCorrect) {
-                  btnStyle = "bg-emerald-950/80 border-emerald-500 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.2)]";
+                  btnStyle = "bg-emerald-950 border-emerald-500 text-emerald-300";
                 } else if (isSelected) {
-                  btnStyle = "bg-red-950/80 border-red-500 text-red-300 shadow-[0_0_10px_rgba(239,68,68,0.2)]";
+                  btnStyle = "bg-red-950 border-red-500 text-red-300";
                 } else {
-                  btnStyle = "bg-slate-950/20 border-slate-900 text-slate-600 opacity-60";
+                  btnStyle = "bg-[#0c0d12]/40 border-slate-900 text-slate-600 opacity-40";
                 }
               }
 
@@ -201,11 +197,11 @@ export default function TriviaDemo() {
                   key={opt.id}
                   disabled={answered}
                   onClick={() => handleAnswerSelect(opt.id)}
-                  className={`border rounded-xl px-4 py-3 text-left text-sm font-medium transition duration-200 flex items-start gap-2 ${btnStyle}`}
+                  className={`border px-4 py-3 text-left text-xs font-bold transition duration-150 flex items-start gap-2 rounded-none ${btnStyle}`}
                   title={`Press keyboard key ${i + 1}`}
                 >
-                  <span className="opacity-50 font-mono text-xs mt-0.5">{i + 1}.</span>
-                  <span>{opt.text}</span>
+                  <span className="opacity-45 text-[9px] mt-0.5">[{i + 1}]</span>
+                  <span>{opt.text.toUpperCase()}</span>
                 </button>
               );
             })}
@@ -213,22 +209,22 @@ export default function TriviaDemo() {
 
           {/* Explanations & Next Button */}
           {gameState === 'feedback' && (
-            <div className="bg-slate-950/80 border border-slate-850 rounded-xl p-4 space-y-4 animate-fadeIn">
+            <div className="bg-slate-950 border border-slate-850 p-4 space-y-4">
               <div className="flex justify-between items-center border-b border-slate-900 pb-2">
-                <span className={`text-xs font-bold uppercase tracking-wider ${
-                  selectedOptId === activeQuestion.correctId ? 'text-emerald-400' : 'text-red-400'
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${
+                  selectedOptId === activeQuestion.correctId ? 'text-emerald-500' : 'text-red-500'
                 }`}>
-                  {selectedOptId === activeQuestion.correctId ? 'Correct Answer!' : 'Incorrect Answer'}
+                  {selectedOptId === activeQuestion.correctId ? '// ANSWER_MATCH // VERIFIED' : '// ANSWER_MISMATCH // FAULT'}
                 </span>
                 <button 
                   onClick={nextQuestion}
-                  className="px-4 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold shadow transition"
+                  className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 border border-blue-500 text-white font-bold transition shadow-flat-slate-sm text-[9px] uppercase tracking-wider"
                 >
-                  {currentIdx === QUESTIONS.length - 1 ? 'Finish Quiz' : 'Next Question'}
+                  {currentIdx === QUESTIONS.length - 1 ? 'FINISH' : 'NEXT'}
                 </button>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed font-mono">
-                {activeQuestion.explanation}
+              <p className="text-[10px] text-slate-500 leading-relaxed font-mono">
+                {activeQuestion.explanation.toUpperCase()}
               </p>
             </div>
           )}
@@ -238,30 +234,28 @@ export default function TriviaDemo() {
       {/* End Screen */}
       {gameState === 'end' && (
         <div className="text-center py-6 space-y-6">
-          <div className="w-16 h-16 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto text-3xl font-bold animate-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-            </svg>
+          <div className="w-12 h-12 bg-slate-900 text-emerald-400 border border-slate-850 flex items-center justify-center mx-auto text-lg font-bold shadow-flat-slate-sm font-mono select-none">
+            [OK]
           </div>
           <div className="space-y-2">
-            <h4 className="text-xl font-display font-bold text-white">Quiz Finished!</h4>
-            <p className="text-sm text-slate-400">
-              You scored <span className="text-blue-400 font-bold font-mono">{score}</span> points.
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider">QUIZ EVALUATION COMPLETE</h4>
+            <p className="text-[11px] text-slate-450 text-slate-500">
+              TOTAL SCORE EARNED: <span className="text-blue-400 font-bold">{score} POINTS</span>
             </p>
-            <p className="text-xs text-slate-500 font-mono">
-              Accuracy: {correctAnswers} / {QUESTIONS.length} correct.
+            <p className="text-[9px] text-slate-600 uppercase font-mono">
+              ACCURACY RATIO: {correctAnswers} OF {QUESTIONS.length} CORRECT SESSIONS.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <button 
               onClick={startGame}
-              className="px-5 py-2 border border-slate-800 hover:bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition"
+              className="px-4 py-2 border border-slate-800 hover:bg-slate-850 text-slate-300 font-bold transition shadow-flat-slate-sm text-[9px] uppercase tracking-wider"
             >
               Play Again
             </button>
             <a 
               href="/Portfolio/projects/tap-tap-trivia"
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 border border-blue-500 text-white font-bold transition shadow-flat-slate-sm text-[9px] uppercase tracking-wider flex items-center justify-center"
             >
               Go to Trivia Case Study
             </a>
