@@ -3,8 +3,6 @@ layout: '../../layouts/Layout.astro'
 title: 'WhispNotes — Native macOS AI Note-Taking & Speech Studio'
 description: 'Native macOS desktop app with local on-device Whisper audio transcription, local Gemma 3 AI assistant capabilities, and interactive node graph canvas.'
 ---
-import WhispNotesDemo from '../../components/ChatWidget.jsx';
-import WhispNotesDemoComponent from '../../components/WhispNotesDemo.jsx';
 
 <div class="max-w-4xl mx-auto py-12 px-6">
   
@@ -46,67 +44,88 @@ import WhispNotesDemoComponent from '../../components/WhispNotesDemo.jsx';
   {/* Content Grid */}
   <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
     
-    {/* Section 1: The Problem */}
+    {/* Section 1: Overview & Privacy */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">01/</span> The Privacy &amp; Latency Challenge
+        <span class="text-blue-500 text-xl font-mono">01/</span> Privacy-First Local AI Architecture
       </h2>
       <p>
-        Modern note-taking software increasingly relies on cloud-hosted LLM endpoints and server-side speech-to-text APIs. However, sending confidential meeting transcripts, academic research notes, or personal ideas to third-party cloud servers introduces significant data privacy risks, requires constant internet access, and suffers from network latency bottlenecks.
+        Modern note-taking software increasingly relies on cloud-hosted LLM endpoints and server-side speech-to-text APIs. However, sending confidential meeting transcripts, academic research notes, or personal ideas to third-party cloud servers introduces significant data privacy risks and network latency bottlenecks.
       </p>
       <p>
-        **WhispNotes** eliminates cloud dependencies by executing **100% of speech transcription and LLM inference locally** on Apple Silicon hardware using Metal Performance Shaders and CoreML acceleration.
+        **WhispNotes** is a native macOS application designed for markdown note-taking with integrated on-device audio transcription and local Gemma 3 AI assistant capabilities. Designed for privacy and offline usage, **100% of note data, speech processing, and AI generation remain local to your machine**.
       </p>
     </div>
 
-    {/* Section 2: Interactive Desktop Simulator */}
-    <div class="space-y-4">
+    {/* Section 2: Application Showcase / Screenshots */}
+    <div class="space-y-8">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">02/</span> macOS App Workspace Simulator
+        <span class="text-blue-500 text-xl font-mono">02/</span> macOS Application Interface
       </h2>
-      <p class="mb-6">
-        Below is an interactive simulation of the WhispNotes native desktop experience. You can switch between notes, trigger time-synced audio playback with the waveform seeker, execute local Gemma 3 AI prompts (Key Takeaways, Action Items, Flashcards), or toggle the Knowledge Graph canvas.
-      </p>
       
-      {/* Interactive Widget Mount */}
-      <WhispNotesDemoComponent client:load />
+      {/* Screenshot 1: Main 3-Pane Interface */}
+      <div class="space-y-3 bg-slate-950 border border-slate-850 p-4 rounded-2xl shadow-xl">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-900 pb-2">
+          <span class="text-blue-400 font-bold">MAIN 3-PANE INTERFACE</span>
+          <span class="text-slate-500">File Sidebar • Live Markdown • Timestamped Transcript</span>
+        </div>
+        <div class="overflow-hidden rounded-xl border border-slate-850">
+          <img 
+            src="/Portfolio/assets/whispnotes/main_interface.png" 
+            alt="WhispNotes Main 3-Pane Interface" 
+            class="w-full h-auto object-cover hover:scale-[1.01] transition-transform duration-300" 
+          />
+        </div>
+      </div>
+
+      {/* Screenshot 2: Spotlight Command Palette */}
+      <div class="space-y-3 bg-slate-950 border border-slate-850 p-4 rounded-2xl shadow-xl">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-900 pb-2">
+          <span class="text-purple-400 font-bold">SPOTLIGHT COMMAND PALETTE (⌘K)</span>
+          <span class="text-slate-500">Instant Note Search &amp; Local AI Action Palette</span>
+        </div>
+        <div class="overflow-hidden rounded-xl border border-slate-850">
+          <img 
+            src="/Portfolio/assets/whispnotes/command_palette.png" 
+            alt="WhispNotes Spotlight Command Palette" 
+            class="w-full h-auto object-cover hover:scale-[1.01] transition-transform duration-300" 
+          />
+        </div>
+      </div>
     </div>
 
-    {/* Section 3: Architecture & Technical Deep Dive */}
+    {/* Section 3: Feature Highlights */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">03/</span> System Architecture &amp; Local Pipelines
+        <span class="text-blue-500 text-xl font-mono">03/</span> Key System Features
       </h2>
-      <p>
-        WhispNotes was engineered to maximize Apple Silicon unified memory bandwidth and ensure fluid 60fps UI performance:
-      </p>
       
       <div class="grid sm:grid-cols-2 gap-6 pt-4">
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-blue-400 font-bold text-sm">SwiftUI 3-Pane Split View</div>
+          <div class="text-blue-400 font-bold text-sm">Three-Pane Split View</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
-            Native macOS AppKit layout featuring a note sidebar index, live markdown editor with timestamp markers, and inspector pane for local AI output.
+            Navigate notes via the file sidebar, write in the markdown editor with live preview, and view time-synced transcripts in the right panel.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
+          <div class="text-emerald-400 font-bold text-sm">On-Device Whisper Transcription</div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Process audio recordings locally using Whisper accelerated via Metal Performance Shaders without sending data to external servers.
           </p>
         </div>
         
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-emerald-400 font-bold text-sm">Whisper.cpp Metal Integration</div>
+          <div class="text-purple-400 font-bold text-sm">On-Device Gemma 3 AI Assistant</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
-            Direct Swift C-interop bindings to `whisper.cpp`, accelerating speech recognition via Apple Neural Engine and GPU Metal compute shaders.
+            Extract executive key takeaways, auto-detect action items, generate study flashcards, and prompt custom Q&amp;A on your note context.
           </p>
         </div>
 
         <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">Offline Gemma 3 AI Context</div>
+          <div class="text-yellow-400 font-bold text-sm">Interactive Knowledge Graph Canvas</div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
-            Local LLM runtime that ingests active note text to extract key takeaways, auto-detect action items, and compile flashcards with zero cloud transmission.
-          </p>
-        </div>
-
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-yellow-400 font-bold text-sm">Force-Directed Node Canvas</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Physics-driven node visualizer that computes Verlet integration to dynamically map note backlinks and tags into an interactive network canvas.
+            Visual node graph of note connections with draggable node physics, zoom/pan controls, blueprint grid background, and search filtering.
           </p>
         </div>
       </div>
@@ -115,10 +134,10 @@ import WhispNotesDemoComponent from '../../components/WhispNotesDemo.jsx';
     {/* Section 4: Direct Release Artifacts & Installation */}
     <div class="space-y-4 border-t border-slate-900 pt-8">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">04/</span> Direct Download &amp; Zero Terminal Setup
+        <span class="text-blue-500 text-xl font-mono">04/</span> Quick Download &amp; Direct Installation
       </h2>
       <p>
-        WhispNotes is distributed as a standalone macOS `.dmg` installer. Users can drag and drop `WhispNotes.app` directly into their Applications folder and manage local model weights directly from the in-app settings menu.
+        WhispNotes requires zero terminal setup. Models for offline transcription and Gemma 3 AI assistant features can be downloaded on-demand directly inside the app's settings modal with a single click.
       </p>
 
       <div class="flex flex-wrap gap-4 pt-2 font-mono">
@@ -126,7 +145,7 @@ import WhispNotesDemoComponent from '../../components/WhispNotesDemo.jsx';
           <span>GITHUB REPOSITORY</span> &rarr;
         </a>
         <a href="https://github.com/GIlbertoRCP/whispNotes/releases" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-[#0f1115] hover:bg-slate-900 border border-slate-850 text-slate-300 hover:text-white shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider flex items-center gap-2">
-          <span>DOWNLOAD DMG INSTALLER (.DMG)</span>
+          <span>DOWNLOAD INSTALLER (WHISPNOTES-1.0.0.DMG)</span>
         </a>
       </div>
     </div>
