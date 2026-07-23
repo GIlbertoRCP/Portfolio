@@ -42,13 +42,17 @@ const PORTFOLIO_DATA = {
     patterns: ['trivia', 'tap', 'multiplayer', 'react native', 'agile', 'group', 'team'],
     response: "TAP-TAP TRIVIA MOBILE CORE HIGHLIGHTS:\n\n• MULTIPLAYER: Responsive React Native quiz app built for a group project at CU Denver.\n• COLLABORATIVE GIT: Coordinated branch merges and resolved conflicts to maintain stable version controls.\n• TIMING VERIFICATION: Captures precise buzzer ticks to prevent network exploit latency.\n\nREAD DETAILS: [Trivia Case Study](/Portfolio/projects/tap-tap-trivia) TO BUZZ DEMO!"
   },
+  whispnotes: {
+    patterns: ['whispnotes', 'whisp', 'notes', 'whisper', 'gemma', 'macos', 'swift', 'swiftui', 'transcription', 'speech', 'note-taking', 'offline ai'],
+    response: "WHISPNOTES NATIVE MACOS STUDIO HIGHLIGHTS:\n\n• ON-DEVICE SPEECH: Uses Whisper.cpp accelerated via Metal Shaders and CoreML to transcribe audio 100% locally.\n• LOCAL GEMMA 3 AI: Ingests note context to generate executive takeaways, flashcards, and action items with zero cloud dependency.\n• 3-PANE & KNOWLEDGE GRAPH: Built natively in Swift & SwiftUI with AppKit 3-pane split-view, ⌘K command palette, and interactive force-directed node graph.\n\nREAD DETAILS: [WhispNotes Case Study](/Portfolio/projects/whisp-notes) TO LAUNCH THE INTERACTIVE APP SIMULATOR!"
+  },
   cart: {
     patterns: ['cart', 'ecommerce', 'e-commerce', 'c#', 'oop', 'inheritance', 'polymorphism', 'generic', 'collections'],
     response: "E-COMMERCE CART CORE HIGHLIGHTS:\n\n• OBJECT-ORIENTED: Implements product subclasses (digital, physical, subscription) in C#/.NET.\n• POLYMORPHISM: Overrides shipping charges (e.g. zero digital download fees vs physical weight coefficients).\n• GENERIC LISTS: Implements generic Collections to manage memory objects and calculate cart parameters.\n\nREAD DETAILS: [E-Commerce Case Study](/Portfolio/projects/ecommerce-cart) TO INSTANTIATE PRODUCT INSTANCES!"
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],
-    response: "GILBERTO'S PORTFOLIO CONTAINS SIX COMPLETED SYSTEMS:\n\n1. PREDICTIVE SDN TELEMETRY - Event-driven Mininet monitoring using Kafka and LSTM/DQN.\n2. F1 ORACLE - Pairwise driver finishing XGBRanker platform.\n3. HUMANOID LOCOMOTION - 3D bipedal PPO training in MuJoCo.\n4. WIRELESS EOD ROBOT - ESP-NOW direct mesh remote and mecanum rover.\n5. TAP-TAP TRIVIA - React Native multiplayer quiz client.\n6. C# OOP CATALOG - Polymorphic e-commerce cart simulation.\n\nSELECT ANY OPTION FOR DETAILED FILE SPECIFICATIONS."
+    response: "GILBERTO'S PORTFOLIO CONTAINS SIX FEATURED SYSTEMS:\n\n1. WHISPNOTES - Native macOS note app with local Whisper transcription & Gemma 3 AI.\n2. PREDICTIVE SDN TELEMETRY - Event-driven Mininet monitoring using Kafka and LSTM/DQN.\n3. F1 ORACLE - Pairwise driver finishing XGBRanker platform.\n4. HUMANOID LOCOMOTION - 3D bipedal PPO training in MuJoCo.\n5. WIRELESS EOD ROBOT - ESP-NOW direct mesh remote and mecanum rover.\n6. TAP-TAP TRIVIA & C# CATALOG - React Native & C# OOP simulations.\n\nSELECT ANY OPTION FOR DETAILED FILE SPECIFICATIONS."
   }
 };
 

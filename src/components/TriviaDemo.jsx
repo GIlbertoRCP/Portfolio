@@ -36,6 +36,18 @@ const QUESTIONS = [
     ],
     correctId: 2,
     explanation: "By quantizing parameters to 8-bit integers (INT8) and compiling to ONNX Runtime, Gilberto achieved a 73% size reduction and a 69% latency speedup!"
+  },
+  {
+    id: 4,
+    stem: "How does WhispNotes achieve 100% offline privacy for speech transcription and AI assistant features on macOS?",
+    options: [
+      { id: 1, text: 'Sending encrypted payloads to OpenAI servers' },
+      { id: 2, text: 'Running local Whisper.cpp (Metal/CoreML) & Gemma 3 LLM' },
+      { id: 3, text: 'Relying on web browser SpeechRecognition APIs' },
+      { id: 4, text: 'Streaming raw audio to a remote Kubernetes cluster' },
+    ],
+    correctId: 2,
+    explanation: "WhispNotes executes speech transcription locally using Whisper.cpp with Metal/CoreML acceleration and performs LLM Q&A using local Gemma 3 models with zero network packets sent."
   }
 ];
 

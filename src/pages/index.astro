@@ -42,7 +42,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="p-4 flex flex-col justify-between">
           <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[03] PORTFOLIO</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">5 MAJOR SYSTEMS</span>
+          <span class="text-slate-200 text-xs font-semibold mt-2">6 MAJOR SYSTEMS</span>
         </div>
         <div class="p-4 flex flex-col justify-between">
           <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[04] LIVE_DEMOS</span>
@@ -67,11 +67,11 @@ import Layout from '../layouts/Layout.astro';
       <div class="border-b border-slate-850 pb-4 font-mono">
         <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">// SEC_01 // CORE_SYSTEMS_INDEX</div>
         <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Featured ML &amp; Telemetry Systems</h2>
-        <p class="text-xs text-slate-400 mt-1">Deep, end-to-end applications demonstrating machine learning models and distributed infrastructure.</p>
+        <p class="text-xs text-slate-400 mt-1">Deep, end-to-end applications demonstrating machine learning models, local AI inference, and distributed infrastructure.</p>
       </div>
       
       <!-- Primary Grid -->
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Project 1: Predictive SDN -->
         <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
@@ -140,6 +140,30 @@ import Layout from '../layouts/Layout.astro';
               <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">5-PT LIDAR</span>
             </div>
             <a href="/Portfolio/projects/motor-control-locomotion" class="text-emerald-400 font-bold text-xs hover:text-emerald-300 transition mt-auto inline-flex items-center gap-1 font-mono">
+              [VIEW DETAILS] &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 4: WhispNotes macOS AI Studio -->
+        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
+          <div>
+            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
+              <span class="text-cyan-400 font-bold uppercase tracking-wider">SYS_REF: SWIFT-MACOS</span>
+              <span class="text-slate-500 uppercase">[SYS.STABLE]</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-cyan-400 transition tracking-tight">WhispNotes macOS AI Studio</h3>
+            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
+              Native macOS markdown note suite with local on-device Whisper transcription, local Gemma 3 AI assistant, and interactive node graph canvas.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">SWIFTUI</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">WHISPER</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">GEMMA 3</span>
+            </div>
+            <a href="/Portfolio/projects/whisp-notes" class="text-cyan-400 font-bold text-xs hover:text-cyan-300 transition mt-auto inline-flex items-center gap-1 font-mono">
               [VIEW DETAILS] &rarr;
             </a>
           </div>
@@ -256,13 +280,13 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div class="divide-y divide-slate-900 flex-grow">
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
+              <span>SWIFT</span> <span class="text-slate-600 text-[10px]">MACOS / NATIVE</span>
+            </div>
+            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>C#</span> <span class="text-slate-600 text-[10px]">OOP / .NET</span>
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>C++</span> <span class="text-slate-600 text-[10px]">EMBEDDED</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>C</span> <span class="text-slate-600 text-[10px]">SYSTEMS</span>
+              <span>C++ / C</span> <span class="text-slate-600 text-[10px]">EMBEDDED</span>
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>PYTHON</span> <span class="text-slate-600 text-[10px]">ML &amp; DATA</span>
@@ -283,6 +307,9 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div class="divide-y divide-slate-900 flex-grow">
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
+              <span>SWIFTUI</span> <span class="text-slate-600 text-[10px]">MACOS UI</span>
+            </div>
+            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>FASTAPI</span> <span class="text-slate-600 text-[10px]">API ENGINE</span>
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
@@ -297,9 +324,6 @@ import Layout from '../layouts/Layout.astro';
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>TAILWIND CSS</span> <span class="text-slate-600 text-[10px]">STYLING</span>
             </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>VERCEL</span> <span class="text-slate-600 text-[10px]">HOSTING</span>
-            </div>
           </div>
         </div>
 
@@ -309,6 +333,9 @@ import Layout from '../layouts/Layout.astro';
             [03] DEV TOOLING
           </div>
           <div class="divide-y divide-slate-900 flex-grow">
+            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
+              <span>WHISPER.CPP</span> <span class="text-slate-600 text-[10px]">SPEECH ML</span>
+            </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>GIT / GITHUB</span> <span class="text-slate-600 text-[10px]">VCS</span>
             </div>
@@ -320,9 +347,6 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>LINUX BASH</span> <span class="text-slate-600 text-[10px]">SHELL</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>VS CODE / EMACS</span> <span class="text-slate-600 text-[10px]">EDITORS</span>
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>MININET</span> <span class="text-slate-600 text-[10px]">NET WORK</span>
@@ -337,13 +361,13 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <div class="divide-y divide-slate-900 flex-grow">
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
+              <span>GEMMA 3</span> <span class="text-slate-600 text-[10px]">LOCAL AI</span>
+            </div>
+            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>ESP32 MCU</span> <span class="text-slate-600 text-[10px]">HARDWARE</span>
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>ESP-NOW LINK</span> <span class="text-slate-600 text-[10px]">P2P WIRE</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>FREERTOS</span> <span class="text-slate-600 text-[10px]">TASKING</span>
             </div>
             <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
               <span>PYTORCH</span> <span class="text-slate-600 text-[10px]">DL / LSTM</span>
