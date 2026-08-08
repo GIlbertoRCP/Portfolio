@@ -23,7 +23,7 @@ import SpatialPipelineDemo from '../../components/SpatialPipelineDemo.jsx';
   </header>
 
   {/* Technical Specifications Table */}
-  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
     <div class="space-y-1">
       <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
       <p class="text-sm font-semibold text-white">Lead Data Engine Architect</p>
@@ -39,6 +39,29 @@ import SpatialPipelineDemo from '../../components/SpatialPipelineDemo.jsx';
     <div class="space-y-1">
       <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Repository</span>
       <a href="https://github.com/GIlbertoRCP/spatial_pipeline" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-cyan-400 hover:underline font-mono">GitHub / spatial_pipeline ↗</a>
+    </div>
+  </section>
+
+  {/* Project Screenshot Showcase */}
+  <section class="mb-16 space-y-6">
+    <div class="rounded-2xl border border-slate-800 overflow-hidden bg-slate-950 p-2 shadow-2xl space-y-2">
+      <img src="/Portfolio/assets/spatial-pipeline/voronoi_map.png" alt="Spatial Transcriptomics Dashboard & Voronoi Map" class="rounded-xl w-full object-cover border border-slate-900" />
+    </div>
+    <div class="flex justify-between items-center text-xs font-mono text-slate-500 px-1">
+      <span>FIG 1.0 — Out-of-Core Density-Adaptive Voronoi Map &amp; Topological Graph Engine</span>
+      <span class="text-cyan-400 font-bold">500k Mols &lt; 7.0s</span>
+    </div>
+
+    {/* Benchmark Plots Grid */}
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-slate-950 border border-slate-850 p-2 rounded-xl space-y-2">
+        <img src="/Portfolio/assets/spatial-pipeline/benchmark_scaling.png" alt="Pipeline Runtime Benchmark Scaling Plot" class="rounded-lg w-full border border-slate-900" />
+        <span class="text-[10px] font-mono text-slate-500 block px-1">FIG 1.1 — Runtime Ingestion &amp; Binning Benchmark Scaling Plot</span>
+      </div>
+      <div class="bg-slate-950 border border-slate-850 p-2 rounded-xl space-y-2">
+        <img src="/Portfolio/assets/spatial-pipeline/memory_profile_scaling.png" alt="Peak RAM Memory Profile Plot" class="rounded-lg w-full border border-slate-900" />
+        <span class="text-[10px] font-mono text-slate-500 block px-1">FIG 1.2 — Peak RAM Memory Profile Across Dataset Sizes</span>
+      </div>
     </div>
   </section>
 
