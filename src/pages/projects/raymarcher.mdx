@@ -1,0 +1,152 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Relativistic Spacetime CUDA Raymarcher Benchmark'
+description: 'High-performance NVIDIA CUDA C++ & WebGPU parallel raymarching engine simulating curved spacetime black hole geodesics with RK4 integration.'
+---
+import RaymarcherDemo from '../../components/RaymarcherDemo.jsx';
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-blue-950/80 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">GPU Parallel Computing</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">CUDA C++ / WebGPU</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Relativistic Spacetime &amp; Low-Level Parallel CUDA Raymarcher
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      A high-performance, real-time NVIDIA CUDA C++ and WebGPU parallel computing benchmark engine simulating Einstein's General Relativity (Schwarzschild &amp; Kerr black hole spacetimes) directly on GPU hardware.
+    </p>
+  </header>
+
+  {/* Technical Specifications Table */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
+      <p class="text-sm font-semibold text-white">GPU Systems Architect</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Compute Engines</span>
+      <p class="text-sm font-semibold text-white">CUDA C++ / WebGPU WGSL</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Integrator</span>
+      <p class="text-sm font-semibold text-white">4th-Order Runge-Kutta (RK4)</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Repository</span>
+      <a href="https://github.com/GIlbertoRCP/raymarcher" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-blue-400 hover:underline font-mono">GitHub / raymarcher ↗</a>
+    </div>
+  </section>
+
+  {/* Interactive Telemetry & Simulator Component */}
+  <section class="mb-16">
+    <h2 class="text-2xl font-display font-extrabold text-white mb-2">Interactive CUDA Benchmark Telemetry</h2>
+    <p class="text-xs text-slate-400 font-mono mb-4">Simulate live warp alignment, thread block dimension sweeps (32x8 vs 16x16), and spatial BVH acceleration.</p>
+    <RaymarcherDemo client:load />
+  </section>
+
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
+    
+    {/* Section 1: Low-Level GPU Architecture */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-blue-500 text-xl font-mono">01/</span> Low-Level Parallel Compute Architecture
+      </h2>
+      <p>
+        Rather than relying on pre-rendered skyboxes or flat 2D approximation disks, this simulator integrates photon trajectories (<strong>null geodesics</strong>) in curved spacetime using parallel <strong>4th-Order Runge-Kutta (RK4)</strong> numerical integration combined with Signed Distance Function (SDF) Constructive Solid Geometry (CSG), ray-cone soft shadows, spatial bounding volume short-circuit acceleration, and real-time step-count diagnostic heatmaps.
+      </p>
+      <ul class="list-disc list-inside space-y-2 pl-4 text-slate-400 font-mono text-xs">
+        <li><strong>Warp Alignment (32x8)</strong>: Maximizes SIMD execution unit utilization across 32-thread warps, achieving up to <strong>722.68 GB/s VRAM bandwidth</strong> at 4K resolution.</li>
+        <li><strong>16-Byte Aligned Structs</strong>: <code class="text-blue-300">alignas(16) SimulationSettings</code> guarantees single-cycle L1/L2 cache line fetches across GPU SMs.</li>
+        <li><strong>Warp Shuffle Reduction (<code class="text-purple-300">__shfl_down_sync</code>)</strong>: Eliminates atomic lock contention when aggregating step count metrics across threads.</li>
+        <li><strong>Early Warp Exit Gate (<code class="text-purple-300">__any_sync</code>)</strong>: Instantly terminates block execution when all threads hit escape or event horizon boundaries.</li>
+      </ul>
+    </div>
+
+    {/* Section 2: Performance Benchmark Matrix Table */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-blue-500 text-xl font-mono">02/</span> Performance Matrix across Resolutions
+      </h2>
+      <p>
+        Empirical measurements gathered using high-resolution CUDA events (<code class="text-blue-300">cudaEventElapsedTime</code>) across 1080p, 1440p, and 4K resolutions under varying CUDA thread block dimensions:
+      </p>
+      
+      <div class="overflow-x-auto bg-slate-950 border border-slate-850 rounded-xl p-4 font-mono text-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-2 px-3">Resolution</th>
+              <th class="py-2 px-3">Block Dim</th>
+              <th class="py-2 px-3">Threads</th>
+              <th class="py-2 px-3">Frame Latency</th>
+              <th class="py-2 px-3">Frame Rate</th>
+              <th class="py-2 px-3">VRAM Bandwidth</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-900 text-slate-300">
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">1080p (1920x1080)</td>
+              <td class="py-2 px-3 text-blue-400 font-bold">32x8 (Warp Aligned)</td>
+              <td class="py-2 px-3">256</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">0.095 ms</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">10,531.3 FPS</td>
+              <td class="py-2 px-3 text-purple-400 font-bold">698.81 GB/s</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3">1080p (1920x1080)</td>
+              <td class="py-2 px-3">16x16</td>
+              <td class="py-2 px-3">256</td>
+              <td class="py-2 px-3">0.116 ms</td>
+              <td class="py-2 px-3">8,639.6 FPS</td>
+              <td class="py-2 px-3">573.28 GB/s</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">1440p (2560x1440)</td>
+              <td class="py-2 px-3 text-blue-400 font-bold">32x8 (Warp Aligned)</td>
+              <td class="py-2 px-3">256</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">0.180 ms</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">5,542.4 FPS</td>
+              <td class="py-2 px-3 text-purple-400 font-bold">653.80 GB/s</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">4K (3840x2160)</td>
+              <td class="py-2 px-3 text-blue-400 font-bold">32x8 (Warp Aligned)</td>
+              <td class="py-2 px-3">256</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">0.367 ms</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">2,722.8 FPS</td>
+              <td class="py-2 px-3 text-purple-400 font-bold">722.68 GB/s</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* Section 3: Geodesic Mathematical Foundation */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-blue-500 text-xl font-mono">03/</span> Schwarzschild &amp; Kerr Geodesic Mathematical Model
+      </h2>
+      <p>
+        The photon trajectory integration solves the null geodesic equations derived from the metric tensor <code class="text-blue-300">g_uv</code>:
+      </p>
+      <div class="bg-slate-950 p-4 border border-slate-850 rounded-xl text-xs font-mono text-slate-300 space-y-2">
+        <p class="text-blue-400 font-bold">// Schwarzschild Isotropic Line Element</p>
+        <p class="text-slate-300">
+          ds^2 = - ((1 - M/2r) / (1 + M/2r))^2 dt^2 + (1 + M/2r)^4 (dx^2 + dy^2 + dz^2)
+        </p>
+        <p class="text-slate-400 pt-2">// Geodesic Acceleration Component</p>
+        <p class="text-slate-300">
+          d^2x/dλ^2 = - Γ^n_ij (dx^i/dλ) (dx^j/dλ)
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

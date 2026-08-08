@@ -1,0 +1,159 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Memory-Constrained Spatial Graph & AnnData Engine'
+description: 'High-performance Python pipeline processing 500,000+ single-cell spatial coordinates into topological graphs under strict RAM limits using out-of-core tile chunking and zero-copy PyArrow transfers.'
+---
+import SpatialPipelineDemo from '../../components/SpatialPipelineDemo.jsx';
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-cyan-950/80 border border-cyan-500/20 rounded-full text-xs font-semibold text-cyan-400">Bioinformatics &amp; Graph Engineering</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Out-of-Core Processing</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Memory-Constrained Spatial Graph Engine &amp; AnnData Ecosystem Bridge
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      A high-performance Python spatial transcriptomics engine engineered to process 500,000+ continuous molecule coordinates into discrete topological graphs, sparse count matrices, and PyTorch Geometric GNN objects in under 7 seconds under strict RAM constraints.
+    </p>
+  </header>
+
+  {/* Technical Specifications Table */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
+      <p class="text-sm font-semibold text-white">Lead Data Engine Architect</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Core Frameworks</span>
+      <p class="text-sm font-semibold text-white">PyArrow / Scanpy / PyG</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Memory Tech</span>
+      <p class="text-sm font-semibold text-white">Zero-Copy Arrow &amp; Memmap</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Repository</span>
+      <a href="https://github.com/GIlbertoRCP/spatial_pipeline" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-cyan-400 hover:underline font-mono">GitHub / spatial_pipeline ↗</a>
+    </div>
+  </section>
+
+  {/* Interactive Pipeline Benchmark Component */}
+  <section class="mb-16">
+    <h2 class="text-2xl font-display font-extrabold text-white mb-2">Interactive Pipeline Benchmark &amp; Schema Inspector</h2>
+    <p class="text-xs text-slate-400 font-mono mb-4">Benchmark out-of-core spatial tiling, PyArrow zero-copy speedups, and inspect AnnData / PyG GNN object structures.</p>
+    <SpatialPipelineDemo client:load />
+  </section>
+
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
+    
+    {/* Section 1: Technical Challenges Overcome */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-cyan-500 text-xl font-mono">01/</span> Technical Challenges Overcome
+      </h2>
+      
+      <div class="space-y-6">
+        <div class="bg-[#0f1115] border border-slate-850 p-5 rounded-xl space-y-2">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span class="text-cyan-400">1.</span> Out-of-Core Boundary Halo Buffer &amp; Edge Deduplication
+          </h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Partitioning spatial coordinates into local grid tiles creates boundary artifacts: cell bins lying on border lines risk double counting, and graph edges crossing tile boundaries generate duplicate graph connections.
+          </p>
+          <p class="text-xs text-slate-300 leading-relaxed font-mono">
+            <strong>Solution</strong>: Implemented a deterministic bin ownership model with a 50µm halo buffer around tile boundaries. Graph edges <code class="text-cyan-300">(Node_A, Node_B)</code> are canonicalized using <code class="text-cyan-300">min(Node_A, Node_B)</code> prior to issuing vector deduplication with <code class="text-cyan-300">np.unique</code>.
+          </p>
+        </div>
+
+        <div class="bg-[#0f1115] border border-slate-850 p-5 rounded-xl space-y-2">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span class="text-cyan-400">2.</span> Ecosystem Interop Friction (Scanpy &amp; Squidpy <code class="text-purple-300">.h5ad</code>)
+          </h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Bioinformaticians using Scanpy or Squidpy expect unified AnnData structures (<code class="text-purple-300">adata.X</code>, <code class="text-purple-300">adata.obsm['spatial']</code>, <code class="text-purple-300">adata.obsp['spatial_connectivities']</code>) rather than disparate CSVs or NPZ matrices.
+          </p>
+          <p class="text-xs text-slate-300 leading-relaxed font-mono">
+            <strong>Solution</strong>: Created native <code class="text-purple-300">to_anndata()</code> and <code class="text-purple-300">from_anndata()</code> serializers populating sparse CSR connectivities and Laplacian matrices.
+          </p>
+        </div>
+
+        <div class="bg-[#0f1115] border border-slate-850 p-5 rounded-xl space-y-2">
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span class="text-cyan-400">3.</span> Zero-Copy PyArrow Memory Transfers
+          </h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Standard Pandas CSV loading copies data multiple times into uncompressed Python objects, spiking RAM usage to 4.8x dataset size.
+          </p>
+          <p class="text-xs text-slate-300 leading-relaxed font-mono">
+            <strong>Solution</strong>: Leveraged PyArrow columnar streaming to read coordinate chunks directly into C++ buffers without Python object overhead, dropping ingestion latency for 500k molecules from 980ms down to <strong>148.6ms</strong>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    {/* Section 2: Performance Scaling Matrix */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-cyan-500 text-xl font-mono">02/</span> Benchmark Scaling Matrix (10k to 500k Molecules)
+      </h2>
+
+      <div class="overflow-x-auto bg-slate-950 border border-slate-850 rounded-xl p-4 font-mono text-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-2 px-3">Molecule Count (N)</th>
+              <th class="py-2 px-3">Ingestion Time</th>
+              <th class="py-2 px-3">Binning Time</th>
+              <th class="py-2 px-3">Graph Build Time</th>
+              <th class="py-2 px-3">Total Execution</th>
+              <th class="py-2 px-3">Peak RAM Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-900 text-slate-300">
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">10,000</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">13.7 ms</td>
+              <td class="py-2 px-3">2.2 ms</td>
+              <td class="py-2 px-3">6.11 s</td>
+              <td class="py-2 px-3 font-bold text-white">6.13 s</td>
+              <td class="py-2 px-3 text-cyan-400 font-bold">1.55 MB</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">50,000</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">15.7 ms</td>
+              <td class="py-2 px-3">3.8 ms</td>
+              <td class="py-2 px-3">6.49 s</td>
+              <td class="py-2 px-3 font-bold text-white">6.51 s</td>
+              <td class="py-2 px-3 text-cyan-400 font-bold">2.79 MB</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">200,000</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">69.2 ms</td>
+              <td class="py-2 px-3">16.3 ms</td>
+              <td class="py-2 px-3">6.40 s</td>
+              <td class="py-2 px-3 font-bold text-white">6.48 s</td>
+              <td class="py-2 px-3 text-cyan-400 font-bold">11.08 MB</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-white">500,000</td>
+              <td class="py-2 px-3 text-emerald-400 font-bold">148.6 ms</td>
+              <td class="py-2 px-3">40.4 ms</td>
+              <td class="py-2 px-3">6.55 s</td>
+              <td class="py-2 px-3 font-bold text-white">6.75 s</td>
+              <td class="py-2 px-3 text-cyan-400 font-bold">27.68 MB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>

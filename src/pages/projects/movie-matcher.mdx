@@ -1,0 +1,100 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Movie Matcher — Real-Time Two-Tower Neural Recommendation Platform'
+description: 'Full-stack collaborative movie matching application featuring two-tower neural candidate retrieval and ranking towers, sub-millisecond Socket.IO state synchronization, and online stochastic vector adaptation.'
+---
+import MovieMatcherDemo from '../../components/MovieMatcherDemo.jsx';
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-purple-950/80 border border-purple-500/20 rounded-full text-xs font-semibold text-purple-400">Neural Recommendation Systems</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">React 19 / Socket.IO / ONNX</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Movie Matcher — Two-Tower Neural &amp; State Synchronization Platform
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      A high-performance full-stack web application designed for real-time collaborative movie matching, combining a <strong>Two-Tower Neural Collaborative Filtering Engine</strong> with online learning over WebSockets, instant room match notifications, state recovery, and Authentik OIDC SSO.
+    </p>
+  </header>
+
+  {/* Technical Specifications Table */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
+      <p class="text-sm font-semibold text-white">Full-Stack &amp; ML Architect</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">ML Architecture</span>
+      <p class="text-sm font-semibold text-white">Two-Tower Deep MLP</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Real-Time Sync</span>
+      <p class="text-sm font-semibold text-white">Socket.IO WebSockets</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Repository</span>
+      <a href="https://github.com/GIlbertoRCP/movie_match" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-purple-400 hover:underline font-mono">GitHub / movie_match ↗</a>
+    </div>
+  </section>
+
+  {/* Interactive Demo Component */}
+  <section class="mb-16">
+    <h2 class="text-2xl font-display font-extrabold text-white mb-2">Interactive Two-Tower Online Learning Simulator</h2>
+    <p class="text-xs text-slate-400 font-mono mb-4">Test card swiping, watch online preference vectors update live, and experience instant room match events.</p>
+    <MovieMatcherDemo client:load />
+  </section>
+
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
+    
+    {/* Section 1: Two-Tower Neural Filtering Architecture */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">01/</span> Two-Tower Neural Recommendation Architecture
+      </h2>
+      <p>
+        Traditional collaborative filtering models require offline batch re-training, failing to capture rapidly evolving user preferences during an active swiping session. Movie Matcher overcomes this with a hybrid Two-Tower deep learning pipeline:
+      </p>
+      
+      <div class="grid md:grid-cols-2 gap-6 pt-2">
+        <div class="bg-[#0f1115] border border-slate-850 p-5 rounded-xl space-y-3">
+          <h3 class="text-sm font-mono font-bold text-purple-400 uppercase tracking-wider">// TOWER 1: CANDIDATE RETRIEVAL</h3>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            Encodes movie metadata (genres, release decades, director latent vectors) into 64-dimensional unit sphere embeddings. Shortlists candidate pools from thousands of TMDB titles in under <strong>2ms</strong>.
+          </p>
+        </div>
+
+        <div class="bg-[#0f1115] border border-slate-850 p-5 rounded-xl space-y-3">
+          <h3 class="text-sm font-mono font-bold text-blue-400 uppercase tracking-wider">// TOWER 2: DEEP MLP RANKING TOWER</h3>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            Evaluates the active user vector <code class="text-blue-300">v_user</code> against candidate vectors through a 3-layer Multi-Layer Perceptron predicting match probabilities <code class="text-blue-300">P(Like | U, M)</code> with ONNX Runtime execution.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Section 2: Online Vector Adaptation Math */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">02/</span> Real-Time Online Stochastic Vector Update
+      </h2>
+      <p>
+        On every swipe event, the user's active session vector shifts dynamically without blocking the Node.js event loop:
+      </p>
+      <div class="bg-slate-950 p-4 border border-slate-850 rounded-xl text-xs font-mono text-slate-300 space-y-2">
+        <p class="text-purple-400 font-bold">// Online Stochastic Vector Adaptation</p>
+        <p class="text-slate-300">
+          v_new = normalize( v_old + alpha * weight * e_movie )
+        </p>
+        <p class="text-slate-500 pt-1">// Where alpha = learning rate (0.25), weight = swipe weight (+1.0 like, -0.5 dislike), e_movie = 64D movie embedding</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

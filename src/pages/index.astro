@@ -42,11 +42,11 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="p-4 flex flex-col justify-between">
           <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[03] PORTFOLIO</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">6 MAJOR SYSTEMS</span>
+          <span class="text-slate-200 text-xs font-semibold mt-2">9 MAJOR SYSTEMS</span>
         </div>
         <div class="p-4 flex flex-col justify-between">
           <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[04] LIVE_DEMOS</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">PLAYABLE SIMS</span>
+          <span class="text-slate-200 text-xs font-semibold mt-2">INTERACTIVE SIMS</span>
         </div>
       </div>
 
@@ -54,7 +54,7 @@ import Layout from '../layouts/Layout.astro';
         <a href="#projects" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold border border-blue-500 hover:border-blue-600 shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider">
           EXPLORE PROJECTS &rarr;
         </a>
-        <a href="/Portfolio/about" class="px-5 py-2.5 bg-[#0f1115] hover:bg-slate-900 border border-slate-855 border-slate-850 text-slate-300 hover:text-white shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider">
+        <a href="/Portfolio/about" class="px-5 py-2.5 bg-[#0f1115] hover:bg-slate-900 border border-slate-850 text-slate-300 hover:text-white shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider">
           ABOUT ME // PROFILE
         </a>
       </div>
@@ -66,14 +66,86 @@ import Layout from '../layouts/Layout.astro';
       <!-- Section Header -->
       <div class="border-b border-slate-850 pb-4 font-mono">
         <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">// SEC_01 // CORE_SYSTEMS_INDEX</div>
-        <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Featured ML &amp; Telemetry Systems</h2>
-        <p class="text-xs text-slate-400 mt-1">Deep, end-to-end applications demonstrating machine learning models, local AI inference, and distributed infrastructure.</p>
+        <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Featured Systems &amp; Compute Pipelines</h2>
+        <p class="text-xs text-slate-400 mt-1">Deep, end-to-end applications demonstrating machine learning models, GPU parallel acceleration, out-of-core pipelines, and distributed infrastructure.</p>
       </div>
       
       <!-- Primary Grid -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <!-- Project 1: Predictive SDN -->
+        <!-- Project 1: CUDA Raymarcher Benchmark -->
+        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
+          <div>
+            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
+              <span class="text-blue-400 font-bold uppercase tracking-wider">SYS_REF: GPU-CUDA-RK4</span>
+              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-blue-400 transition tracking-tight">CUDA vs WebGPU Raymarcher</h3>
+            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
+              General relativity Schwarzschild &amp; Kerr black hole raymarcher using RK4 geodesic integration, 32x8 warp alignment, and 722 GB/s VRAM throughput.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">CUDA C++</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">WEBGPU</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">RK4 GEODESIC</span>
+            </div>
+            <a href="/Portfolio/projects/raymarcher" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition mt-auto inline-flex items-center gap-1 font-mono">
+              [VIEW DETAILS &amp; SIMULATOR] &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2: Spatial Graph Pipeline -->
+        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
+          <div>
+            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
+              <span class="text-cyan-400 font-bold uppercase tracking-wider">SYS_REF: SPATIAL-GRAPH-01</span>
+              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-cyan-400 transition tracking-tight">Spatial Graph &amp; AnnData Engine</h3>
+            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
+              Out-of-core Python pipeline processing 500,000+ single-cell spatial coordinates into topological graphs under strict RAM limits with PyArrow zero-copy transfers.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">PYARROW</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">ANNDATA</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">VORONOI</span>
+            </div>
+            <a href="/Portfolio/projects/spatial-pipeline" class="text-cyan-400 font-bold text-xs hover:text-cyan-300 transition mt-auto inline-flex items-center gap-1 font-mono">
+              [VIEW DETAILS &amp; BENCHMARKS] &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 3: Movie Match Neural Platform -->
+        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
+          <div>
+            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
+              <span class="text-purple-400 font-bold uppercase tracking-wider">SYS_REF: TWO-TOWER-ML</span>
+              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
+            </div>
+            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-purple-400 transition tracking-tight">Movie Match Real-Time Platform</h3>
+            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
+              Two-Tower neural candidate retrieval and MLP ranking towers with real-time online vector adaptation over WebSockets and sub-ms room state sync.
+            </p>
+          </div>
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">TWO-TOWER</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">SOCKET.IO</span>
+              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">REACT 19</span>
+            </div>
+            <a href="/Portfolio/projects/movie-matcher" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition mt-auto inline-flex items-center gap-1 font-mono">
+              [VIEW DETAILS &amp; DEMO] &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 4: Predictive SDN -->
         <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
           <div>
             <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
@@ -97,7 +169,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </article>
 
-        <!-- Project 2: F1 Oracle -->
+        <!-- Project 5: F1 Oracle -->
         <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
           <div>
             <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
@@ -121,7 +193,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </article>
 
-        <!-- Project 3: Humanoid Locomotion -->
+        <!-- Project 6: Humanoid Locomotion -->
         <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
           <div>
             <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
@@ -145,7 +217,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </article>
 
-        <!-- Project 4: WhispNotes macOS AI Studio -->
+        <!-- Project 7: WhispNotes macOS AI Studio -->
         <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
           <div>
             <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
