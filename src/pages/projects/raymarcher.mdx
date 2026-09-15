@@ -1,9 +1,8 @@
 ---
 layout: '../../layouts/Layout.astro'
-title: 'Relativistic Spacetime CUDA Raymarcher Benchmark'
-description: 'High-performance NVIDIA CUDA C++ & WebGPU parallel raymarching engine simulating curved spacetime black hole geodesics with RK4 integration.'
+title: 'Relativistic Spacetime & Low-Level Parallel CUDA Raymarcher'
+description: 'High-performance NVIDIA CUDA C++ & WebGPU parallel raymarching engine simulating curved spacetime black hole geodesics with 4th-Order Runge-Kutta numerical integration.'
 ---
-import RaymarcherDemo from '../../components/RaymarcherDemo.jsx';
 
 <div class="max-w-4xl mx-auto py-12 px-6">
   
@@ -13,17 +12,18 @@ import RaymarcherDemo from '../../components/RaymarcherDemo.jsx';
     <div class="flex flex-wrap gap-2 mb-4">
       <span class="px-2.5 py-1 bg-blue-950/80 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">GPU Parallel Computing</span>
       <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">CUDA C++ / WebGPU</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">General Relativity</span>
     </div>
     <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
       Relativistic Spacetime &amp; Low-Level Parallel CUDA Raymarcher
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      A high-performance, real-time NVIDIA CUDA C++ and WebGPU parallel computing benchmark engine simulating Einstein's General Relativity (Schwarzschild &amp; Kerr black hole spacetimes) directly on GPU hardware.
+      A real-time NVIDIA CUDA C++ and WebGPU parallel simulation engine that solves Einstein's General Relativity equations (Schwarzschild and Kerr rotating black hole spacetimes) directly on GPU hardware by tracing curved light paths with 4th-Order Runge-Kutta numerical integration.
     </p>
   </header>
 
   {/* Technical Specifications Table */}
-  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
     <div class="space-y-1">
       <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
       <p class="text-sm font-semibold text-white">GPU Systems Architect</p>
@@ -33,7 +33,7 @@ import RaymarcherDemo from '../../components/RaymarcherDemo.jsx';
       <p class="text-sm font-semibold text-white">CUDA C++ / WebGPU WGSL</p>
     </div>
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Integrator</span>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Numerical Solver</span>
       <p class="text-sm font-semibold text-white">4th-Order Runge-Kutta (RK4)</p>
     </div>
     <div class="space-y-1">
@@ -42,119 +42,227 @@ import RaymarcherDemo from '../../components/RaymarcherDemo.jsx';
     </div>
   </section>
 
-  {/* Project Screenshot Showcase */}
-  <section class="mb-16 space-y-3">
-    <div class="rounded-2xl border border-slate-800 overflow-hidden bg-slate-950 p-2 shadow-2xl">
-      <img src="/Portfolio/assets/raymarcher/blackhole_viewport.png" alt="CUDA Raymarcher Black Hole Viewport" class="rounded-xl w-full object-cover border border-slate-900" />
-    </div>
-    <div class="flex justify-between items-center text-xs font-mono text-slate-500 px-1">
-      <span>FIG 1.0 — NVIDIA CUDA Kerr Black Hole Geodesic Viewport &amp; Dear ImGui Telemetry</span>
-      <span class="text-blue-400 font-bold">10,531 FPS @ 1080p</span>
-    </div>
-  </section>
-
-  {/* Interactive Telemetry & Simulator Component */}
-  <section class="mb-16">
-    <h2 class="text-2xl font-display font-extrabold text-white mb-2">Interactive CUDA Benchmark Telemetry</h2>
-    <p class="text-xs text-slate-400 font-mono mb-4">Simulate live warp alignment, thread block dimension sweeps (32x8 vs 16x16), and spatial BVH acceleration.</p>
-    <RaymarcherDemo client:load />
-  </section>
-
   {/* Content Grid */}
   <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
     
-    {/* Section 1: Low-Level GPU Architecture */}
+    {/* Section 1: Overview & The Core Challenge */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">01/</span> Low-Level Parallel Compute Architecture
+        <span class="text-blue-500 text-xl font-mono">01/</span> Simulating Curved Spacetime on the GPU
       </h2>
       <p>
-        Rather than relying on pre-rendered skyboxes or flat 2D approximation disks, this simulator integrates photon trajectories (<strong>null geodesics</strong>) in curved spacetime using parallel <strong>4th-Order Runge-Kutta (RK4)</strong> numerical integration combined with Signed Distance Function (SDF) Constructive Solid Geometry (CSG), ray-cone soft shadows, spatial bounding volume short-circuit acceleration, and real-time step-count diagnostic heatmaps.
+        In standard computer graphics, raytracing operates under Euclidean flat-space assumptions where light travels in straight lines ($d\mathbf{x}/dt = \mathbf{c}$). However, near extreme gravitational wells like black holes, spacetime itself curves. Although photons have zero rest mass, they follow the shortest paths through 4D curved spacetime—known as <strong>null geodesics</strong> ($ds^2 = 0$).
       </p>
-      <ul class="list-disc list-inside space-y-2 pl-4 text-slate-400 font-mono text-xs">
-        <li><strong>Warp Alignment (32x8)</strong>: Maximizes SIMD execution unit utilization across 32-thread warps, achieving up to <strong>722.68 GB/s VRAM bandwidth</strong> at 4K resolution.</li>
-        <li><strong>16-Byte Aligned Structs</strong>: <code class="text-blue-300">alignas(16) SimulationSettings</code> guarantees single-cycle L1/L2 cache line fetches across GPU SMs.</li>
-        <li><strong>Warp Shuffle Reduction (<code class="text-purple-300">__shfl_down_sync</code>)</strong>: Eliminates atomic lock contention when aggregating step count metrics across threads.</li>
-        <li><strong>Early Warp Exit Gate (<code class="text-purple-300">__any_sync</code>)</strong>: Instantly terminates block execution when all threads hit escape or event horizon boundaries.</li>
-      </ul>
+      <p>
+        Translating Einstein's field equations into real-time GPU code introduces two steep engineering hurdles:
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-bold text-sm">Coordinate Singularities</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Standard spherical coordinates (Boyer-Lindquist / standard Schwarzschild) contain mathematical singularities at the event horizon ($r = 2M$) and polar coordinate axes ($\theta = 0, \pi$). On GPU hardware, this triggers division-by-zero, <code class="text-blue-300">NaN</code> propagation, and thread lockups.
+          </p>
+        </div>
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-bold text-sm">Numerical Energy Drift</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            First-order Euler integration ($x_{n+1} = x_n + v\Delta t$) suffers from high truncation error ($O(\Delta t)$). Photons in near-circular orbits artificially bleed energy and spiral into the horizon, destroying delicate physical structures like the photon sphere.
+          </p>
+        </div>
+      </div>
+      <p class="pt-2">
+        This project solves both problems: formulating the geodesic equations in <strong>Cartesian Isotropic Coordinates</strong> to completely avoid coordinate poles, and stepping rays with a parallelized <strong>4th-Order Runge-Kutta (RK4)</strong> solver inside GPU thread warps.
+      </p>
     </div>
 
-    {/* Section 2: Performance Benchmark Matrix Table */}
-    <div class="space-y-4">
+    {/* Section 2: Mathematical Formulation */}
+    <div class="space-y-6">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">02/</span> Performance Matrix across Resolutions
+        <span class="text-blue-500 text-xl font-mono">02/</span> Schwarzschild &amp; Kerr Mathematical Model
       </h2>
       <p>
-        Empirical measurements gathered using high-resolution CUDA events (<code class="text-blue-300">cudaEventElapsedTime</code>) across 1080p, 1440p, and 4K resolutions under varying CUDA thread block dimensions:
+        Instead of evaluating costly 4D Christoffel connection coefficients ($\Gamma^\mu_{\alpha\beta}$) for each ray step, the solver recasts General Relativity into an equivalent 3D optical system using Cartesian isotropic coordinates $\mathbf{x} = (x, y, z)$ with isotropic radius $r = \sqrt{x^2 + y^2 + z^2}$.
+      </p>
+
+      {/* Sub-block 1: Metric Line Element */}
+      <div class="bg-slate-950/80 border border-slate-850 rounded-xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-850 pb-2">
+          <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">1. Cartesian Isotropic Line Element</span>
+          <span class="text-[10px] font-mono text-slate-500">CONFORMALLY FLAT SPATIAL SLICES</span>
+        </div>
+        <p class="text-xs text-slate-400">
+          The spacetime line element around a static black hole of mass $M$ in isotropic coordinates:
+        </p>
+        <div class="py-2 text-center overflow-x-auto text-slate-100">
+          $$
+          ds^2 = -\left(\frac{1 - \frac{M}{2r}}{1 + \frac{M}{2r}}\right)^2 c^2 dt^2 + \left(1 + \frac{M}{2r}\right)^4 \left(dx^2 + dy^2 + dz^2\right)
+          $$
+        </div>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          <strong class="text-slate-300">Why this matters:</strong> In these coordinates, the event horizon is mapped to $r_h = M/2$ (corresponding to $r_s = 2M$ in standard Schwarzschild coordinates). Space is conformally flat, meaning light cones are isotropic spheres locally, and the camera can rotate freely across all angles without gimbal lock or polar singularities.
+        </p>
+      </div>
+
+      {/* Sub-block 2: Effective Index of Refraction */}
+      <div class="bg-slate-950/80 border border-slate-850 rounded-xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-850 pb-2">
+          <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">2. Equivalent Optical Refractive Index</span>
+          <span class="text-[10px] font-mono text-slate-500">NULL GEODESIC REDUCTION (ds² = 0)</span>
+        </div>
+        <p class="text-xs text-slate-400">
+          Setting $ds^2 = 0$ for null rays allows the metric to be remapped to an effective, radially varying index of refraction $n(r)$:
+        </p>
+        <div class="py-2 text-center overflow-x-auto text-slate-100">
+          $$
+          n(r) = \frac{\left(1 + \frac{M}{2r}\right)^3}{1 - \frac{M}{2r}}
+          $$
+        </div>
+        <p class="text-xs text-slate-400">
+          From Fermat's principle, the acceleration vector $\frac{d\mathbf{p}}{d\lambda}$ for a photon with spatial position $\mathbf{x}$ and momentum $\mathbf{p} = d\mathbf{x}/d\lambda$ evaluates directly to a radial gradient:
+        </p>
+        <div class="py-2 text-center overflow-x-auto text-slate-100">
+          $$
+          \frac{d\mathbf{p}}{d\lambda} = \frac{1}{2} \nabla \left(n(r)^2\right) = -\frac{M\left(1 + \frac{M}{2r}\right)^5\left(2 - \frac{M}{2r}\right)}{r^3\left(1 - \frac{M}{2r}\right)^3}\,\mathbf{x}
+          $$
+        </div>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          <strong class="text-slate-300">GPU Benefit:</strong> This closed-form vector gradient requires only elementary vector operations (dot products, additions, scalar multiplies) readily executed on GPU hardware in a single cycle.
+        </p>
+      </div>
+
+      {/* Sub-block 3: 4th-Order Runge-Kutta */}
+      <div class="bg-slate-950/80 border border-slate-850 rounded-xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-850 pb-2">
+          <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">3. 4th-Order Runge-Kutta (RK4) Stepping</span>
+          <span class="text-[10px] font-mono text-slate-500">LOCAL ERROR O(h⁵), GLOBAL ERROR O(h⁴)</span>
+        </div>
+        <p class="text-xs text-slate-400">
+          To step each light ray along its affine parameter $\lambda$ with step size $h$, the system updates position $\mathbf{x}$ and direction $\mathbf{p}$ using four intermediate evaluations per step:
+        </p>
+        <div class="py-2 text-center overflow-x-auto text-slate-100 font-mono text-xs">
+          $$
+          \begin{aligned}
+          \mathbf{k}_1 &= f(\mathbf{x}_n, \mathbf{p}_n) \\
+          \mathbf{k}_2 &= f\left(\mathbf{x}_n + \frac{h}{2}\mathbf{k}_{1,x}, \;\mathbf{p}_n + \frac{h}{2}\mathbf{k}_{1,p}\right) \\
+          \mathbf{k}_3 &= f\left(\mathbf{x}_n + \frac{h}{2}\mathbf{k}_{2,x}, \;\mathbf{p}_n + \frac{h}{2}\mathbf{k}_{2,p}\right) \\
+          \mathbf{k}_4 &= f\left(\mathbf{x}_n + h\,\mathbf{k}_{3,x}, \;\mathbf{p}_n + h\,\mathbf{k}_{3,p}\right) \\
+          \mathbf{x}_{n+1} &= \mathbf{x}_n + \frac{h}{6}\left(\mathbf{k}_{1,x} + 2\mathbf{k}_{2,x} + 2\mathbf{k}_{3,x} + \mathbf{k}_{4,x}\right)
+          \end{aligned}
+          $$
+        </div>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Between integration stages, photon velocity is re-projected back onto the null shell ($|\mathbf{p}| = n(r)$) to completely eliminate accumulated floating-point energy drift.
+        </p>
+      </div>
+
+      {/* Sub-block 4: Frame-Dragging (Kerr Metric) */}
+      <div class="bg-slate-950/80 border border-slate-850 rounded-xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-850 pb-2">
+          <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">4. Frame-Dragging &amp; Rotating Spacetime (Kerr Black Hole)</span>
+          <span class="text-[10px] font-mono text-slate-500">LENSE-THIRRING PRECESSION</span>
+        </div>
+        <p class="text-xs text-slate-400">
+          When the black hole possesses angular momentum $\mathbf{J} = (0, 0, J)$ with spin parameter $a = J/M$, rotating spacetime drags nearby light rays in the direction of rotation. This manifests as an effective Coriolis acceleration:
+        </p>
+        <div class="py-2 text-center overflow-x-auto text-slate-100">
+          $$
+          \frac{d\mathbf{p}}{d\lambda} = \mathbf{F}_{\text{grav}} + 2\,\mathbf{p} \times \boldsymbol{\Omega}_{\text{fd}}
+          $$
+        </div>
+        <p class="text-xs text-slate-400">
+          where the frame-dragging angular velocity field $\boldsymbol{\Omega}_{\text{fd}}$ is given by:
+        </p>
+        <div class="py-2 text-center overflow-x-auto text-slate-100">
+          $$
+          \boldsymbol{\Omega}_{\text{fd}} = \left(0,\; 0,\; \frac{2J}{r^3\left(1 + \frac{M}{2r}\right)^6}\right)
+          $$
+        </div>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          <strong class="text-slate-300">Observable Effect:</strong> Prograde rays (orbiting with the spin) experience reduced effective gravity and can orbit closer to the horizon, while retrograde rays are deflected outwards. This breaks left-right symmetry, distorting the circular black hole shadow into an asymmetrical D-shape.
+        </p>
+      </div>
+
+    </div>
+
+    {/* Section 3: GPU Parallel Compute Architecture */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-blue-500 text-xl font-mono">03/</span> Low-Level GPU Parallel Architecture
+      </h2>
+      <p>
+        Integrating thousands of numerical RK4 steps for millions of screen pixels at 60 FPS requires careful consideration of hardware execution units, memory hierarchies, and warp scheduling:
       </p>
       
-      <div class="overflow-x-auto bg-slate-950 border border-slate-850 rounded-xl p-4 font-mono text-xs">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="border-b border-slate-800 text-slate-400">
-              <th class="py-2 px-3">Resolution</th>
-              <th class="py-2 px-3">Block Dim</th>
-              <th class="py-2 px-3">Threads</th>
-              <th class="py-2 px-3">Frame Latency</th>
-              <th class="py-2 px-3">Frame Rate</th>
-              <th class="py-2 px-3">VRAM Bandwidth</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-900 text-slate-300">
-            <tr>
-              <td class="py-2 px-3 font-bold text-white">1080p (1920x1080)</td>
-              <td class="py-2 px-3 text-blue-400 font-bold">32x8 (Warp Aligned)</td>
-              <td class="py-2 px-3">256</td>
-              <td class="py-2 px-3 text-emerald-400 font-bold">0.095 ms</td>
-              <td class="py-2 px-3 text-emerald-400 font-bold">10,531.3 FPS</td>
-              <td class="py-2 px-3 text-purple-400 font-bold">698.81 GB/s</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-3">1080p (1920x1080)</td>
-              <td class="py-2 px-3">16x16</td>
-              <td class="py-2 px-3">256</td>
-              <td class="py-2 px-3">0.116 ms</td>
-              <td class="py-2 px-3">8,639.6 FPS</td>
-              <td class="py-2 px-3">573.28 GB/s</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-3 font-bold text-white">1440p (2560x1440)</td>
-              <td class="py-2 px-3 text-blue-400 font-bold">32x8 (Warp Aligned)</td>
-              <td class="py-2 px-3">256</td>
-              <td class="py-2 px-3 text-emerald-400 font-bold">0.180 ms</td>
-              <td class="py-2 px-3 text-emerald-400 font-bold">5,542.4 FPS</td>
-              <td class="py-2 px-3 text-purple-400 font-bold">653.80 GB/s</td>
-            </tr>
-            <tr>
-              <td class="py-2 px-3 font-bold text-white">4K (3840x2160)</td>
-              <td class="py-2 px-3 text-blue-400 font-bold">32x8 (Warp Aligned)</td>
-              <td class="py-2 px-3">256</td>
-              <td class="py-2 px-3 text-emerald-400 font-bold">0.367 ms</td>
-              <td class="py-2 px-3 text-emerald-400 font-bold">2,722.8 FPS</td>
-              <td class="py-2 px-3 text-purple-400 font-bold">722.68 GB/s</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="grid sm:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-mono text-xs font-bold uppercase">32-Thread Warp SIMD Scheduling</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Threads are mapped to 2D pixel tiles aligned with 32-thread hardware warps (e.g. 32x8 block configurations). Neighboring pixels trace similar trajectories through spacetime, minimizing branch divergence across the SIMD execution units.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-mono text-xs font-bold uppercase">16-Byte Struct Memory Alignment</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            The simulation parameters struct is explicitly aligned with <code class="text-blue-300">alignas(16) SimulationSettings</code>. This guarantees that parameters loaded by threads align with 128-bit cache line transactions, enabling single-cycle L1/L2 cache loads.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-mono text-xs font-bold uppercase">Early Warp Exit Gates (__any_sync)</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Rays terminate upon crossing the event horizon ($r \le M/2$) or escaping to asymptotically flat space ($r \ge R_{\text{escape}}$). Using CUDA's <code class="text-purple-300">__any_sync()</code> intrinsic, the entire thread warp exits early the moment all 32 rays reach termination, preventing redundant execution.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-mono text-xs font-bold uppercase">Dual Native &amp; WebGPU Pipeline</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Engineered with a dual-backend architecture: an offline high-precision C++/CUDA implementation (<code class="text-slate-300">cuda_raymarcher/</code>) for direct hardware evaluation, and a real-time WebGPU compute pipeline (<code class="text-slate-300">raymarch.wgsl.ts</code>) for browser execution.
+          </p>
+        </div>
       </div>
     </div>
 
-    {/* Section 3: Geodesic Mathematical Foundation */}
+    {/* Section 4: Emergent Relativistic Optical Phenomena */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">03/</span> Schwarzschild &amp; Kerr Geodesic Mathematical Model
+        <span class="text-blue-500 text-xl font-mono">04/</span> Key Emergent Relativistic Phenomena
       </h2>
       <p>
-        The photon trajectory integration solves the null geodesic equations derived from the metric tensor <code class="text-blue-300">g_uv</code>:
+        The simulator accurately reproduces primary astronomical signatures predicted by General Relativity without artifice or pre-rendered textures:
       </p>
-      <div class="bg-slate-950 p-4 border border-slate-850 rounded-xl text-xs font-mono text-slate-300 space-y-2">
-        <p class="text-blue-400 font-bold">// Schwarzschild Isotropic Line Element</p>
-        <p class="text-slate-300">
-          ds^2 = - ((1 - M/2r) / (1 + M/2r))^2 dt^2 + (1 + M/2r)^4 (dx^2 + dy^2 + dz^2)
-        </p>
-        <p class="text-slate-400 pt-2">// Geodesic Acceleration Component</p>
-        <p class="text-slate-300">
-          d^2x/dλ^2 = - Γ^n_ij (dx^i/dλ) (dx^j/dλ)
-        </p>
+
+      <div class="space-y-3 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-white">1. The Photon Sphere &amp; Black Hole Shadow</span>
+            <span class="text-xs text-blue-400 font-mono">$r = 1.5\,r_s = 3M$</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            At a radius of $r = 3M$, light can orbit the black hole in unstable circular orbits. Rays passing interior to this impact parameter inevitably plunge across the event horizon ($r_s = 2M$), creating the pitch-black central shadow observed by telescopes such as the Event Horizon Telescope (EHT).
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-white">2. Gravitational Lensing &amp; Einstein Rings</span>
+            <span class="text-xs text-blue-400 font-mono">$\theta_E = \sqrt{\frac{4GM}{c^2 D}}$</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Photons grazing past the photon sphere are deflected by extreme angles (up to multiple complete revolutions). Light from celestial bodies located directly behind the singularity is bent around both sides, focusing into luminous Einstein rings.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-white">3. Relativistic Doppler Beaming &amp; Redshift</span>
+            <span class="text-xs text-blue-400 font-mono">$I_\text{obs} = g^4 \cdot I_\text{emit}$</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Accretion disk plasma orbits at relativistic Keplerian velocities ($\omega \propto r^{-3/2}$). Due to special relativistic beaming and gravitational time dilation, radiation emitted by gas moving toward the observer is blueshifted and dramatically boosted in intensity by a factor of $g^4$, while the receding side appears dimmer and redshifted.
+          </p>
+        </div>
       </div>
     </div>
 

@@ -1,23 +1,25 @@
 ---
 layout: '../../layouts/Layout.astro'
-title: 'WhispNotes — Native macOS AI Note-Taking & Speech Studio'
-description: 'Native macOS desktop app with local on-device Whisper audio transcription, local Gemma 3 AI assistant capabilities, and interactive node graph canvas.'
+title: 'WhispNotes — Pure Native macOS AI Note Studio'
+description: 'Pure native macOS desktop application featuring on-device Whisper speech transcription with multi-speaker diarization, local Gemma 3 AI assistant capabilities, and an interactive knowledge graph canvas.'
 ---
 
 <div class="max-w-4xl mx-auto py-12 px-6">
   
   {/* Project Header */}
   <header class="mb-12 border-b border-slate-900 pb-8 relative">
-    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 blur-3xl pointer-events-none rounded-full"></div>
     <div class="flex flex-wrap gap-2 mb-4">
-      <span class="px-2.5 py-1 bg-blue-950/80 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">Native macOS Application</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">On-Device Speech &amp; LLM</span>
+      <span class="px-2.5 py-1 bg-cyan-950/80 border border-cyan-500/20 rounded-full text-xs font-semibold text-cyan-400">Native macOS Application</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">Swift 5.9 / SwiftUI / AppKit</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">On-Device Whisper &amp; Diarization</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">Local Gemma 3 AI Assistant</span>
     </div>
     <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
-      WhispNotes — On-Device AI Note Studio
+      WhispNotes — Pure Native macOS AI Note Studio
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      A privacy-first native macOS markdown note-taking suite powered by on-device Whisper speech transcription and an offline Gemma 3 AI assistant, complete with an interactive 3D physics node graph canvas and Spotlight command palette.
+      A privacy-first native macOS markdown note-taking application engineered with Swift and SwiftUI. Integrates on-device <strong>Whisper speech transcription</strong> with multi-speaker diarization, an offline <strong>Gemma 3 AI study assistant</strong>, and a force-directed <strong>knowledge graph canvas</strong>—with zero background servers or external API ports.
     </p>
   </header>
 
@@ -28,46 +30,59 @@ description: 'Native macOS desktop app with local on-device Whisper audio transc
       <p class="text-sm font-semibold text-white">Native macOS Architect</p>
     </div>
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Core Framework</span>
-      <p class="text-sm font-semibold text-white">SwiftUI / AppKit</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Framework &amp; Tooling</span>
+      <p class="text-sm font-semibold text-white">Swift 5.9 / SPM / AppKit</p>
     </div>
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">AI Models</span>
-      <p class="text-sm font-semibold text-white">Whisper.cpp &amp; Gemma 3</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">On-Device Models</span>
+      <p class="text-sm font-semibold text-white">Whisper &amp; Gemma 3</p>
     </div>
     <div class="space-y-1">
       <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Repository</span>
-      <a href="https://github.com/GIlbertoRCP/whispNotes" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-blue-400 hover:underline font-mono">GitHub / whispNotes ↗</a>
+      <a href="https://github.com/GIlbertoRCP/whispNotes" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-cyan-400 hover:underline font-mono">GitHub / whispNotes ↗</a>
     </div>
   </section>
 
   {/* Content Grid */}
   <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
     
-    {/* Section 1: Overview & Privacy */}
+    {/* Section 1: Overview & Privacy Architecture */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">01/</span> Privacy-First Local AI Architecture
+        <span class="text-cyan-500 text-xl font-mono">01/</span> Local-First Privacy Architecture
       </h2>
       <p>
-        Modern note-taking software increasingly relies on cloud-hosted LLM endpoints and server-side speech-to-text APIs. However, sending confidential meeting transcripts, academic research notes, or personal ideas to third-party cloud servers introduces significant data privacy risks and network latency bottlenecks.
+        Modern note-taking tools frequently route sensitive audio recordings, lecture notes, and ideas through cloud LLM APIs and third-party transcription endpoints. WhispNotes is engineered as a pure offline desktop application:
       </p>
-      <p>
-        **WhispNotes** is a native macOS application designed for markdown note-taking with integrated on-device audio transcription and local Gemma 3 AI assistant capabilities. Designed for privacy and offline usage, **100% of note data, speech processing, and AI generation remain local to your machine**.
-      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="font-mono text-xs text-cyan-400 font-bold">// ZERO BACKGROUND DAEMONS</div>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            Unlike hybrid web wrappers that spawn local Node or Python HTTP servers on localhost ports, WhispNotes compiles directly to native Apple Silicon and Intel machine code with zero background HTTP listeners or external ports.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="font-mono text-xs text-blue-400 font-bold">// 100% LOCAL DATA RESIDENCY</div>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            All notes, audio waveforms, speaker diarization metadata, and offline AI weights reside securely inside the local Application Support container with automatic JSON serialization and 30-day soft-delete trash retention.
+          </p>
+        </div>
+      </div>
     </div>
 
-    {/* Section 2: Application Showcase / Screenshots */}
+    {/* Section 2: Application Showcase / Authentic Screenshots */}
     <div class="space-y-8">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">02/</span> macOS Application Interface
+        <span class="text-cyan-500 text-xl font-mono">02/</span> macOS Application Interface
       </h2>
       
       {/* Screenshot 1: Main 3-Pane Interface */}
       <div class="space-y-3 bg-slate-950 border border-slate-850 p-4 rounded-2xl shadow-xl">
         <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-900 pb-2">
-          <span class="text-blue-400 font-bold">MAIN 3-PANE INTERFACE</span>
-          <span class="text-slate-500">File Sidebar • Live Markdown • Timestamped Transcript</span>
+          <span class="text-cyan-400 font-bold">MAIN 3-PANE INTERFACE</span>
+          <span class="text-slate-500">Folder &amp; Tag Sidebar • Live Markdown Split • Diarized Transcript</span>
         </div>
         <div class="overflow-hidden rounded-xl border border-slate-850">
           <img 
@@ -81,8 +96,8 @@ description: 'Native macOS desktop app with local on-device Whisper audio transc
       {/* Screenshot 2: Spotlight Command Palette */}
       <div class="space-y-3 bg-slate-950 border border-slate-850 p-4 rounded-2xl shadow-xl">
         <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-900 pb-2">
-          <span class="text-purple-400 font-bold">SPOTLIGHT COMMAND PALETTE (⌘K)</span>
-          <span class="text-slate-500">Instant Note Search &amp; Local AI Action Palette</span>
+          <span class="text-purple-400 font-bold">SPOTLIGHT COMMAND PALETTE (⌘K / ⌘O)</span>
+          <span class="text-slate-500">Fuzzy Search Across Notes, Folders &amp; Audio Transcripts</span>
         </div>
         <div class="overflow-hidden rounded-xl border border-slate-850">
           <img 
@@ -92,60 +107,130 @@ description: 'Native macOS desktop app with local on-device Whisper audio transc
           />
         </div>
       </div>
+
+      {/* Screenshot 3: Interactive Knowledge Graph Canvas */}
+      <div class="space-y-3 bg-slate-950 border border-slate-850 p-4 rounded-2xl shadow-xl">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-900 pb-2">
+          <span class="text-emerald-400 font-bold">INTERACTIVE KNOWLEDGE GRAPH CANVAS (⌘G)</span>
+          <span class="text-slate-500">Force-Directed Node Graph with Draggable Physics</span>
+        </div>
+        <div class="overflow-hidden rounded-xl border border-slate-850">
+          <img 
+            src="/Portfolio/assets/whispnotes/knowledge_graph.png" 
+            alt="WhispNotes Knowledge Graph Canvas" 
+            class="w-full h-auto object-cover hover:scale-[1.01] transition-transform duration-300" 
+          />
+        </div>
+      </div>
     </div>
 
-    {/* Section 3: Feature Highlights */}
+    {/* Section 3: Key Subsystems & Features */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">03/</span> Key System Features
+        <span class="text-cyan-500 text-xl font-mono">03/</span> Core Subsystems &amp; Technical Capabilities
       </h2>
       
-      <div class="grid sm:grid-cols-2 gap-6 pt-4">
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-blue-400 font-bold text-sm">Three-Pane Split View</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Navigate notes via the file sidebar, write in the markdown editor with live preview, and view time-synced transcripts in the right panel.
+      <div class="grid sm:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-cyan-400 font-bold text-sm font-mono">// THREE-PANE SPLIT VIEW &amp; TYPOGRAPHY</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Hierarchical folder tree and tag filtering sidebar, markdown editor with live-rendered split preview, zebra-striped tables, inline math formula support, and wiki-link bidirectional backlink navigation.
           </p>
         </div>
 
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-emerald-400 font-bold text-sm">On-Device Whisper Transcription</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Process audio recordings locally using Whisper accelerated via Metal Performance Shaders without sending data to external servers.
-          </p>
-        </div>
-        
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">On-Device Gemma 3 AI Assistant</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Extract executive key takeaways, auto-detect action items, generate study flashcards, and prompt custom Q&amp;A on your note context.
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-emerald-400 font-bold text-sm font-mono">// ON-DEVICE WHISPER &amp; DIARIZATION</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Local speech transcription with multi-speaker diarization. Generates interactive timestamped transcript cards with automatic playback tracking, speaker labeling, and one-click blockquote insertion.
           </p>
         </div>
 
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-yellow-400 font-bold text-sm">Interactive Knowledge Graph Canvas</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Visual node graph of note connections with draggable node physics, zoom/pan controls, blueprint grid background, and search filtering.
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-purple-400 font-bold text-sm font-mono">// OFFLINE GEMMA 3 AI ASSISTANT</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Integrated local intelligence capable of extracting executive takeaways, auto-detecting action items, generating study flashcards, and running contextual Q&amp;A directly on note content without cloud reliance.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-blue-400 font-bold text-sm font-mono">// MULTI-BAR AUDIO WAVEFORM SEEKER</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Dynamic audio visualizer bar supporting smooth dragging and seeking, real-time playhead tracking, timestamp display, and variable playback speed steppers (1x, 1.2x, 1.5x, 2x).
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-yellow-400 font-bold text-sm font-mono">// INTELLIGENT PASTE &amp; HEURISTICS</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Smart paste engine that automatically reconstructs HTML tables into GitHub-flavored Markdown, converts formatted equations, unglues concatenated headings, and restores bullet hierarchies.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="text-pink-400 font-bold text-sm font-mono">// NATIVE PPTX &amp; PDF PRESENTATIONS</div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Built-in OpenXML slide renderer for PowerPoint and PDF documents with widescreen 16:9 canvas view, slide navigation, presenter notes extraction, and one-click slide citation links.
           </p>
         </div>
       </div>
     </div>
 
-    {/* Section 4: Direct Release Artifacts & Installation */}
-    <div class="space-y-4 border-t border-slate-900 pt-8">
+    {/* Section 4: Architecture & SPM Packaging */}
+    <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-blue-500 text-xl font-mono">04/</span> Quick Download &amp; Direct Installation
+        <span class="text-cyan-500 text-xl font-mono">04/</span> Architecture &amp; Package Structure
       </h2>
       <p>
-        WhispNotes requires zero terminal setup. Models for offline transcription and Gemma 3 AI assistant features can be downloaded on-demand directly inside the app's settings modal with a single click.
+        Managed with Swift Package Manager and structured into clean architectural layers across views, services, view models, and data models:
+      </p>
+
+      <div class="bg-slate-950 border border-slate-850 rounded-xl p-4 font-mono text-xs space-y-2 text-slate-300">
+        <div class="flex justify-between border-b border-slate-850 pb-1 text-slate-400">
+          <span>MODULE PATH</span>
+          <span>RESPONSIBILITY</span>
+        </div>
+        <div class="flex justify-between py-1">
+          <span class="text-cyan-400">Sources/App/</span>
+          <span>Application lifecycle, window controllers, and native menu bar commands</span>
+        </div>
+        <div class="flex justify-between py-1 border-t border-slate-900">
+          <span class="text-cyan-400">Sources/Models/</span>
+          <span>Note entities, transcript models, themes, and graph canvas node structures</span>
+        </div>
+        <div class="flex justify-between py-1 border-t border-slate-900">
+          <span class="text-cyan-400">Sources/Services/</span>
+          <span>NotesDataManager, audio recording, Whisper engine, SmartPaste, and Gemma 3</span>
+        </div>
+        <div class="flex justify-between py-1 border-t border-slate-900">
+          <span class="text-cyan-400">Sources/ViewModels/</span>
+          <span>Reactive audio recorder and player view models</span>
+        </div>
+        <div class="flex justify-between py-1 border-t border-slate-900">
+          <span class="text-cyan-400">Sources/Views/</span>
+          <span>Modular SwiftUI components (Editor, Sidebar, Waveform, Graph, Settings)</span>
+        </div>
+        <div class="flex justify-between py-1 border-t border-slate-900">
+          <span class="text-cyan-400">scripts/build_app.sh</span>
+          <span>Build automation script packaging standalone signed .app bundle &amp; DMG installer</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Section 5: Direct Installation & Releases */}
+    <div class="space-y-4 border-t border-slate-900 pt-8">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-cyan-500 text-xl font-mono">05/</span> Quick Download &amp; Direct Installation
+      </h2>
+      <p>
+        WhispNotes requires zero terminal setup. Packaged releases include a drag-and-drop macOS disk image installer. Models for offline speech transcription and local AI assistant features download on-demand directly inside the app settings modal with a single click.
       </p>
 
       <div class="flex flex-wrap gap-4 pt-2 font-mono">
-        <a href="https://github.com/GIlbertoRCP/whispNotes" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold border border-blue-500 hover:border-blue-600 shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider flex items-center gap-2">
+        <a href="https://github.com/GIlbertoRCP/whispNotes" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold border border-cyan-500 shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider flex items-center gap-2">
           <span>GITHUB REPOSITORY</span> &rarr;
         </a>
         <a href="https://github.com/GIlbertoRCP/whispNotes/releases" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-[#0f1115] hover:bg-slate-900 border border-slate-850 text-slate-300 hover:text-white shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider flex items-center gap-2">
-          <span>DOWNLOAD INSTALLER (WHISPNOTES-1.0.0.DMG)</span>
+          <span>DOWNLOAD INSTALLER (WHISPNOTES-1.6.0.DMG)</span> &rarr;
         </a>
       </div>
     </div>
