@@ -65,8 +65,8 @@ description: 'High-performance Python spatial transcriptomics engine combining o
           class="rounded-lg w-full border border-slate-900 bg-white" 
         />
         <div class="flex justify-between items-center text-[10px] font-mono text-slate-500 px-1">
-          <span>FIG 1.1 — RAPIDS cuGraph GPU vs Multi-Core CPU Graph Latency</span>
-          <span class="text-cyan-400 font-bold">102x Speedup</span>
+          <span>FIG 1.1 — RAPIDS GPU vs CPU k-NN Graph Latency (250k cells)</span>
+          <span class="text-cyan-400 font-bold">20× vs 16 cores · 102× vs 1 thread</span>
         </div>
       </div>
       <div class="bg-slate-950 border border-slate-850 p-3 rounded-xl space-y-2">
@@ -319,7 +319,7 @@ description: 'High-performance Python spatial transcriptomics engine combining o
                 <th class="py-2 px-3">CPU (Single Thread)</th>
                 <th class="py-2 px-3">CPU (16 Cores)</th>
                 <th class="py-2 px-3">GPU (RAPIDS cuML)</th>
-                <th class="py-2 px-3">GPU Speedup</th>
+                <th class="py-2 px-3">Speedup vs 1 thread</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-900 text-slate-300">

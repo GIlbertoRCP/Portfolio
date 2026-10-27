@@ -1,0 +1,105 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'predictive-audit — Does Your Forecasting Model Beat Persistence?'
+description: 'A tool that checks time-series forecasting results against trivial baselines and common evaluation mistakes, applied to five published results.'
+---
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-amber-950/80 border border-amber-500/20 rounded-full text-xs font-semibold text-amber-400">ML Evaluation</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Python · CLI + library</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Did the Model Beat Yesterday?
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      <strong>predictive-audit</strong> checks a time-series forecasting result against the baselines it has to beat before it means anything, and against the evaluation mistakes that make it look better than it is. I ran it on five public results. Four don't clearly beat trivial baselines, including my own team's.
+    </p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      <a href="https://github.com/GIlbertoRCP/predictive_audit" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-amber-400 hover:underline font-mono">GitHub / predictive_audit ↗</a>
+      <a href="https://github.com/GIlbertoRCP/predictive_audit/blob/main/docs/WRITEUP.md" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-amber-400 hover:underline font-mono">Full write-up ↗</a>
+    </div>
+  </header>
+
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
+
+    {/* Section 1: Origin */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-amber-500 text-xl font-mono">01/</span> Why It Exists
+      </h2>
+      <p>
+        My team's course project, the <a href="/Portfolio/projects/predictive-sdn" class="text-amber-400 hover:underline">Predictive SDN system</a>, reported a network-congestion forecaster with an F1 score around 0.99. Months later I checked what the simplest possible forecaster scores on the same data, "the next step is congested if this step is": <strong>F1 0.993</strong>.
+      </p>
+      <p>
+        The model had learned that the label rarely changes, and a shuffled train/test split of overlapping windows hid that. This tool automates the checks that would have caught it, so I could run them on published work.
+      </p>
+    </div>
+
+    {/* Section 2: Checks */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-amber-500 text-xl font-mono">02/</span> What It Checks
+      </h2>
+      <ul class="space-y-3.5 mt-4">
+        <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">✓</span><div><strong class="text-white">Trivial baselines:</strong> the model is compared with persistence, moving average, seasonal-naive and majority/mean on the same rows. The confidence interval comes from a moving-block bootstrap, because an i.i.d. bootstrap is far too optimistic on autocorrelated data.</div></li>
+        <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">✓</span><div><strong class="text-white">Reported score:</strong> flags a published number that a trivial baseline already reaches.</div></li>
+        <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">✓</span><div><strong class="text-white">Label memory:</strong> flags targets so autocorrelated that any model posts a high score.</div></li>
+        <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">✓</span><div><strong class="text-white">Temporal split:</strong> flags shuffled splits where test rows sit between training rows in time.</div></li>
+        <li class="flex items-start gap-3"><span class="text-amber-500 mt-1">✓</span><div><strong class="text-white">Feature leakage:</strong> flags feature columns that are near-copies of future target values.</div></li>
+      </ul>
+      <p>It runs as a CLI or a Python library, and <code>{'--fail-on'}</code> sets the exit code, so an audit can gate CI.</p>
+    </div>
+
+    {/* Section 3: Case studies */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-amber-500 text-xl font-mono">03/</span> Five Case Studies
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border border-slate-900">
+          <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
+            <tr><th class="text-left p-3">Result audited</th><th class="text-left p-3">Verdict</th><th class="text-left p-3">Finding</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-900 align-top">
+            <tr><td class="p-3">My team's congestion forecaster</td><td class="p-3 text-red-400 font-semibold">FAIL</td><td class="p-3">With a chronological split it loses to a 3-step moving average (F1 0.984 vs 0.987, interval excludes 0).</td></tr>
+            <tr><td class="p-3">xiaochus/TrafficFlowPrediction (681★, PeMS)</td><td class="p-3 text-emerald-400 font-semibold">Holds up</td><td class="p-3">Beats every baseline by 8–10% MAE with its own published weights, though the headline R² is mostly autocorrelation (persistence alone: 0.92).</td></tr>
+            <tr><td class="p-3">Traffic-Matrix-Prediction (ISCC 2019)</td><td class="p-3 text-red-400 font-semibold">FAIL</td><td class="p-3">Retrained all 785 per-pair LSTMs: 11–21% worse than persistence on Abilene, GÉANT and CERNET. A linear AR(10) beats it everywhere.</td></tr>
+            <tr><td class="p-3">SDN-TMprediction (IEEE ICC 2021)</td><td class="p-3 text-red-400 font-semibold">FAIL</td><td class="p-3">The testbed replays packet captures, so traffic loops. "The value one replay loop ago" beats the RNNs on 9 of 13 flows.</td></tr>
+            <tr><td class="p-3">Annongkhanh/Traffic-matrix-prediction</td><td class="p-3 text-red-400 font-semibold">FAIL</td><td class="p-3">The reported error is higher than persistence's on both datasets.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        An audit that fails everything would be worthless, so case 02 matters: the tool says so when a result genuinely holds up. Third-party data and weights are pinned and checked by SHA-256, and every case reruns from its own script.
+      </p>
+    </div>
+
+    {/* Section 4: Takeaways */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-amber-500 text-xl font-mono">04/</span> What I'd Ask of Any Forecasting Result
+      </h2>
+      <ol class="list-decimal pl-6 space-y-2">
+        <li>Report persistence and a seasonal-naive baseline on the same rows.</li>
+        <li>Report the margin, with an interval that respects autocorrelation.</li>
+        <li>Split by time. Never shuffle overlapping windows before splitting.</li>
+        <li>Treat R² and accuracy on smooth or sticky series as near-meaningless on their own.</li>
+        <li>Include one simple learned model, such as a linear AR, before reaching for an LSTM.</li>
+      </ol>
+    </div>
+
+  </div>
+
+  {/* Page Navigation */}
+  <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/Portfolio/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
+    <span>predictive-audit</span>
+  </div>
+
+</div>

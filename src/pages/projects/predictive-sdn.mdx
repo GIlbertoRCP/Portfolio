@@ -20,13 +20,26 @@ import SdnTelemetryDemo from '../../components/SdnTelemetryDemo.jsx';
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
       An event-driven, distributed Software-Defined Networking (SDN) monitoring and traffic engineering pipeline that combines LSTM forecast models and DQN Reinforcement Learning to move from reactive to proactive network recovery.
     </p>
+    <p class="text-sm text-slate-500 mt-4">
+      Team: Diego Alas, Gilberto Romero-Cano, Corey Green, JJ Wagner ·
+      <a href="https://github.com/GIlbertoRCP/Predictive_Activation" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">Source on GitHub</a>
+    </p>
   </header>
+
+  {/* Postscript callout */}
+  <aside class="mb-16 border border-amber-500/30 bg-amber-950/20 rounded-2xl p-6 space-y-2">
+    <p class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">Postscript: the forecaster didn't beat a baseline</p>
+    <p class="text-sm text-slate-300 leading-relaxed">
+      The original evaluation reported F1 ≈ 0.99 for the congestion forecaster. When I revisited it, "the next step is congested if this step is" scored F1 0.993 on the same data. A shuffled split of overlapping windows had hidden that. With a chronological split, a 3-step moving average beats the model. I turned those checks into a tool and used it on published results.
+    </p>
+    <a href="/Portfolio/projects/predictive-audit" class="inline-block text-sm font-semibold text-amber-400 hover:underline">Read the audit &rarr;</a>
+  </aside>
 
   {/* Technical Specifications Table */}
   <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
-      <p class="text-sm font-semibold text-white">Systems &amp; ML Architect</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Team</span>
+      <p class="text-sm font-semibold text-white">4-person course project</p>
     </div>
     <div class="space-y-1">
       <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Broker Bus</span>
@@ -100,7 +113,7 @@ import SdnTelemetryDemo from '../../components/SdnTelemetryDemo.jsx';
         <span class="text-blue-500 text-xl font-mono">03/</span> Interactive Telemetry Operations Center
       </h2>
       <p class="mb-4">
-        This browser-based simulation replicates our Kafka telemetry pipeline. Click <strong>"Inject Traffic Spike"</strong> to watch simulated switch queues climb. You will see the LSTM risk engine detect the spike, escalate polling frequency to intensive mode (1s), and route the path around the bottleneck.
+        This browser-based simulation is an illustration of the Kafka telemetry pipeline, with scripted data rather than the real system. Click <strong>"Inject Traffic Spike"</strong> to watch simulated switch queues climb. You will see the LSTM risk engine detect the spike, escalate polling frequency to intensive mode (1s), and route the path around the bottleneck.
       </p>
       
       {/* Interactive Widget Mount */}
@@ -146,12 +159,12 @@ import SdnTelemetryDemo from '../../components/SdnTelemetryDemo.jsx';
         <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-4 text-center shadow-lg shadow-blue-950/10">
           <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">ONNX FP32 Engine</span>
           <p class="text-lg font-bold text-blue-400 mt-1">0.058 ms latency</p>
-          <p class="text-xs text-slate-400">66.8% speedup</p>
+          <p class="text-xs text-slate-400">3.0× faster</p>
         </div>
         <div class="bg-slate-950/60 border border-slate-900 rounded-xl p-4 text-center shadow-lg shadow-emerald-950/10">
           <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">ONNX INT8 Quantized</span>
           <p class="text-lg font-bold text-emerald-400 mt-1">0.054 ms latency</p>
-          <p class="text-xs text-emerald-400">72.9% smaller (214 KB)</p>
+          <p class="text-xs text-emerald-400">3.2× faster · 72.9% smaller (214 KB)</p>
         </div>
       </div>
     </div>

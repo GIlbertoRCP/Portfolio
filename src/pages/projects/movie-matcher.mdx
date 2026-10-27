@@ -19,7 +19,7 @@ description: 'Full-stack collaborative movie matching application featuring a Tw
       Movie Matcher — Real-Time Two-Tower Recommendation Platform
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      A full-stack collaborative movie matching application designed for paired decision making. Features an in-memory <strong>Two-Tower Neural Recommendation Engine</strong> for candidate retrieval and deep MLP scoring, sub-millisecond <strong>Socket.IO room synchronization</strong>, and physics-driven card gesture controls.
+      A full-stack collaborative movie matching application designed for paired decision making. Features an in-memory <strong>Two-Tower Neural Recommendation Engine</strong> for candidate retrieval and deep MLP scoring, real-time <strong>Socket.IO room synchronization</strong>, and physics-driven card gesture controls.
     </p>
   </header>
 
@@ -138,7 +138,7 @@ description: 'Full-stack collaborative movie matching application featuring a Tw
       <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
         <div class="font-mono text-xs text-emerald-400 font-bold">// EXPLAINABLE FEATURE ATTRIBUTION</div>
         <p class="text-xs text-slate-400 leading-relaxed font-sans">
-          To provide user transparency, an attribution engine computes relative contributions for each recommendation—breaking down score weights across genre alignment (+35%), community critic rating (+28%), release era compatibility (+18%), and neural vector similarity (+19%).
+          To provide user transparency, an attribution engine computes relative contributions for each recommendation—breaking down score weights, for example genre alignment (+35%), community critic rating (+28%), release era compatibility (+18%), and neural vector similarity (+19%).
         </p>
       </div>
     </div>
@@ -149,7 +149,7 @@ description: 'Full-stack collaborative movie matching application featuring a Tw
         <span class="text-purple-500 text-xl font-mono">03/</span> Real-Time Session State Synchronization
       </h2>
       <p>
-        The collaborative pairing workflow relies on Socket.IO rooms to synchronize user actions with sub-millisecond latency:
+        The collaborative pairing workflow relies on Socket.IO rooms to keep both users' swipes and matches in sync in real time:
       </p>
 
       <div class="bg-[#0f1115] border border-slate-850 p-6 rounded-xl space-y-4">

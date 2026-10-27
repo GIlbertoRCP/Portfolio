@@ -1,9 +1,8 @@
 ---
 layout: '../../layouts/Layout.astro'
-title: 'F1 Oracle — Race Prediction & Telemetry Platform'
-description: 'Pairwise XGBRanker ML model predicting Formula 1 outcomes alongside driver telemetry head-to-heads and Monte Carlo simulations.'
+title: 'F1 Winner Oracle — Calibrated Race Forecasts, Scored in Public'
+description: 'Calibrated Formula 1 race-winner probabilities from a conditional logit model, frozen before each race in a hash-chained log and scored in public.'
 ---
-import F1Simulation from '../../components/F1Simulation.jsx';
 
 <div class="max-w-4xl mx-auto py-12 px-6">
   
@@ -11,142 +10,105 @@ import F1Simulation from '../../components/F1Simulation.jsx';
   <header class="mb-12 border-b border-slate-900 pb-8 relative">
     <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-3xl pointer-events-none rounded-full"></div>
     <div class="flex flex-wrap gap-2 mb-4">
-      <span class="px-2.5 py-1 bg-purple-950/80 border border-purple-500/20 rounded-full text-xs font-semibold text-purple-400">Machine Learning & Analytics</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Full Stack Platform</span>
+      <span class="px-2.5 py-1 bg-purple-950/80 border border-purple-500/20 rounded-full text-xs font-semibold text-purple-400">ML Evaluation &amp; Forecasting</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Static site · GitHub Actions</span>
     </div>
     <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
-      F1 Oracle — Prediction &amp; Telemetry Suite
+      F1 Winner Oracle
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      An end-to-end telemetry analysis and machine learning platform powered by an XGBoost pairwise ranking model, featuring physical tyre-degradation slopes, fuel adjustments, and Monte Carlo simulators.
+      Calibrated Formula 1 race-winner probabilities. Every forecast is frozen before the lights go out, written to a tamper-evident log, and scored in public, misses included.
+    </p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      <a href="https://gilbertorcp.github.io/F1-Prediction/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-purple-400 hover:underline font-mono">Live site ↗</a>
+      <a href="https://github.com/GIlbertoRCP/F1-Prediction" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-purple-400 hover:underline font-mono">GitHub / F1-Prediction ↗</a>
+      <a href="https://github.com/GIlbertoRCP/F1-Prediction/blob/main/MODEL_CARD.md" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-purple-400 hover:underline font-mono">Model card ↗</a>
+    </div>
+    <p class="text-sm text-slate-500 mt-4">
+      Started as a fork of a classmate's project (Diego Hurtado, 6 commits). The model, evaluation, live site and tests described here are my work since the fork.
     </p>
   </header>
 
   {/* Technical Specifications Table */}
   <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
-      <p class="text-sm font-semibold text-white">Full-Stack Data Engineer</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Model</span>
+      <p class="text-sm font-semibold text-white">Conditional logit (plain Python)</p>
     </div>
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">ML Model Core</span>
-      <p class="text-sm font-semibold text-white">XGBRanker (Pairwise)</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Evaluation</span>
+      <p class="text-sm font-semibold text-white">174 races, walk-forward</p>
     </div>
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Telemetry Source</span>
-      <p class="text-sm font-semibold text-white">FastF1 (Ergast/OpenF1)</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Data</span>
+      <p class="text-sm font-semibold text-white">Jolpica-F1 API, FastF1</p>
     </div>
     <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Architecture</span>
-      <p class="text-sm font-semibold text-white">React, FastAPI, Docker</p>
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Tests</span>
+      <p class="text-sm font-semibold text-white">85 (68 Python, 17 JS)</p>
     </div>
   </section>
 
   {/* Content Grid */}
   <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
     
-    {/* Section 1: The Problem */}
+    {/* Section 1: The question */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">01/</span> The F1 Telemetry Challenge
+        <span class="text-purple-500 text-xl font-mono">01/</span> The Question
       </h2>
       <p>
-        Evaluating true driver pace in Formula 1 is notoriously difficult. A driver's raw lap time is distorted by track rubbering-in, tyre age, engine modes, and fuel weight load. Additionally, standard regression models that predict absolute lap times fail in racing applications because finishing order constraints matter far more than time intervals.
-      </p>
-      <p>
-        To solve this, the **F1 Oracle** implements physical telemetry correction formulas to filter out distortions, then uses a pairwise preference ranking model to predict the final order and simulate probability curves.
+        Most F1 prediction projects show a pick and a screenshot of a good race. This one is built around a harder question: <em>when the model says 30%, does that happen about 30% of the time?</em> The site answers that in public with a calibration chart and a record of every forecast it has made.
       </p>
     </div>
 
-    {/* Section 2: Live Predictor Widget */}
+    {/* Section 2: Results */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">02/</span> Matchups &amp; Stochastic Simulation
+        <span class="text-purple-500 text-xl font-mono">02/</span> What the Numbers Say
       </h2>
-      <p class="mb-6">
-        Below is the browser-based simulation suite. You can select two drivers to evaluate their comparative timing attributes and compute a Bradley-Terry victory probability. Alternatively, select track dampness and Safety Car parameters and run a 1,000-run Monte Carlo simulation to evaluate predicted distributions.
-      </p>
-      
-      {/* Interactive Widget Mount */}
-      <F1Simulation client:load />
-    </div>
-
-    {/* Section 3: Feature Engineering */}
-    <div class="space-y-4">
-      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">03/</span> Physics-Based Feature Engineering
-      </h2>
-      <p>
-        Before training the model, we filter out laps under safety car or pit lane exits and extract micro-telemetry streams. We then compute customized features:
-      </p>
-      
-      <div class="grid sm:grid-cols-2 gap-6 pt-4">
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">Fuel-Corrected Pace</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Subtracts estimated lap fuel burning weights (adjusted dynamically for tracks, e.g. Monaco vs Spa) and applies a penalty coefficient (~0.03s per kg) to find a driver's true pace.
-          </p>
-        </div>
-        
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">Tyre Degradation Rate</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Computes the linear regression slope of lap times vs. tyre age across stints of at least 5 clean laps.
-          </p>
-        </div>
-
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">ERS Efficiency Proxy</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Calculates the ratio of full-throttle time to braking recovery time during a driver's best push lap relative to the field median.
-          </p>
-        </div>
-
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2 hover:border-slate-800 transition">
-          <div class="text-purple-400 font-bold text-sm">Asymmetric PU Deployment</div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Calculates Sector 1/Sector 3 ratios to detect battery starvation and ERS clipping.
-          </p>
-        </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border border-slate-900">
+          <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
+            <tr><th class="text-left p-3">174 races, walk-forward</th><th class="text-right p-3">Top pick wins</th><th class="text-right p-3">Log loss (lower is better)</th></tr>
+          </thead>
+          <tbody class="divide-y divide-slate-900">
+            <tr><td class="p-3">Random guess</td><td class="p-3 text-right">0%</td><td class="p-3 text-right">3.00</td></tr>
+            <tr><td class="p-3">Pole sitter always wins</td><td class="p-3 text-right">54.0%</td><td class="p-3 text-right">1.53</td></tr>
+            <tr class="text-white font-semibold"><td class="p-3">Winner Oracle</td><td class="p-3 text-right">55.2%</td><td class="p-3 text-right">1.24</td></tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-
-    {/* Section 4: Pairwise XGBoost Model */}
-    <div class="space-y-4">
-      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">04/</span> Pairwise XGBRanker &amp; Decay
-      </h2>
       <p>
-        The prediction engine trains an <code>XGBRanker</code> gradient boosted tree using a <code>rank:pairwise</code> loss function. This treats each race as a ranking group and learns relative preferences between drivers.
-      </p>
-      <p>
-        The training data utilizes a temporal decay function (weight = exp(-λ * Δt)), where recent 2026 races are heavily weighted, and historical data provides weaker priors, accounting for structural regulation shifts.
+        The model beats the grid-only baseline on log loss (paired 95% interval −0.45 to −0.16), and its probabilities are close to calibrated. As a single pick it is <strong>no better than the pole sitter</strong>. What it adds is honest odds for everyone else on the grid, and the site says so.
       </p>
     </div>
 
-    {/* Section 5: Prefetching Pipeline */}
+    {/* Section 3: Negative results */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">05/</span> Async Prefetching Architecture
+        <span class="text-purple-500 text-xl font-mono">03/</span> Ideas That Didn't Help
       </h2>
-      <p>
-        F1 telemetry payloads are extremely heavy. To prevent long wait times on a cold cache, the FastAPI backend implements background prefetching using <code>BackgroundTasks</code>:
-      </p>
+      <p>I tested the features people usually assume help, and reported the ones that didn't:</p>
       <ul class="space-y-3.5 mt-4">
-        <li class="flex items-start gap-3">
-          <span class="text-purple-500 mt-1">✓</span>
-          <div>
-            <strong class="text-white">Calendar Ingestion Trigger:</strong> 
-            Loading the season calendar triggers an async prefetch worker for the next upcoming GP round of the active season.
-          </div>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="text-purple-500 mt-1">✓</span>
-          <div>
-            <strong class="text-white">Sequential Pre-fetching:</strong> 
-            Querying predictions for any GP round dynamically schedules a background cache load for the next round chronologically.
-          </div>
-        </li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">My original XGBRanker</strong> on engineered telemetry features (fuel-corrected pace, tyre degradation slopes) scored worse than the simple model on the races it ran on. It's archived, not deleted, so its old predictions can still be scored.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Qualifying pace</strong> adds nothing once the grid is known.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Practice-session pace</strong> (107 weekends of lap data) makes the forecast slightly worse.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">A joint ten-place model</strong> hurt the win odds, so the finishing-order extension keeps the win odds fixed and adds later places separately.</div></li>
+      </ul>
+    </div>
+
+    {/* Section 4: How it's built */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">04/</span> How It's Built
+      </h2>
+      <ul class="space-y-3.5 mt-4">
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Model in plain Python.</strong> A conditional logit on the starting grid plus exponentially weighted driver and team form, fitted by Newton's method with a backtracking line search. It uses no numpy and no ML library, so it's easy to read and audit.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Walk-forward everywhere.</strong> Every race is predicted from earlier races only. A test checks that changing a future result can't change an earlier feature.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Tamper-evident log.</strong> Each live record stores the hash of the previous one, and the publisher refuses to log a forecast after a race has started.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Browser race simulator.</strong> It re-runs a race thousands of times from the exported model parameters. A Node test checks that the JavaScript reproduces the Python win odds to within 2e-6.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Static and automated.</strong> A scheduled GitHub Action refreshes data every 3 hours on race weekends, freezes the forecast, and rebuilds the JSON the site reads.</div></li>
       </ul>
     </div>
 
@@ -155,7 +117,7 @@ import F1Simulation from '../../components/F1Simulation.jsx';
   {/* Page Navigation */}
   <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
     <a href="/Portfolio/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
-    <span>F1 Oracle Predictor Suite</span>
+    <span>F1 Winner Oracle</span>
   </div>
 
 </div>

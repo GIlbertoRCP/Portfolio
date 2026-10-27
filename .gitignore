@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # local resources/context files
 context/
+
+# python
+__pycache__/
+*.pyc

@@ -1,595 +1,269 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+
+const base = '/Portfolio';
+
+// Accent classes are written out in full so Tailwind can find them.
+const accents = {
+  blue: { text: 'text-blue-400', hover: 'group-hover:text-blue-400' },
+  amber: { text: 'text-amber-400', hover: 'group-hover:text-amber-400' },
+  purple: { text: 'text-purple-400', hover: 'group-hover:text-purple-400' },
+  cyan: { text: 'text-cyan-400', hover: 'group-hover:text-cyan-400' },
+  emerald: { text: 'text-emerald-400', hover: 'group-hover:text-emerald-400' },
+};
+
+const featured = [
+  {
+    title: 'Raymarcher: Light in Curved Spacetime',
+    slug: 'raymarcher',
+    thumb: 'raymarcher.jpg',
+    accent: 'blue',
+    summary: 'A compiler turns a spacetime metric into CUDA and WebGPU ray tracers that render black holes in real time.',
+    result: 'Physics matches Bardeen (1973) and other published results to 10⁻¹⁰. CUDA and WebGPU agree on all 14M test pixels.',
+    tags: ['CUDA C++', 'WebGPU', 'TypeScript'],
+    code: 'https://github.com/GIlbertoRCP/raymarcher',
+    live: 'https://gilbertorcp.github.io/raymarcher/',
+  },
+  {
+    title: 'predictive-audit',
+    slug: 'predictive-audit',
+    accent: 'amber',
+    summary: 'Checks forecasting results against trivial baselines and evaluation leaks. I built it after finding my own team’s model failed.',
+    result: 'Ran it on 5 published results: 4 don’t clearly beat persistence or a moving average.',
+    tags: ['Python', 'Time series', 'Bootstrap'],
+    code: 'https://github.com/GIlbertoRCP/predictive_audit',
+  },
+  {
+    title: 'F1 Winner Oracle',
+    slug: 'f1-oracle',
+    thumb: 'f1-oracle.jpg',
+    accent: 'purple',
+    summary: 'Calibrated race-winner odds, frozen before each race in a hash-chained log and scored in public.',
+    result: 'Log loss 1.24 vs 1.53 for “pole sitter wins” over 174 walk-forward races. No better as a single pick, and the site says so.',
+    tags: ['Python', 'GitHub Actions', 'JavaScript'],
+    code: 'https://github.com/GIlbertoRCP/F1-Prediction',
+    live: 'https://gilbertorcp.github.io/F1-Prediction/',
+  },
+  {
+    title: 'Spatial Graph Pipeline',
+    slug: 'spatial-pipeline',
+    thumb: 'spatial-pipeline.jpg',
+    accent: 'cyan',
+    summary: 'Out-of-core Python engine that turns spatial transcriptomics data into cell graphs for AnnData and PyTorch Geometric.',
+    result: 'k-NN graph for 250k cells in 180 ms on GPU, 20× faster than 16 CPU cores, with flat memory under a 512 MB cap.',
+    tags: ['Python', 'RAPIDS', 'Dask / Zarr'],
+    code: 'https://github.com/GIlbertoRCP/spatial_pipeline',
+  },
+  {
+    title: 'WhispNotes',
+    slug: 'whisp-notes',
+    thumb: 'whispnotes.jpg',
+    accent: 'cyan',
+    summary: 'Native macOS note app with on-device Whisper transcription, a local Gemma 3 assistant and a knowledge graph.',
+    result: 'Ships as a DMG through GitHub Releases, with CI and a test suite.',
+    tags: ['Swift', 'SwiftUI', 'whisper.cpp'],
+    code: 'https://github.com/GIlbertoRCP/whispNotes',
+    live: 'https://github.com/GIlbertoRCP/whispNotes/releases',
+    liveLabel: 'Download',
+  },
+  {
+    title: 'Movie Match',
+    slug: 'movie-matcher',
+    accent: 'purple',
+    summary: 'Two people swipe on movies together in real time. A two-tower recommender adapts to both of them as they go.',
+    result: 'Full stack: React 19, Node/Express, Socket.IO rooms, SQLite, JWT and OIDC auth, CI.',
+    tags: ['React', 'Socket.IO', 'Recommenders'],
+    code: 'https://github.com/GIlbertoRCP/movie_match',
+  },
+];
+
+const more = [
+  {
+    title: 'Literature Companion',
+    slug: 'literature-companion',
+    accent: 'emerald',
+    summary: 'Local desktop RAG app for papers and codebases: BM25 + dense retrieval fused with RRF, and SM-2 flashcards.',
+    tags: ['Tauri', 'FastAPI', 'ChromaDB'],
+    code: 'https://github.com/GIlbertoRCP/ficP',
+  },
+  {
+    title: 'Predictive SDN (team of 4)',
+    slug: 'predictive-sdn',
+    accent: 'blue',
+    summary: 'Kafka-based SDN telemetry with LSTM congestion forecasting and a DQN polling agent, in Mininet. Course project.',
+    tags: ['Kafka', 'PyTorch', 'Mininet'],
+    code: 'https://github.com/GIlbertoRCP/Predictive_Activation',
+  },
+  {
+    title: 'Humanoid Locomotion',
+    slug: 'motor-control-locomotion',
+    accent: 'emerald',
+    summary: 'PPO agent trained in MuJoCo to walk over uneven terrain using a 5-point vertical rangefinder.',
+    tags: ['MuJoCo', 'PPO', 'Reward shaping'],
+  },
+  {
+    title: 'Wireless EOD Rover',
+    slug: 'bomb-squad-robot',
+    accent: 'blue',
+    summary: 'Three ESP32 nodes over ESP-NOW: a controller, a Mecanum rover with a 4-DOF claw, and a tremor-sensing target.',
+    tags: ['ESP32', 'ESP-NOW', 'C++'],
+  },
+];
+
+const skills = [
+  { area: 'GPU & performance', items: 'CUDA C++, NVRTC, WebGPU / WGSL, Nsight Compute, RAPIDS' },
+  { area: 'ML & evaluation', items: 'PyTorch, XGBoost, scikit-learn, Stable-Baselines3, ONNX Runtime, walk-forward evaluation, bootstrap intervals' },
+  { area: 'Data systems', items: 'Python, pandas, NumPy, Dask, Zarr, PyArrow, AnnData, Kafka, SQL' },
+  { area: 'Apps & backends', items: 'TypeScript, React, Node.js, FastAPI, Socket.IO, Swift / SwiftUI, Tauri' },
+  { area: 'Embedded', items: 'C / C++, ESP32, ESP-NOW, MPU6050' },
+  { area: 'Tooling', items: 'Git, GitHub Actions, Docker, Linux, CMake' },
+];
+
+const certs = [
+  { name: 'Generative AI with Diffusion Models', issued: 'October 2026', url: 'https://learn.nvidia.com/certificates?id=vEq-w5ssQaG2Emi6CRZcJw' },
+  { name: 'Building Transformer-Based NLP Applications', issued: 'September 2026', url: 'https://learn.nvidia.com/certificates?id=7VhTQxgiSbSwfn2ZcEyPHw' },
+];
 ---
 
 <Layout>
-  <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 space-y-24">
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-20 space-y-24">
 
     <!-- Hero Section -->
-    <section class="space-y-8 relative">
-      
+    <section class="space-y-8">
       <div class="space-y-4">
         <h1 class="text-4xl sm:text-6xl font-display font-extrabold tracking-tight text-white leading-none">
-          GILBERTO ROMERO-CANO
+          Gilberto Romero-Cano
         </h1>
-        <p class="text-sm font-mono text-slate-500 uppercase tracking-widest leading-none pt-1">
-          // SOFTWARE ARCHITECT // MACHINE LEARNING // EMBEDDED TELEMETRY
+        <p class="text-sm font-mono text-slate-400 uppercase tracking-widest">
+          CS student · GPU computing · ML evaluation · data systems
         </p>
       </div>
-      
-      <p class="text-sm sm:text-base text-slate-400 leading-relaxed max-w-3xl font-sans">
-        Computer Science student at <strong class="text-slate-200">CU Denver</strong> with a strong foundation in software architecture, backend development, and machine learning. Experienced in building end-to-end applications, from data modeling in Python to engineering scalable backends in C# and FastAPI.
+
+      <p class="text-base text-slate-300 leading-relaxed max-w-3xl">
+        I'm a Computer Science student at <strong class="text-white">CU Denver</strong> (graduating May 2027). I build GPU and data-heavy systems and then check whether they actually work. That means validating a black-hole renderer against published physics, scoring forecasts against baselines in public, and reporting the results that didn't pan out.
       </p>
 
-      <!-- Contact Info Row -->
-      <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-500 font-mono border-t border-b border-slate-850 py-3">
-        <div class="flex items-center gap-1.5"><span class="text-slate-700">LOC:</span> Denver, CO</div>
-        <div class="flex items-center gap-1.5"><span class="text-slate-700">TEL:</span> <a href="tel:7206936526" class="hover:text-blue-400 transition">(720) 693-6526</a></div>
-        <div class="flex items-center gap-1.5"><span class="text-slate-700">MAIL:</span> <a href="mailto:gilbertorcp712@gmail.com" class="hover:text-blue-400 transition">gilbertorcp712@gmail.com</a></div>
-        <div class="flex items-center gap-1.5"><span class="text-slate-700">LINK:</span> <a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">linkedin.com/in/gromerocano/</a></div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400 font-mono border-y border-slate-850 py-3">
+        <span>Denver, CO</span>
+        <a href="mailto:gilbertorcp712@gmail.com" class="hover:text-blue-400 transition">gilbertorcp712@gmail.com</a>
+        <a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">LinkedIn</a>
+        <a href="https://github.com/GIlbertoRCP" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition">GitHub</a>
       </div>
 
-      <!-- Key Metrics Badge Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 border border-slate-850 bg-slate-950 font-mono divide-x divide-y sm:divide-y-0 divide-slate-850 max-w-3xl select-none">
-        <div class="p-4 flex flex-col justify-between">
-          <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[01] EDUCATION</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">CU DENVER CS</span>
-        </div>
-        <div class="p-4 flex flex-col justify-between">
-          <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[02] SPECIALTY</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">ML &amp; SYSTEMS</span>
-        </div>
-        <div class="p-4 flex flex-col justify-between">
-          <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[03] PORTFOLIO</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">9 MAJOR SYSTEMS</span>
-        </div>
-        <div class="p-4 flex flex-col justify-between">
-          <span class="text-[9px] text-slate-500 uppercase font-bold tracking-wider">[04] LIVE_DEMOS</span>
-          <span class="text-slate-200 text-xs font-semibold mt-2">INTERACTIVE SIMS</span>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap gap-4 pt-2 font-mono">
-        <a href="#projects" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold border border-blue-500 hover:border-blue-600 shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider">
-          EXPLORE PROJECTS &rarr;
+      <div class="flex flex-wrap gap-4 font-mono">
+        <a href="#projects" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold border border-blue-500 shadow-flat-slate transition-all text-sm uppercase tracking-wider">
+          See projects &rarr;
         </a>
-        <a href="/Portfolio/about" class="px-5 py-2.5 bg-[#0f1115] hover:bg-slate-900 border border-slate-850 text-slate-300 hover:text-white shadow-flat-slate hover:translate-y-[-1px] transition-all text-xs uppercase tracking-wider">
-          ABOUT ME // PROFILE
+        <a href={`${base}/about`} class="px-5 py-2.5 bg-[#0f1115] hover:bg-slate-900 border border-slate-850 text-slate-300 hover:text-white shadow-flat-slate transition-all text-sm uppercase tracking-wider">
+          About me
         </a>
       </div>
     </section>
 
-    <!-- Primary Featured Projects Section -->
-    <section id="projects" class="pt-12 space-y-8 scroll-mt-20">
-      
-      <!-- Section Header -->
-      <div class="border-b border-slate-850 pb-4 font-mono">
-        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">// SEC_01 // CORE_SYSTEMS_INDEX</div>
-        <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Featured Systems &amp; Compute Pipelines</h2>
-        <p class="text-xs text-slate-400 mt-1">Deep, end-to-end applications demonstrating machine learning models, GPU parallel acceleration, out-of-core pipelines, and distributed infrastructure.</p>
+    <!-- Featured Projects -->
+    <section id="projects" class="space-y-8 scroll-mt-20">
+      <div class="border-b border-slate-850 pb-4">
+        <h2 class="text-2xl font-display font-extrabold text-white tracking-tight">Featured projects</h2>
+        <p class="text-sm text-slate-400 mt-1">Each card lists one measured result. The case study covers how it was measured.</p>
       </div>
-      
-      <!-- Primary Grid -->
+
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- Project 1: CUDA & WebGPU Relativistic Raymarcher -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-blue-400 font-bold uppercase tracking-wider">SYS_REF: GPU-CUDA-RK4</span>
-              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-blue-400 transition tracking-tight">Relativistic CUDA Raymarcher</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              General relativity Schwarzschild &amp; Kerr black hole simulator using 4th-Order Runge-Kutta numerical integration and parallel 32-thread warp scheduling.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">CUDA C++</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">WEBGPU</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">RK4 GEODESIC</span>
-            </div>
-            <a href="/Portfolio/projects/raymarcher" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 2: Spatial Graph Pipeline -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-cyan-400 font-bold uppercase tracking-wider">SYS_REF: SPATIAL-GRAPH-01</span>
-              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-cyan-400 transition tracking-tight">Spatial Graph &amp; AnnData Engine</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              Out-of-core Python pipeline processing 500,000+ single-cell spatial coordinates into topological graphs under strict RAM limits with PyArrow zero-copy transfers.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">PYARROW</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">ANNDATA</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">VORONOI</span>
-            </div>
-            <a href="/Portfolio/projects/spatial-pipeline" class="text-cyan-400 font-bold text-xs hover:text-cyan-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS &amp; BENCHMARKS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 3: Movie Match Neural Platform -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-purple-400 font-bold uppercase tracking-wider">SYS_REF: TWO-TOWER-ML</span>
-              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-purple-400 transition tracking-tight">Movie Match Real-Time Platform</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              Two-Tower neural candidate retrieval and MLP ranking towers with real-time online vector adaptation over WebSockets and sub-ms room state sync.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">TWO-TOWER</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">SOCKET.IO</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">REACT 19</span>
-            </div>
-            <a href="/Portfolio/projects/movie-matcher" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 4: Predictive SDN -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-blue-400 font-bold uppercase tracking-wider">SYS_REF: CSCI-4930-HL1</span>
-              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-blue-400 transition tracking-tight">Predictive Network Telemetry System</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              Traffic engineering pipeline using PyTorch LSTM forecasts, Stable-Baselines3 DQN agents, and Apache Kafka to reroute traffic dynamically.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">KAFKA</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">LSTM / DQN</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">MININET</span>
-            </div>
-            <a href="/Portfolio/projects/predictive-sdn" class="text-blue-400 font-bold text-xs hover:text-blue-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 5: F1 Oracle -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-purple-400 font-bold uppercase tracking-wider">SYS_REF: ML-RANKER-01</span>
-              <span class="text-slate-500 uppercase">[SYS.STABLE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-purple-400 transition tracking-tight">F1 Oracle Prediction Platform</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              Machine Learning race predictions utilizing XGBRanker pairwise ranking on FastF1 timing telemetry, paired with Monte Carlo simulators.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">FASTF1</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">XGBOOST</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">FASTAPI</span>
-            </div>
-            <a href="/Portfolio/projects/f1-oracle" class="text-purple-400 font-bold text-xs hover:text-purple-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 6: Humanoid Locomotion -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-emerald-400 font-bold uppercase tracking-wider">SYS_REF: RL-PPO-3D</span>
-              <span class="text-slate-500 uppercase">[SYS.ACTIVE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-emerald-400 transition tracking-tight">Humanoid Locomotion</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              3D bipedal bionic humanoid agent trained using Proximal Policy Optimization (PPO) in MuJoCo physics engine across 160 million simulation steps.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">MUJOCO</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">PPO (RL)</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">5-PT LIDAR</span>
-            </div>
-            <a href="/Portfolio/projects/motor-control-locomotion" class="text-emerald-400 font-bold text-xs hover:text-emerald-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 7: WhispNotes macOS AI Studio -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-cyan-400 font-bold uppercase tracking-wider">SYS_REF: SWIFT-MACOS</span>
-              <span class="text-slate-500 uppercase">[SYS.STABLE]</span>
-            </div>
-            <h3 class="text-lg font-display font-extrabold text-white mb-3 group-hover:text-cyan-400 transition tracking-tight">WhispNotes macOS AI Studio</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              Native macOS markdown note suite with local on-device Whisper transcription, local Gemma 3 AI assistant, and interactive node graph canvas.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">SWIFTUI</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">WHISPER</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">GEMMA 3</span>
-            </div>
-            <a href="/Portfolio/projects/whisp-notes" class="text-cyan-400 font-bold text-xs hover:text-cyan-300 transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
+        {featured.map((p) => {
+          const a = accents[p.accent];
+          return (
+            <article class="bg-[#0f1115] border border-slate-850 flex flex-col transition-all duration-200 hover:border-slate-700 shadow-flat-slate group overflow-hidden">
+              <a href={`${base}/projects/${p.slug}`} class="block" tabindex="-1" aria-hidden="true">
+                {p.thumb ? (
+                  <img src={`${base}/assets/thumbs/${p.thumb}`} alt="" width="640" height="360" loading="lazy" class="w-full aspect-video object-cover border-b border-slate-850" />
+                ) : (
+                  <div class="w-full aspect-video border-b border-slate-850 bg-slate-950 flex items-center justify-center">
+                    <span class={`font-display font-extrabold text-2xl ${a.text} opacity-60`}>{p.title}</span>
+                  </div>
+                )}
+              </a>
+              <div class="p-5 flex flex-col flex-grow">
+                <h3 class={`text-lg font-display font-extrabold text-white mb-2 tracking-tight transition ${a.hover}`}>
+                  <a href={`${base}/projects/${p.slug}`}>{p.title}</a>
+                </h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-3">{p.summary}</p>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4 border-l-2 border-slate-700 pl-3">{p.result}</p>
+                <div class="flex flex-wrap gap-1.5 mb-5 font-mono text-xs mt-auto">
+                  {p.tags.map((t) => <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">{t}</span>)}
+                </div>
+                <div class="flex flex-wrap gap-4 font-mono text-sm font-bold">
+                  <a href={`${base}/projects/${p.slug}`} class={`${a.text} hover:underline`}>Case study &rarr;</a>
+                  {p.code && <a href={p.code} target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">Code ↗</a>}
+                  {p.live && <a href={p.live} target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">{p.liveLabel ?? 'Live'} ↗</a>}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
 
-    <!-- Secondary Systems & Coursework Section -->
+    <!-- More Projects -->
     <section class="space-y-8">
-      
-      <!-- Section Header -->
-      <div class="border-b border-slate-850 pb-4 font-mono">
-        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">// SEC_02 // SYSTEM_BUILD_INDEX</div>
-        <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Other Engineering Projects</h2>
-        <p class="text-xs text-slate-400 mt-1">Robotics, mobile development, and object-oriented systems architectures.</p>
+      <div class="border-b border-slate-850 pb-4">
+        <h2 class="text-2xl font-display font-extrabold text-white tracking-tight">More projects</h2>
+        <p class="text-sm text-slate-400 mt-1">Coursework, team projects and earlier work.</p>
       </div>
 
-      <!-- Secondary Grid -->
-      <div class="grid md:grid-cols-3 gap-6">
-        
-        <!-- Project 3: Bomb Squad Robot -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-slate-500 font-bold uppercase tracking-wider">REF: EMBEDDED-NODE-3</span>
-              <span class="text-slate-500 uppercase">[DEVCYCLE]</span>
-            </div>
-            <h3 class="text-lg font-display font-bold text-white mb-3 group-hover:text-blue-400 transition tracking-tight">Wireless EOD Disposal Rover</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              A distributed 3-node wireless system running ESP-NOW to steer a 4-DOF Mecanum rover, incorporating claw shaking sensor parameters.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">ESP32</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">ESP-NOW</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">C++</span>
-            </div>
-            <a href="/Portfolio/projects/bomb-squad-robot" class="text-slate-400 font-bold text-xs hover:text-white transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 4: Tap-Tap Trivia -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-slate-500 font-bold uppercase tracking-wider">REF: MOBILE-APP-BUZZ</span>
-              <span class="text-slate-500 uppercase">[DEVCYCLE]</span>
-            </div>
-            <h3 class="text-lg font-display font-bold text-white mb-3 group-hover:text-blue-400 transition tracking-tight">Tap-Tap Trivia (Group App)</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              A responsive React Native front-end buzzer mobile app developed using Git and Agile workflows to coordinate team merges.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">REACT NATIVE</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">AGILE / GIT</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">MOBILE</span>
-            </div>
-            <a href="/Portfolio/projects/tap-tap-trivia" class="text-slate-400 font-bold text-xs hover:text-white transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 5: E-Commerce Cart Simulation -->
-        <article class="bg-[#0f1115] border border-slate-850 p-6 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 hover:translate-y-[-2px] shadow-flat-slate group relative overflow-hidden">
-          <div>
-            <div class="flex justify-between items-center mb-4 font-mono text-[9px]">
-              <span class="text-slate-500 font-bold uppercase tracking-wider">REF: NET-OOP-SIM</span>
-              <span class="text-slate-500 uppercase">[DEVCYCLE]</span>
-            </div>
-            <h3 class="text-lg font-display font-bold text-white mb-3 group-hover:text-blue-400 transition tracking-tight">E-Commerce Cart Simulation</h3>
-            <p class="text-slate-400 mb-6 text-xs leading-relaxed">
-              Modular catalog system using OOP inheritance and polymorphism to integrate digital, physical, and subscription products with Generic Collections.
-            </p>
-          </div>
-          <div>
-            <div class="flex flex-wrap gap-1.5 mb-6 font-mono text-[9px]">
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">C#</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">.NET CORE</span>
-              <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">OOP</span>
-            </div>
-            <a href="/Portfolio/projects/ecommerce-cart" class="text-slate-400 font-bold text-xs hover:text-white transition mt-auto inline-flex items-center gap-1 font-mono">
-              [VIEW DETAILS] &rarr;
-            </a>
-          </div>
-        </article>
-
+      <div class="grid sm:grid-cols-2 gap-6">
+        {more.map((p) => {
+          const a = accents[p.accent];
+          return (
+            <article class="bg-[#0f1115] border border-slate-850 p-5 flex flex-col transition-all duration-200 hover:border-slate-700 shadow-flat-slate group">
+              <h3 class={`text-base font-display font-bold text-white mb-2 tracking-tight transition ${a.hover}`}>
+                <a href={`${base}/projects/${p.slug}`}>{p.title}</a>
+              </h3>
+              <p class="text-slate-400 text-sm leading-relaxed mb-4">{p.summary}</p>
+              <div class="flex flex-wrap gap-1.5 mb-4 font-mono text-xs mt-auto">
+                {p.tags.map((t) => <span class="px-2 py-0.5 bg-slate-900 border border-slate-850 text-slate-400">{t}</span>)}
+              </div>
+              <div class="flex flex-wrap gap-4 font-mono text-sm font-bold">
+                <a href={`${base}/projects/${p.slug}`} class={`${a.text} hover:underline`}>Case study &rarr;</a>
+                {p.code && <a href={p.code} target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white">Code ↗</a>}
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
 
-    <!-- Skills Matrix Section -->
-    <section class="space-y-8 select-none">
-      
-      <!-- Section Header -->
-      <div class="border-b border-slate-850 pb-4 font-mono">
-        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">// SEC_03 // CORE_SPECIFICATION_MATRIX</div>
-        <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Technical Core Matrix</h2>
-        <p class="text-xs text-slate-400 mt-1">Structured view of my engineering languages, runtimes, and hardware tooling.</p>
+    <!-- Skills -->
+    <section class="space-y-8">
+      <div class="border-b border-slate-850 pb-4">
+        <h2 class="text-2xl font-display font-extrabold text-white tracking-tight">Skills</h2>
+        <p class="text-sm text-slate-400 mt-1">Grouped by what I use them for. Each one appears in at least one project above.</p>
       </div>
-
-      <!-- Specs Grid (Spreadsheet-like tabular design) -->
-      <div class="grid sm:grid-cols-2 md:grid-cols-4 border border-slate-850 divide-y sm:divide-y-0 divide-x divide-slate-850 bg-slate-950 font-mono text-[11px]">
-        
-        <!-- Column 1 -->
-        <div class="flex flex-col">
-          <div class="bg-slate-900 border-b border-slate-850 p-3 text-white font-bold uppercase tracking-wider">
-            [01] LANGUAGES
+      <dl class="border border-slate-850 divide-y divide-slate-850 bg-slate-950">
+        {skills.map((s) => (
+          <div class="grid sm:grid-cols-[200px_1fr] gap-1 sm:gap-6 p-4">
+            <dt class="text-sm font-mono font-bold text-white">{s.area}</dt>
+            <dd class="text-sm text-slate-400">{s.items}</dd>
           </div>
-          <div class="divide-y divide-slate-900 flex-grow">
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>SWIFT</span> <span class="text-slate-600 text-[10px]">MACOS / NATIVE</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>C#</span> <span class="text-slate-600 text-[10px]">OOP / .NET</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>C++ / C</span> <span class="text-slate-600 text-[10px]">EMBEDDED</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>PYTHON</span> <span class="text-slate-600 text-[10px]">ML &amp; DATA</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>JAVASCRIPT</span> <span class="text-slate-600 text-[10px]">WEB APPS</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>SQL</span> <span class="text-slate-600 text-[10px]">DATABASES</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Column 2 -->
-        <div class="flex flex-col">
-          <div class="bg-slate-900 border-b border-slate-850 p-3 text-white font-bold uppercase tracking-wider">
-            [02] FRAMEWORKS / LIBS
-          </div>
-          <div class="divide-y divide-slate-900 flex-grow">
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>SWIFTUI</span> <span class="text-slate-600 text-[10px]">MACOS UI</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>FASTAPI</span> <span class="text-slate-600 text-[10px]">API ENGINE</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>PANDAS / NUMPY</span> <span class="text-slate-600 text-[10px]">DATA PREP</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>SCIKIT-LEARN</span> <span class="text-slate-600 text-[10px]">MODELS</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>REACT NATIVE</span> <span class="text-slate-600 text-[10px]">MOBILE UI</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>TAILWIND CSS</span> <span class="text-slate-600 text-[10px]">STYLING</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Column 3 -->
-        <div class="flex flex-col">
-          <div class="bg-slate-900 border-b border-slate-850 p-3 text-white font-bold uppercase tracking-wider">
-            [03] DEV TOOLING
-          </div>
-          <div class="divide-y divide-slate-900 flex-grow">
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>WHISPER.CPP</span> <span class="text-slate-600 text-[10px]">SPEECH ML</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>GIT / GITHUB</span> <span class="text-slate-600 text-[10px]">VCS</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>DOCKER</span> <span class="text-slate-600 text-[10px]">CONTAINERS</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>POSTMAN</span> <span class="text-slate-600 text-[10px]">API TEST</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>LINUX BASH</span> <span class="text-slate-600 text-[10px]">SHELL</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>MININET</span> <span class="text-slate-600 text-[10px]">NET WORK</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Column 4 -->
-        <div class="flex flex-col">
-          <div class="bg-slate-900 border-b border-slate-850 p-3 text-white font-bold uppercase tracking-wider">
-            [04] SPECIALTIES
-          </div>
-          <div class="divide-y divide-slate-900 flex-grow">
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>GEMMA 3</span> <span class="text-slate-600 text-[10px]">LOCAL AI</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>ESP32 MCU</span> <span class="text-slate-600 text-[10px]">HARDWARE</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>ESP-NOW LINK</span> <span class="text-slate-600 text-[10px]">P2P WIRE</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>PYTORCH</span> <span class="text-slate-600 text-[10px]">DL / LSTM</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>STABLE-BS3</span> <span class="text-slate-600 text-[10px]">DQN (RL)</span>
-            </div>
-            <div class="flex justify-between p-3 text-slate-400 hover:bg-slate-900/40 hover:text-white transition">
-              <span>ONNX RUNTIME</span> <span class="text-slate-600 text-[10px]">COMPILER</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+        ))}
+      </dl>
     </section>
 
-    <!-- Certifications & Specialized Training Section -->
+    <!-- Certifications -->
     <section class="space-y-6">
-      
-      <!-- Section Header -->
-      <div class="border-b border-slate-850 pb-4 font-mono">
-        <div class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">// SEC_04 // CREDENTIALS_&_SPECIALIZED_TRAINING</div>
-        <h2 class="text-2xl font-display font-extrabold text-white uppercase tracking-tight">Certifications &amp; Training</h2>
-        <p class="text-xs text-slate-400 mt-1">Verified industry credentials in generative diffusion models, transformer architectures, and GPU acceleration.</p>
+      <div class="border-b border-slate-850 pb-4">
+        <h2 class="text-2xl font-display font-extrabold text-white tracking-tight">Certifications</h2>
       </div>
-
-      <!-- Credential Card 1: Generative AI with Diffusion Models -->
-      <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
-        
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div class="space-y-1.5">
-            <div class="flex items-center gap-2 font-mono text-[10px]">
-              <span class="px-2 py-0.5 bg-[#76b900]/10 border border-[#76b900]/30 text-[#76b900] font-bold uppercase tracking-wider">
-                NVIDIA Deep Learning Institute (DLI)
-              </span>
-              <span class="text-slate-500 uppercase">[VERIFIED]</span>
+      <ul class="space-y-3">
+        {certs.map((c) => (
+          <li class="bg-[#0f1115] border border-slate-850 p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold text-white">{c.name}</p>
+              <p class="text-xs text-slate-500 mt-0.5">NVIDIA Deep Learning Institute · {c.issued}</p>
             </div>
-            <h3 class="text-base font-display font-bold text-white tracking-tight">
-              Generative AI with Diffusion Models
-            </h3>
-            <p class="text-xs text-slate-400">
-              Demonstrated competence in denoising diffusion models, U-Net architectures, noise scheduling, and text-to-image generation pipelines.
-            </p>
-          </div>
-
-          <!-- Direct Verification Link -->
-          <a 
-            href="https://learn.nvidia.com/certificates?id=vEq-w5ssQaG2Emi6CRZcJw" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="px-3.5 py-2 bg-slate-900 border border-slate-800 hover:border-[#76b900]/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold transition inline-flex items-center gap-2 self-start flex-shrink-0 group/btn"
-          >
-            <span class="w-1.5 h-1.5 bg-[#76b900] rounded-full animate-pulse"></span>
-            <span>VERIFY CREDENTIAL</span>
-            <span class="text-slate-500 group-hover/btn:text-[#76b900] transition">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Metadata Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3 border-y border-slate-900 font-mono text-[10px] text-slate-400 my-4 bg-slate-950/40 p-3">
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUED:</span>
-            <span class="text-slate-200">OCTOBER 7, 2026</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">CREDENTIAL ID:</span>
-            <span class="text-slate-200 truncate block">vEq-w5ssQaG2Emi6CRZcJw</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUER:</span>
-            <span class="text-slate-200">NVIDIA DLI</span>
-          </div>
-        </div>
-
-        <!-- Core Competencies -->
-        <div class="space-y-2">
-          <span class="text-[9px] font-mono text-slate-500 uppercase font-bold tracking-wider block">CORE COMPETENCIES:</span>
-          <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Denoising Diffusion (DDPM)</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">U-Net Architectures</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">CLIP Conditioning</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Noise Scheduling</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Text-to-Image Pipelines</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">GPU Acceleration</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Credential Card 2: Building Transformer-Based Natural Language Processing Applications -->
-      <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
-        
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div class="space-y-1.5">
-            <div class="flex items-center gap-2 font-mono text-[10px]">
-              <span class="px-2 py-0.5 bg-[#76b900]/10 border border-[#76b900]/30 text-[#76b900] font-bold uppercase tracking-wider">
-                NVIDIA Deep Learning Institute (DLI)
-              </span>
-              <span class="text-slate-500 uppercase">[VERIFIED]</span>
-            </div>
-            <h3 class="text-base font-display font-bold text-white tracking-tight">
-              Building Transformer-Based Natural Language Processing Applications
-            </h3>
-            <p class="text-xs text-slate-400">
-              Demonstrated competence in transformer fine-tuning, sequence modeling, and GPU-accelerated NLP workflows.
-            </p>
-          </div>
-
-          <!-- Direct Verification Link -->
-          <a 
-            href="https://learn.nvidia.com/certificates?id=7VhTQxgiSbSwfn2ZcEyPHw" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="px-3.5 py-2 bg-slate-900 border border-slate-800 hover:border-[#76b900]/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold transition inline-flex items-center gap-2 self-start flex-shrink-0 group/btn"
-          >
-            <span class="w-1.5 h-1.5 bg-[#76b900] rounded-full animate-pulse"></span>
-            <span>VERIFY CREDENTIAL</span>
-            <span class="text-slate-500 group-hover/btn:text-[#76b900] transition">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Metadata Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3 border-y border-slate-900 font-mono text-[10px] text-slate-400 my-4 bg-slate-950/40 p-3">
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUED:</span>
-            <span class="text-slate-200">SEPTEMBER 2, 2026</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">CREDENTIAL ID:</span>
-            <span class="text-slate-200 truncate block">7VhTQxgiSbSwfn2ZcEyPHw</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUER:</span>
-            <span class="text-slate-200">NVIDIA DLI</span>
-          </div>
-        </div>
-
-        <!-- Core Competencies -->
-        <div class="space-y-2">
-          <span class="text-[9px] font-mono text-slate-500 uppercase font-bold tracking-wider block">CORE COMPETENCIES:</span>
-          <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Self-Attention Architectures</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Transformer Fine-Tuning</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Seq2Seq Modeling</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">NLP Pipeline Optimization</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">GPU Acceleration</span>
-          </div>
-        </div>
-      </div>
+            <a href={c.url} target="_blank" rel="noopener noreferrer" class="text-sm font-mono font-bold text-[#76b900] hover:underline self-start sm:self-auto">Verify ↗</a>
+          </li>
+        ))}
+      </ul>
     </section>
 
   </main>

@@ -1,62 +1,43 @@
-# Astro Starter Kit: Blog
+# Gilberto Romero-Cano — Portfolio
+
+Source for my portfolio site: **https://gilbertorcp.github.io/Portfolio/**
+
+I'm a Computer Science student at CU Denver (B.S., expected May 2027) working on GPU computing, ML evaluation, and data pipelines.
+
+## Featured projects
+
+| Project | What it is | Repo |
+|---|---|---|
+| Relativistic Raymarcher | CUDA C++ and WebGPU geodesic tracer for Schwarzschild, Kerr and Reissner-Nordström spacetimes, with cross-backend validation | [raymarcher](https://github.com/GIlbertoRCP/raymarcher) |
+| Spatial Graph Pipeline | Out-of-core Python engine for spatial transcriptomics graphs under a fixed RAM budget | [spatial_pipeline](https://github.com/GIlbertoRCP/spatial_pipeline) |
+| predictive-audit | Checks a time-series forecasting result against trivial baselines and common leakage mistakes | [predictive_audit](https://github.com/GIlbertoRCP/predictive_audit) |
+| WhispNotes | Native macOS note app with on-device Whisper transcription and a local LLM assistant | [whispNotes](https://github.com/GIlbertoRCP/whispNotes) |
+| Movie Match | Real-time paired movie picker with a two-tower recommender | [movie_match](https://github.com/GIlbertoRCP/movie_match) |
+| Literature Companion | Local desktop RAG app (Tauri, FastAPI, ChromaDB) with hybrid retrieval and spaced repetition | [ficP](https://github.com/GIlbertoRCP/ficP) |
+| F1 Oracle | Race prediction with an XGBoost pairwise ranker (team fork; I built most of the pipeline) | [F1-Prediction](https://github.com/GIlbertoRCP/F1-Prediction) |
+| Predictive SDN | Team course project: Kafka-based SDN telemetry with LSTM forecasting | [Predictive_Activation](https://github.com/GIlbertoRCP/Predictive_Activation) |
+
+## Stack
+
+[Astro](https://astro.build) with MDX, React islands for the interactive demos, Tailwind CSS, and KaTeX for equations. It deploys to GitHub Pages through [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on every push to `main`.
+
+`backend_api/` is an unused FastAPI prototype for an LLM-backed chat assistant. The live site's assistant runs entirely in the browser (`src/components/ChatWidget.jsx`).
+
+## Run locally
 
 ```sh
-npm create astro@latest -- --template blog
+npm install
+npm run dev      # http://localhost:4321/Portfolio/
+npm run build    # static output in dist/
 ```
 
-> **Seasoned astronaut?** Delete this file. Have fun!
-
-Features:
-
-- Minimal styling (make it your own!)
-- 100/100 Lighthouse performance
-- SEO-friendly with canonical URLs and OpenGraph data
-- Sitemap support
-- RSS Feed support
-- Markdown & MDX support
-
-## Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Layout
 
 ```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+src/layouts/Layout.astro    shared nav, footer, chat widget
+src/pages/index.astro       home page and project cards
+src/pages/about.astro       about, education, certifications
+src/pages/projects/*.mdx    one case-study page per project
+src/components/*.jsx        interactive demos (illustrative, run in the browser)
+public/assets/              project images and thumbnails
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).

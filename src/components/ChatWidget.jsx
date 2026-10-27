@@ -4,55 +4,67 @@ import { useState, useRef, useEffect } from 'react';
 const PORTFOLIO_DATA = {
   greetings: {
     patterns: ['hi', 'hello', 'hey', 'greetings', 'hola', 'yo'],
-    response: "HI THERE! I'M GILBERTO'S DIAGNOSTIC ASSISTANT. YOU CAN ASK ME ABOUT HIS PRIMARY ML SYSTEMS (F1 ORACLE, PREDICTIVE NETWORK TELEMETRY, OR HUMANOID LOCOMOTION), HIS EMBEDDED EOD ROBOT, TRIVIA QUIZ APP, OR E-COMMERCE SIMULATOR. YOU CAN ALSO ASK FOR HIS TECH STACK OR HIS COMPUTER SCIENCE STUDIES AT CU DENVER!"
+    response: "Hi! I can answer questions about Gilberto's projects: the Raymarcher, predictive-audit, F1 Winner Oracle, the spatial pipeline, WhispNotes, Movie Match and more. You can also ask about his skills, education or how to get in touch."
   },
   about: {
     patterns: ['who are you', 'about gilberto', 'who is gilberto', 'bio', 'background'],
-    response: "GILBERTO ROMERO-CANO IS A COMPUTER SCIENCE STUDENT AT CU DENVER SPECIALIZING IN SOFTWARE ARCHITECTURE, BACKEND ENGINEERING, AND MACHINE LEARNING PIPELINES. HE DEPLOYS SCALABLE DATA PLATFORMS FROM FASTAPI BACKENDS IN PYTHON TO OBJECT-ORIENTED STRUCTURES IN C#."
+    response: "Gilberto Romero-Cano is a Computer Science student at CU Denver (graduating May 2027). He builds GPU and data-heavy systems and checks whether they actually work: validating against published results, scoring against baselines, and reporting what didn't work."
   },
   skills: {
     patterns: ['skills', 'tech stack', 'languages', 'frameworks', 'technologies', 'tools', 'code'],
-    response: "GILBERTO'S TECHNICAL PROFILE SPECIFICATIONS:\n\n• LANGUAGES: Python, C++, C, C#, JavaScript, TypeScript, SQL\n• FRAMEWORKS/LIBS: FastAPI, Pandas, NumPy, Scikit-learn, React Native, Tailwind CSS, Vercel\n• DEV TOOLING: Git, GitHub, Docker, Postman, Linux Bash/Shell, VS Code, Emacs, Mininet\n• SPECIALTIES: Machine Learning (PyTorch, XGBoost, Stable Baselines3), IoT/Embedded (ESP32, ESP-NOW, FreeRTOS, MPU6050)"
+    response: "Skills by area:\n\n• GPU: CUDA C++, NVRTC, WebGPU/WGSL, Nsight Compute, RAPIDS\n• ML & evaluation: PyTorch, XGBoost, scikit-learn, Stable-Baselines3, ONNX Runtime\n• Data: Python, pandas, NumPy, Dask, Zarr, PyArrow, AnnData, Kafka, SQL\n• Apps: TypeScript, React, Node.js, FastAPI, Socket.IO, Swift/SwiftUI, Tauri\n• Embedded: C/C++, ESP32, ESP-NOW"
   },
   education: {
     patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study'],
-    response: "GILBERTO IS PURSUING A BACHELOR OF SCIENCE IN COMPUTER SCIENCE AT THE UNIVERSITY OF COLORADO DENVER (GRADUATION: MAY 2027). RELEVANT COURSEWORK INCLUDES DATA STRUCTURES & ALGORITHMS, MACHINE LEARNING, SOFTWARE ENGINEERING, NETWORKING, AND OPERATING SYSTEMS."
+    response: "B.S. in Computer Science at the University of Colorado Denver, expected May 2027. Relevant coursework includes data structures & algorithms, machine learning, software engineering, computer networks, operating systems and databases. He also holds two NVIDIA DLI certificates (diffusion models, transformer NLP)."
   },
   contact: {
-    patterns: ['contact', 'email', 'hire', 'resume', 'github', 'reach out', 'social'],
-    response: "CONNECTION CHANNELS FOR G. ROMERO-CANO:\n\n• LOCATION: Denver, CO\n• PHONE: (720) 693-6526\n• MAIL: gilbertorcp712@gmail.com\n• LINKEDIN: [linkedin.com/in/gromerocano/](https://linkedin.com/in/gromerocano/)\n• GITHUB: [github.com/GIlbertoRCP](https://github.com/GIlbertoRCP)\n\n(FEEL FREE TO INITIATE INTERACTIVE WORKFLOW DEMOS ON THIS PORTFOLIO FOR MORE DETAILS.)"
+    patterns: ['contact', 'email', 'hire', 'resume', 'github', 'reach out', 'social', 'linkedin'],
+    response: "Ways to reach Gilberto:\n\n• Email: gilbertorcp712@gmail.com\n• LinkedIn: [linkedin.com/in/gromerocano](https://linkedin.com/in/gromerocano/)\n• GitHub: [github.com/GIlbertoRCP](https://github.com/GIlbertoRCP)"
+  },
+  raymarcher: {
+    patterns: ['raymarcher', 'black hole', 'cuda', 'webgpu', 'gpu', 'relativity', 'kerr', 'schwarzschild', 'geodesic', 'spacetime'],
+    response: "Raymarcher compiles a spacetime metric into CUDA and WebGPU ray tracers and renders black holes in real time. Its physics is checked against published results (e.g. Bardeen 1973), and the two backends agree on all 14 million test pixels. The Kerr kernel reaches 10.4 TFLOP/s on an RTX 3070.\n\nDetails: [Raymarcher case study](/Portfolio/projects/raymarcher)"
+  },
+  audit: {
+    patterns: ['audit', 'baseline', 'persistence', 'leakage', 'forecast'],
+    response: "predictive-audit checks forecasting results against trivial baselines (persistence, moving average, seasonal-naive) and common evaluation leaks. Gilberto built it after finding his own team's F1 ≈ 0.99 congestion model was matched by \"next step = this step\". Of 5 published results audited, 4 don't clearly beat trivial baselines.\n\nDetails: [predictive-audit case study](/Portfolio/projects/predictive-audit)"
   },
   sdn: {
-    patterns: ['sdn', 'telemetry', 'kafka', 'self-healing', 'mininet', 'congestion', 'lstm', 'dqn', 'networking', 'predictive network'],
-    response: "PREDICTIVE NETWORK TELEMETRY SYSTEM CORE HIGHLIGHTS:\n\n• EVENT-DRIVEN BUS: Decouples network switches (Mininet + os-ken) from AI analysis using Apache Kafka.\n• SELF-HEALING ENGINE: Uses a PyTorch LSTM model to forecast congestion. When risk exceeds 70%, a DQN RL agent scales up polling frequency and installs flow rules to reroute traffic.\n• EDGE COMPILING: Quantized the LSTM weights (INT8) using ONNX, reducing size by 73% and inference latency by 69%.\n\nREAD DETAILS: [SDN Case Study](/Portfolio/projects/predictive-sdn) TO TEST THE TELEMETRY SIMULATOR PANEL!"
+    patterns: ['sdn', 'telemetry', 'kafka', 'self-healing', 'mininet', 'congestion', 'lstm', 'dqn', 'networking'],
+    response: "Predictive SDN was a 4-person course project: Mininet switches publish telemetry to Kafka, an LSTM forecasts congestion, and a DQN agent adjusts polling. ONNX export made inference about 3× faster. A later audit showed the forecaster didn't beat a simple baseline under a chronological split.\n\nDetails: [Predictive SDN case study](/Portfolio/projects/predictive-sdn)"
   },
   f1: {
-    patterns: ['f1', 'oracle', 'prediction', 'telemetry', 'fastf1', 'xgboost', 'monte carlo', 'race'],
-    response: "F1 ORACLE PREDICTION PLATFORM CORE HIGHLIGHTS:\n\n• PREFERENCE RANKER: Trains an XGBRanker model on FastF1 historical telemetries to predict driver placement probabilities.\n• TELEMETRY ENGINEERING: Subtracts fuel burning weights and estimates linear tyre-degradation rates across stints.\n• STOCHASTIC SIMULATION: Runs a client-side Monte Carlo simulator (1,000 runs) factoring in safety cars and track wetness parameters.\n\nREAD DETAILS: [F1 Oracle Case Study](/Portfolio/projects/f1-oracle) TO RUN match-ups!"
+    patterns: ['f1', 'oracle', 'formula', 'race', 'fastf1', 'xgboost', 'monte carlo'],
+    response: "F1 Winner Oracle publishes calibrated race-winner odds, frozen before each race in a hash-chained log and scored in public. Over 174 walk-forward races its log loss is 1.24 vs 1.53 for \"the pole sitter wins\". As a single pick it's no better than the pole sitter, and the site says so.\n\nDetails: [F1 Oracle case study](/Portfolio/projects/f1-oracle)"
   },
-  locomotion: {
-    patterns: ['locomotion', 'mujoco', 'ppo', 'bipedal', 'humanoid', 'reinforcement learning', 'penguin slide', 'motor control', 'rl'],
-    response: "HUMANOID LOCOMOTION PROJECT CORE HIGHLIGHTS:\n\n• BIONIC MODEL: Modified humanoid density parameters to enable controlled acceleration in MuJoCo physics engine.\n• DEPTH SENSING: Configured a 5-point vertical rangefinder (LiDAR) array, concatenating spatial readings via a VisionObservationWrapper.\n• EMERGENT REWARD HACKING: Agent discovered a 'penguin slide' maneuver to navigate steep descents.\n\nREAD DETAILS: [Locomotion Case Study](/Portfolio/projects/motor-control-locomotion) TO VIEW SIMULATION DEMO SCATTER!"
-  },
-  robot: {
-    patterns: ['robot', 'bomb', 'embedded', 'esp32', 'esp-now', 'mecanum', 'rover', 'servo', 'hardware', 'eod'],
-    response: "EOD TRAINER ROBOT CORE HIGHLIGHTS:\n\n• ESP-NOW DIRECT: Connectionless packet delivery between Controller remote, Rover robot, and Bomb target node under 20ms.\n• PHYSICAL SPECS: 4-DOF robotic claw servos, holonomic Mecanum driving, MPU6050 accelerometer to enforce tremor/shaking penalties.\n\nREAD DETAILS: [EOD Robot Case Study](/Portfolio/projects/bomb-squad-robot) TO DRAG SCHEMATICS!"
-  },
-  trivia: {
-    patterns: ['trivia', 'tap', 'multiplayer', 'react native', 'agile', 'group', 'team'],
-    response: "TAP-TAP TRIVIA MOBILE CORE HIGHLIGHTS:\n\n• MULTIPLAYER: Responsive React Native quiz app built for a group project at CU Denver.\n• COLLABORATIVE GIT: Coordinated branch merges and resolved conflicts to maintain stable version controls.\n• TIMING VERIFICATION: Captures precise buzzer ticks to prevent network exploit latency.\n\nREAD DETAILS: [Trivia Case Study](/Portfolio/projects/tap-tap-trivia) TO BUZZ DEMO!"
+  spatial: {
+    patterns: ['spatial', 'transcriptomics', 'anndata', 'xenium', 'rapids', 'dask', 'zarr', 'graph', 'cells'],
+    response: "The spatial pipeline turns spatial transcriptomics data into cell graphs for AnnData and PyTorch Geometric. It builds a k-NN graph for 250k cells in 180 ms on GPU (20× faster than 16 CPU cores) and streams data out-of-core under a 512 MB memory cap.\n\nDetails: [Spatial pipeline case study](/Portfolio/projects/spatial-pipeline)"
   },
   whispnotes: {
-    patterns: ['whispnotes', 'whisp', 'notes', 'whisper', 'gemma', 'macos', 'swift', 'swiftui', 'transcription', 'speech', 'note-taking', 'offline ai'],
-    response: "WHISPNOTES NATIVE MACOS STUDIO HIGHLIGHTS:\n\n• ON-DEVICE SPEECH: Uses Whisper.cpp accelerated via Metal Shaders and CoreML to transcribe audio 100% locally.\n• LOCAL GEMMA 3 AI: Ingests note context to generate executive takeaways, flashcards, and action items with zero cloud dependency.\n• 3-PANE & KNOWLEDGE GRAPH: Built natively in Swift & SwiftUI with AppKit 3-pane split-view, ⌘K command palette, and interactive force-directed node graph.\n\nREAD DETAILS: [WhispNotes Case Study](/Portfolio/projects/whisp-notes) TO LAUNCH THE INTERACTIVE APP SIMULATOR!"
+    patterns: ['whispnotes', 'whisp', 'notes', 'whisper', 'gemma', 'macos', 'swift', 'swiftui', 'transcription', 'speech'],
+    response: "WhispNotes is a native macOS note app with on-device Whisper transcription, a local Gemma 3 assistant and a knowledge graph view. It ships as a DMG through GitHub Releases.\n\nDetails: [WhispNotes case study](/Portfolio/projects/whisp-notes)"
   },
-  cart: {
-    patterns: ['cart', 'ecommerce', 'e-commerce', 'c#', 'oop', 'inheritance', 'polymorphism', 'generic', 'collections'],
-    response: "E-COMMERCE CART CORE HIGHLIGHTS:\n\n• OBJECT-ORIENTED: Implements product subclasses (digital, physical, subscription) in C#/.NET.\n• POLYMORPHISM: Overrides shipping charges (e.g. zero digital download fees vs physical weight coefficients).\n• GENERIC LISTS: Implements generic Collections to manage memory objects and calculate cart parameters.\n\nREAD DETAILS: [E-Commerce Case Study](/Portfolio/projects/ecommerce-cart) TO INSTANTIATE PRODUCT INSTANCES!"
+  movies: {
+    patterns: ['movie', 'match', 'recommend', 'two-tower', 'socket'],
+    response: "Movie Match lets two people swipe on movies together in real time over Socket.IO, with a two-tower recommender that adapts to both of them.\n\nDetails: [Movie Match case study](/Portfolio/projects/movie-matcher)"
+  },
+  rag: {
+    patterns: ['rag', 'literature', 'papers', 'chromadb', 'tauri', 'flashcard', 'bm25'],
+    response: "The Literature Companion is a local desktop RAG app for papers and codebases. It fuses BM25 and dense retrieval with Reciprocal Rank Fusion and schedules flashcards with SM-2.\n\nDetails: [Literature Companion case study](/Portfolio/projects/literature-companion)"
+  },
+  locomotion: {
+    patterns: ['locomotion', 'mujoco', 'ppo', 'bipedal', 'humanoid', 'reinforcement learning', 'rl'],
+    response: "A PPO agent trained in MuJoCo to walk over uneven terrain, using a 5-point vertical rangefinder and iterative reward shaping. It discovered a \"penguin slide\" to get down steep slopes.\n\nDetails: [Locomotion case study](/Portfolio/projects/motor-control-locomotion)"
+  },
+  robot: {
+    patterns: ['robot', 'bomb', 'embedded', 'esp32', 'esp-now', 'mecanum', 'rover', 'hardware', 'eod'],
+    response: "The EOD rover is three ESP32 nodes talking over ESP-NOW: a controller, a Mecanum rover with a 4-DOF claw, and a target node that uses an MPU6050 to penalize shaking.\n\nDetails: [EOD rover case study](/Portfolio/projects/bomb-squad-robot)"
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],
-    response: "GILBERTO'S PORTFOLIO CONTAINS SIX FEATURED SYSTEMS:\n\n1. WHISPNOTES - Native macOS note app with local Whisper transcription & Gemma 3 AI.\n2. PREDICTIVE SDN TELEMETRY - Event-driven Mininet monitoring using Kafka and LSTM/DQN.\n3. F1 ORACLE - Pairwise driver finishing XGBRanker platform.\n4. HUMANOID LOCOMOTION - 3D bipedal PPO training in MuJoCo.\n5. WIRELESS EOD ROBOT - ESP-NOW direct mesh remote and mecanum rover.\n6. TAP-TAP TRIVIA & C# CATALOG - React Native & C# OOP simulations.\n\nSELECT ANY OPTION FOR DETAILED FILE SPECIFICATIONS."
+    response: "Featured projects:\n\n1. Raymarcher: CUDA/WebGPU black-hole ray tracer\n2. predictive-audit: forecasting results vs trivial baselines\n3. F1 Winner Oracle: calibrated race odds, scored in public\n4. Spatial pipeline: out-of-core cell graphs\n5. WhispNotes: native macOS AI note app\n6. Movie Match: real-time paired recommendations\n\nAsk about any of them for details."
   }
 };
 
@@ -75,7 +87,7 @@ function getBotResponse(query) {
   }
 
   if (!bestMatch || maxMatches === 0) {
-    bestMatch = "QUERY LOGGED. COMMAND UNRECOGNIZED. CHOOSE SUB-SYSTEM METRICS: F1 ORACLE, PREDICTIVE SDN, HUMANOID LOCOMOTION, EOD ROBOT, TRIVIA GAME, C# OOP CATALOG, SKILLS OR GITHUB CONTROLLER.";
+    bestMatch = "I don't have an answer for that. Try asking about a project (Raymarcher, predictive-audit, F1 Oracle, spatial pipeline, WhispNotes, Movie Match), or about skills, education or contact.";
   }
 
   return bestMatch;
@@ -84,7 +96,7 @@ function getBotResponse(query) {
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'ai', content: "CONSOLE PORT: DIAGNOSTICS READY. ASK ME ABOUT GILBERTO'S MACHINE LEARNING MODELS, EMBEDDED ROBOTICS, OR TECH MATRIX SPECIFICATIONS." }
+    { role: 'ai', content: "Hi! Ask me about Gilberto's projects, skills or how to get in touch. This assistant matches keywords in your browser; it isn't an LLM." }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -98,7 +110,7 @@ export default function ChatWidget() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage = { role: 'user', content: input.toUpperCase() };
+    const userMessage = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
     const currentInput = input;
     setInput('');
@@ -122,10 +134,10 @@ export default function ChatWidget() {
         <div className="mb-3 w-80 sm:w-96 bg-[#0f1115] border border-slate-850 rounded-none shadow-flat-slate flex flex-col h-[28rem] overflow-hidden select-none transition-all duration-200">
           
           {/* Header */}
-          <div className="bg-slate-950 px-4 py-2.5 border-b border-slate-850 flex justify-between items-center text-[10px]">
+          <div className="bg-slate-950 px-4 py-2.5 border-b border-slate-850 flex justify-between items-center text-xs">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none"></span>
-              <h3 className="font-bold text-slate-200 uppercase tracking-wider">GRC // DIAGNOSTIC_ASSISTANT</h3>
+              <h3 className="font-bold text-slate-200 uppercase tracking-wider">Portfolio assistant</h3>
             </div>
             <button 
               onClick={() => setIsOpen(false)}
@@ -158,7 +170,7 @@ export default function ChatWidget() {
                       className="text-blue-400 hover:underline font-bold"
                       {...(match[2].startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
-                      {match[1].toUpperCase()}
+                      {match[1]}
                     </a>
                   );
                   lastIndex = linkRegex.lastIndex;
@@ -203,14 +215,14 @@ export default function ChatWidget() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="ENTER SYSTEM QUERY..."
+              placeholder="Ask about a project..."
               className="flex-grow bg-[#0c0d12] text-white text-xs rounded-none px-3 py-2 border border-slate-800 focus:outline-none focus:border-blue-500 font-mono"
               disabled={isLoading}
             />
             <button 
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="bg-blue-600 hover:bg-blue-700 border border-blue-500 text-white px-3 py-2 rounded-none font-bold transition shadow-flat-slate-sm disabled:opacity-50 text-[10px] uppercase tracking-wider"
+              className="bg-blue-600 hover:bg-blue-700 border border-blue-500 text-white px-3 py-2 rounded-none font-bold transition shadow-flat-slate-sm disabled:opacity-50 text-xs uppercase tracking-wider"
             >
               QUERY
             </button>
@@ -222,11 +234,11 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-[#0f1115] border border-slate-850 hover:bg-slate-900 text-white font-mono rounded-none px-4 py-2 text-[10px] font-bold shadow-flat-slate flex items-center gap-2 select-none"
+          className="bg-[#0f1115] border border-slate-850 hover:bg-slate-900 text-white font-mono rounded-none px-4 py-2 text-xs font-bold shadow-flat-slate flex items-center gap-2 select-none"
           aria-label="Open diagnostics assistant"
         >
           <span className="w-1.5 h-1.5 bg-emerald-500 animate-pulse"></span>
-          [SYS_DIAGNOSTICS]
+          Ask about my work
         </button>
       )}
     </div>

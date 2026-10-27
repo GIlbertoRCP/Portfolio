@@ -1,0 +1,82 @@
+---
+layout: '../../layouts/Layout.astro'
+title: 'Academic Literature Companion — Local RAG and Active Recall'
+description: 'A local desktop app (Tauri, React, FastAPI, ChromaDB) for reading academic papers and codebases with hybrid sparse-dense retrieval and spaced-repetition flashcards.'
+---
+
+<div class="max-w-4xl mx-auto py-12 px-6">
+  
+  {/* Project Header */}
+  <header class="mb-12 border-b border-slate-900 pb-8 relative">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl pointer-events-none rounded-full"></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-emerald-950/80 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-400">Retrieval-Augmented Generation</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Tauri / React / TypeScript</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">FastAPI / ChromaDB</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Academic Literature Companion
+    </h1>
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      A local desktop app for working through academic papers, codebases and configs. It answers questions with hybrid sparse-dense retrieval, compares several papers side by side, and turns what you read into spaced-repetition flashcards.
+    </p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      <a href="https://github.com/GIlbertoRCP/ficP" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-emerald-400 hover:underline font-mono">GitHub / ficP ↗</a>
+    </div>
+  </header>
+
+  {/* Technical Specifications Table */}
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Desktop shell</span>
+      <p class="text-sm font-semibold text-white">Tauri (Rust)</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Retrieval</span>
+      <p class="text-sm font-semibold text-white">BM25 + dense, fused by RRF</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Vector store</span>
+      <p class="text-sm font-semibold text-white">ChromaDB</p>
+    </div>
+    <div class="space-y-1">
+      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">LLM</span>
+      <p class="text-sm font-semibold text-white">Gemini or local Ollama</p>
+    </div>
+  </section>
+
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
+
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-500 text-xl font-mono">01/</span> Hybrid Retrieval
+      </h2>
+      <p>
+        Dense embeddings (Sentence-Transformers <code>all-MiniLM-L6-v2</code>) find passages that mean the same thing. Okapi BM25 finds exact terms, such as a function name or an equation label, that embeddings blur. The two rankings are merged with Reciprocal Rank Fusion. Ingested documents keep their section hierarchy, so answers can point back to where they came from.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-emerald-500 text-xl font-mono">02/</span> Features
+      </h2>
+      <ul class="space-y-3.5 mt-4">
+        <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">✓</span><div><strong class="text-white">Multi-format ingestion:</strong> PDFs, Python source, YAML configs and Markdown, including a whole repository at once.</div></li>
+        <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">✓</span><div><strong class="text-white">Active recall:</strong> generated flashcards tagged by Bloom's taxonomy level and scheduled with the SM-2 algorithm.</div></li>
+        <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">✓</span><div><strong class="text-white">Comparative matrix:</strong> synthesizes findings across several papers at once.</div></li>
+        <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">✓</span><div><strong class="text-white">Audio briefings:</strong> podcast-style summaries generated with edge-tts on a background worker queue.</div></li>
+        <li class="flex items-start gap-3"><span class="text-emerald-500 mt-1">✓</span><div><strong class="text-white">Hardened desktop app:</strong> sanitized upload filenames, a 100 MB upload limit, a strict CORS allowlist and a Tauri Content Security Policy.</div></li>
+      </ul>
+      <p>A pytest suite covers the document parsers, vector store indexing, the SM-2 scheduler and the API endpoints, and runs in CI.</p>
+    </div>
+
+  </div>
+
+  {/* Page Navigation */}
+  <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/Portfolio/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
+    <span>Literature Companion</span>
+  </div>
+
+</div>
