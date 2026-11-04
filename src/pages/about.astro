@@ -3,7 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout>
+<Layout title="About" description="About Gilberto Romero-Cano: Computer Science student at CU Denver (May 2027), education and NVIDIA DLI certifications.">
   <main class="max-w-3xl mx-auto px-6 py-16 space-y-16">
     
     <!-- Profile Summary -->
@@ -15,18 +15,22 @@ import Layout from '../layouts/Layout.astro';
         </div>
         
         <!-- Technical Profile Data Block -->
-        <div class="bg-slate-950 border border-slate-850 p-4 text-[11px] font-mono text-slate-400 space-y-2 md:min-w-[280px] shadow-flat-slate select-none">
+        <div class="bg-slate-950 border border-slate-850 p-4 text-[11px] font-mono text-slate-400 space-y-2 md:min-w-[280px] shadow-flat-slate">
           <div class="flex justify-between border-b border-slate-900 pb-1.5">
-            <span class="text-slate-650 text-slate-500">LOCATION:</span>
+            <span class="text-slate-500">LOCATION:</span>
             <span class="text-slate-200">DENVER, CO</span>
           </div>
           <div class="flex justify-between border-b border-slate-900 pb-1.5">
-            <span class="text-slate-650 text-slate-500">EMAIL:</span>
-            <a href="mailto:gilbertorcp712@gmail.com" class="text-slate-200 hover:text-blue-450 hover:text-blue-400 transition">gilbertorcp712@gmail.com</a>
+            <span class="text-slate-500">EMAIL:</span>
+            <a href="mailto:gilbertorcp712@gmail.com" class="text-slate-200 hover:text-blue-400 transition">gilbertorcp712@gmail.com</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-900 pb-1.5">
+            <span class="text-slate-500">LINKEDIN:</span>
+            <a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="text-slate-200 hover:text-blue-400 transition">gromerocano</a>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-650 text-slate-500">LINKEDIN:</span>
-            <a href="https://linkedin.com/in/gromerocano/" target="_blank" rel="noopener noreferrer" class="text-slate-200 hover:text-blue-450 hover:text-blue-400 transition">gromerocano</a>
+            <span class="text-slate-500">RESUME:</span>
+            <a href="/Portfolio/GilbertoRomero-Cano_Resume.pdf" target="_blank" rel="noopener" class="text-slate-200 hover:text-blue-400 transition">PDF ↗</a>
           </div>
         </div>
       </div>
@@ -43,7 +47,7 @@ import Layout from '../layouts/Layout.astro';
     <section class="space-y-6">
       <h2 class="text-xl font-display font-bold text-white">Education</h2>
       
-      <div class="border-l border-dashed border-slate-800 pl-6 space-y-8 ml-1.5 select-none">
+      <div class="border-l border-dashed border-slate-800 pl-6 space-y-8 ml-1.5">
         
         <div class="relative">
           <!-- Square timeline node -->

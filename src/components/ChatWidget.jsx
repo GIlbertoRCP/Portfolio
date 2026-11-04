@@ -12,7 +12,7 @@ const PORTFOLIO_DATA = {
   },
   skills: {
     patterns: ['skills', 'tech stack', 'languages', 'frameworks', 'technologies', 'tools', 'code'],
-    response: "Skills by area:\n\n• GPU: CUDA C++, NVRTC, WebGPU/WGSL, Nsight Compute, RAPIDS\n• ML & evaluation: PyTorch, XGBoost, scikit-learn, Stable-Baselines3, ONNX Runtime\n• Data: Python, pandas, NumPy, Dask, Zarr, PyArrow, AnnData, Kafka, SQL\n• Apps: TypeScript, React, Node.js, FastAPI, Socket.IO, Swift/SwiftUI, Tauri\n• Embedded: C/C++, ESP32, ESP-NOW"
+    response: "Skills by area:\n\n• GPU: CUDA C++, NVRTC, WebGPU/WGSL, Nsight Compute, RAPIDS\n• ML & evaluation: PyTorch, XGBoost, scikit-learn, Stable-Baselines3, ONNX Runtime\n• Data: Python, pandas, NumPy, SciPy, PyArrow, pyproj, Dask, Kafka, SQL\n• Apps: TypeScript, React, Node.js, FastAPI, Socket.IO, Swift/SwiftUI, Tauri\n• Embedded: C/C++, ESP32, ESP-NOW, MPU6050\n• Tooling: Git, GitHub Actions, Docker, Linux, CMake"
   },
   education: {
     patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study', 'cert', 'nvidia'],

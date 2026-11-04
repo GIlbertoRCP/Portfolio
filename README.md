@@ -9,12 +9,12 @@ I'm a Computer Science student at CU Denver (B.S., expected May 2027) working on
 | Project | What it is | Repo |
 |---|---|---|
 | Relativistic Raymarcher | CUDA C++ and WebGPU geodesic tracer for Schwarzschild, Kerr and Reissner-Nordström spacetimes, with cross-backend validation | [raymarcher](https://github.com/GIlbertoRCP/raymarcher) |
-| Spatial Pipeline: Photo Hotspot Engine | Finds wildlife and nature photo hotspots in geotagged observations using equal-area hexes, Moran's I, Getis-Ord Gi* and seasonal lift | [spatial_pipeline](https://github.com/GIlbertoRCP/spatial_pipeline) |
 | predictive-audit | Checks a time-series forecasting result against trivial baselines and common leakage mistakes | [predictive_audit](https://github.com/GIlbertoRCP/predictive_audit) |
+| F1 Winner Oracle | Calibrated race-winner odds, frozen before each race in a hash-chained log and scored in public (started as a fork of a classmate's project) | [F1-Prediction](https://github.com/GIlbertoRCP/F1-Prediction) |
+| Spatial Pipeline: Photo Hotspot Engine | Finds wildlife and nature photo hotspots in geotagged observations using equal-area hexes, Moran's I, Getis-Ord Gi* and seasonal lift | [spatial_pipeline](https://github.com/GIlbertoRCP/spatial_pipeline) |
 | WhispNotes | Native macOS note app with on-device Whisper transcription and a local LLM assistant | [whispNotes](https://github.com/GIlbertoRCP/whispNotes) |
 | Movie Match | Real-time paired movie picker with a two-tower recommender | [movie_match](https://github.com/GIlbertoRCP/movie_match) |
 | Literature Companion | Local desktop RAG app (Tauri, FastAPI, ChromaDB) with hybrid retrieval and spaced repetition | [ficP](https://github.com/GIlbertoRCP/ficP) |
-| F1 Oracle | Race prediction with an XGBoost pairwise ranker (team fork; I built most of the pipeline) | [F1-Prediction](https://github.com/GIlbertoRCP/F1-Prediction) |
 | Predictive SDN | Team course project: Kafka-based SDN telemetry with LSTM forecasting | [Predictive_Activation](https://github.com/GIlbertoRCP/Predictive_Activation) |
 
 ## Stack
