@@ -34,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="space-y-4">
         <h2 class="text-xl font-display font-bold text-white">Summary</h2>
         <p class="text-slate-400 leading-relaxed text-sm">
-          Computer Science student at CU Denver who builds GPU and data-heavy systems and checks whether they actually work. Recent projects include a CUDA and WebGPU black-hole renderer validated across both backends, an out-of-core spatial transcriptomics pipeline, and an audit tool that tests published forecasting results against trivial baselines. I care most about measured results: benchmarks I can reproduce, baselines I have to beat, and write-ups that report what didn't work.
+          Computer Science student at CU Denver who builds GPU and data-heavy systems and checks whether they actually work. Recent projects include a CUDA and WebGPU black-hole renderer validated across both backends, a spatial statistics engine that finds wildlife and nature photo hotspots in geotagged observations, and an audit tool that tests published forecasting results against trivial baselines. I care most about measured results: benchmarks I can reproduce, baselines I have to beat, and write-ups that report what didn't work.
         </p>
       </div>
     </section>
@@ -73,7 +73,69 @@ import Layout from '../layouts/Layout.astro';
     <section class="space-y-6">
       <h2 class="text-xl font-display font-bold text-white">Certifications</h2>
       
-      <!-- Credential Card 1: Generative AI with Diffusion Models -->
+      <!-- Credential Card 1: Building RAG Agents with LLMs -->
+      <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
+        
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2 font-mono text-xs">
+              <span class="px-2 py-0.5 bg-[#76b900]/10 border border-[#76b900]/30 text-[#76b900] font-bold uppercase tracking-wider">
+                NVIDIA Deep Learning Institute (DLI)
+              </span>
+            </div>
+            <h3 class="text-base font-display font-bold text-white tracking-tight">
+              Building RAG Agents with LLMs
+            </h3>
+            <p class="text-xs text-slate-400">
+              Demonstrated competence in retrieval-augmented generation (RAG) architectures, agentic LLM orchestration, vector embedding pipelines, and semantic retrieval systems.
+            </p>
+          </div>
+
+          <!-- Direct Verification Link -->
+          <a 
+            href="https://learn.nvidia.com/certificates?id=mLIN0nBrTV2hXFALcbVM3Q" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="px-3 py-1.5 bg-slate-900 border border-slate-800 hover:border-[#76b900]/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold transition inline-flex items-center gap-2 self-start flex-shrink-0 group/btn"
+          >
+            <span class="w-1.5 h-1.5 bg-[#76b900] rounded-full animate-pulse"></span>
+            <span>VERIFY CERTIFICATE</span>
+            <span class="text-slate-500 group-hover/btn:text-[#76b900] transition">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Metadata Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3 border-y border-slate-900 font-mono text-xs text-slate-400 my-4 bg-slate-950/40 p-3">
+          <div>
+            <span class="text-slate-600 block uppercase font-bold">ISSUED:</span>
+            <span class="text-slate-200">NOVEMBER 3, 2026</span>
+          </div>
+          <div>
+            <span class="text-slate-600 block uppercase font-bold">CREDENTIAL ID:</span>
+            <span class="text-slate-200 truncate block">mLIN0nBrTV2hXFALcbVM3Q</span>
+          </div>
+          <div>
+            <span class="text-slate-600 block uppercase font-bold">ISSUER:</span>
+            <span class="text-slate-200">NVIDIA DLI</span>
+          </div>
+        </div>
+
+        <!-- Core Competencies -->
+        <div class="space-y-2">
+          <span class="text-xs font-mono text-slate-500 uppercase font-bold tracking-wider block">CORE COMPETENCIES:</span>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Retrieval-Augmented Generation (RAG)</span>
+            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Agentic LLM Workflows</span>
+            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Vector Embeddings &amp; FAISS</span>
+            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">LangChain Orchestration</span>
+            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Semantic Document Chunking</span>
+            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">NVIDIA NIM Microservices</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credential Card 2: Generative AI with Diffusion Models -->
       <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
         <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
         
@@ -135,7 +197,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- Credential Card 2: Building Transformer-Based Natural Language Processing Applications -->
+      <!-- Credential Card 3: Building Transformer-Based Natural Language Processing Applications -->
       <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
         <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
         
@@ -218,10 +280,10 @@ import Layout from '../layouts/Layout.astro';
         <!-- Philosophy Card 2 -->
         <div class="bg-[#0f1115] border border-slate-850 p-5 space-y-3 shadow-flat-slate">
           <h4 class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
-            <span class="text-cyan-500 font-bold">/</span> OUT-OF-CORE DATA ENGINES
+            <span class="text-cyan-500 font-bold">/</span> SPATIAL STATS &amp; DATA ENGINES
           </h4>
           <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Out-of-core spatial graphing, PyArrow zero-copy columnar buffers, density-adaptive Voronoi binning, and AnnData (.h5ad) ecosystem bridges for massive datasets.
+            Equal-area EPSG:5070 hexagonal binning, Moran's I and Local Getis-Ord Gi* hotspot detection with BH-FDR control, and out-of-core halo-exchanged tiling for large point datasets.
           </p>
         </div>
 

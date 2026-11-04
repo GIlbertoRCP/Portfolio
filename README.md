@@ -9,7 +9,7 @@ I'm a Computer Science student at CU Denver (B.S., expected May 2027) working on
 | Project | What it is | Repo |
 |---|---|---|
 | Relativistic Raymarcher | CUDA C++ and WebGPU geodesic tracer for Schwarzschild, Kerr and Reissner-Nordström spacetimes, with cross-backend validation | [raymarcher](https://github.com/GIlbertoRCP/raymarcher) |
-| Spatial Graph Pipeline | Out-of-core Python engine for spatial transcriptomics graphs under a fixed RAM budget | [spatial_pipeline](https://github.com/GIlbertoRCP/spatial_pipeline) |
+| Spatial Pipeline: Photo Hotspot Engine | Finds wildlife and nature photo hotspots in geotagged observations using equal-area hexes, Moran's I, Getis-Ord Gi* and seasonal lift | [spatial_pipeline](https://github.com/GIlbertoRCP/spatial_pipeline) |
 | predictive-audit | Checks a time-series forecasting result against trivial baselines and common leakage mistakes | [predictive_audit](https://github.com/GIlbertoRCP/predictive_audit) |
 | WhispNotes | Native macOS note app with on-device Whisper transcription and a local LLM assistant | [whispNotes](https://github.com/GIlbertoRCP/whispNotes) |
 | Movie Match | Real-time paired movie picker with a two-tower recommender | [movie_match](https://github.com/GIlbertoRCP/movie_match) |

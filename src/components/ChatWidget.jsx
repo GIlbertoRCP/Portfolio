@@ -15,8 +15,8 @@ const PORTFOLIO_DATA = {
     response: "Skills by area:\n\n• GPU: CUDA C++, NVRTC, WebGPU/WGSL, Nsight Compute, RAPIDS\n• ML & evaluation: PyTorch, XGBoost, scikit-learn, Stable-Baselines3, ONNX Runtime\n• Data: Python, pandas, NumPy, Dask, Zarr, PyArrow, AnnData, Kafka, SQL\n• Apps: TypeScript, React, Node.js, FastAPI, Socket.IO, Swift/SwiftUI, Tauri\n• Embedded: C/C++, ESP32, ESP-NOW"
   },
   education: {
-    patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study'],
-    response: "B.S. in Computer Science at the University of Colorado Denver, expected May 2027. Relevant coursework includes data structures & algorithms, machine learning, software engineering, computer networks, operating systems and databases. He also holds two NVIDIA DLI certificates (diffusion models, transformer NLP)."
+    patterns: ['education', 'university', 'college', 'cu denver', 'coursework', 'school', 'study', 'cert', 'nvidia'],
+    response: "B.S. in Computer Science at the University of Colorado Denver, expected May 2027. Relevant coursework includes data structures & algorithms, machine learning, software engineering, computer networks, operating systems and databases. He also holds three NVIDIA DLI certificates (RAG agents with LLMs, diffusion models, transformer NLP)."
   },
   contact: {
     patterns: ['contact', 'email', 'hire', 'resume', 'github', 'reach out', 'social', 'linkedin'],
@@ -39,8 +39,8 @@ const PORTFOLIO_DATA = {
     response: "F1 Winner Oracle publishes calibrated race-winner odds, frozen before each race in a hash-chained log and scored in public. Over 174 walk-forward races its log loss is 1.24 vs 1.53 for \"the pole sitter wins\". As a single pick it's no better than the pole sitter, and the site says so.\n\nDetails: [F1 Oracle case study](/Portfolio/projects/f1-oracle)"
   },
   spatial: {
-    patterns: ['spatial', 'transcriptomics', 'anndata', 'xenium', 'rapids', 'dask', 'zarr', 'graph', 'cells'],
-    response: "The spatial pipeline turns spatial transcriptomics data into cell graphs for AnnData and PyTorch Geometric. It builds a k-NN graph for 250k cells in 180 ms on GPU (20× faster than 16 CPU cores) and streams data out-of-core under a 512 MB memory cap.\n\nDetails: [Spatial pipeline case study](/Portfolio/projects/spatial-pipeline)"
+    patterns: ['spatial', 'hotspot', 'inaturalist', 'yfcc', 'moran', 'getis', 'hex', 'photo', 'wildlife'],
+    response: "Spatial Pipeline finds wildlife and nature photo hotspots in geotagged observations from iNaturalist and YFCC100M. It bins into equal-area EPSG:5070 hexes, counts unique photographers rather than raw uploads, ranks subjects with Moran's I, marks significant local hotspots with Getis-Ord Gi* (FDR-corrected per tag), and computes month and hour-of-day timing lift.\n\nDetails: [Spatial pipeline case study](/Portfolio/projects/spatial-pipeline)"
   },
   whispnotes: {
     patterns: ['whispnotes', 'whisp', 'notes', 'whisper', 'gemma', 'macos', 'swift', 'swiftui', 'transcription', 'speech'],
@@ -64,7 +64,7 @@ const PORTFOLIO_DATA = {
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],
-    response: "Featured projects:\n\n1. Raymarcher: CUDA/WebGPU black-hole ray tracer\n2. predictive-audit: forecasting results vs trivial baselines\n3. F1 Winner Oracle: calibrated race odds, scored in public\n4. Spatial pipeline: out-of-core cell graphs\n5. WhispNotes: native macOS AI note app\n6. Movie Match: real-time paired recommendations\n\nAsk about any of them for details."
+    response: "Featured projects:\n\n1. Raymarcher: CUDA/WebGPU black-hole ray tracer\n2. predictive-audit: forecasting results vs trivial baselines\n3. F1 Winner Oracle: calibrated race odds, scored in public\n4. Spatial pipeline: wildlife & nature photo hotspot engine\n5. WhispNotes: native macOS AI note app\n6. Movie Match: real-time paired recommendations\n\nAsk about any of them for details."
   }
 };
 

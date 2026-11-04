@@ -46,14 +46,16 @@ const featured = [
     live: 'https://gilbertorcp.github.io/F1-Prediction/',
   },
   {
-    title: 'Spatial Graph Pipeline',
+    title: 'Spatial Pipeline: Photo Hotspot Engine',
     slug: 'spatial-pipeline',
     thumb: 'spatial-pipeline.jpg',
     accent: 'cyan',
-    summary: 'Out-of-core Python engine that turns spatial transcriptomics data into cell graphs for AnnData and PyTorch Geometric.',
-    result: 'k-NN graph for 250k cells in 180 ms on GPU, 20× faster than 16 CPU cores, with flat memory under a 512 MB cap.',
-    tags: ['Python', 'RAPIDS', 'Dask / Zarr'],
+    summary: 'Finds wildlife and nature photo hotspots in geotagged observations using equal-area hexes, unique-photographer counts, Moran’s I and Getis-Ord Gi*.',
+    result: 'On a month of Denver-area iNaturalist data (6,417 observations, 954 observers), significant Gi* hotspots land where a naturalist would point you.',
+    tags: ['Python', 'Spatial stats', 'deck.gl'],
     code: 'https://github.com/GIlbertoRCP/spatial_pipeline',
+    live: 'https://gilbertorcp.github.io/spatial_pipeline/',
+    liveLabel: 'Docs',
   },
   {
     title: 'WhispNotes',
@@ -114,13 +116,14 @@ const more = [
 const skills = [
   { area: 'GPU & performance', items: 'CUDA C++, NVRTC, WebGPU / WGSL, Nsight Compute, RAPIDS' },
   { area: 'ML & evaluation', items: 'PyTorch, XGBoost, scikit-learn, Stable-Baselines3, ONNX Runtime, walk-forward evaluation, bootstrap intervals' },
-  { area: 'Data systems', items: 'Python, pandas, NumPy, Dask, Zarr, PyArrow, AnnData, Kafka, SQL' },
+  { area: 'Data systems', items: 'Python, pandas, NumPy, SciPy, PyArrow, pyproj, Dask, Kafka, SQL' },
   { area: 'Apps & backends', items: 'TypeScript, React, Node.js, FastAPI, Socket.IO, Swift / SwiftUI, Tauri' },
   { area: 'Embedded', items: 'C / C++, ESP32, ESP-NOW, MPU6050' },
   { area: 'Tooling', items: 'Git, GitHub Actions, Docker, Linux, CMake' },
 ];
 
 const certs = [
+  { name: 'Building RAG Agents with LLMs', issued: 'November 2026', url: 'https://learn.nvidia.com/certificates?id=mLIN0nBrTV2hXFALcbVM3Q' },
   { name: 'Generative AI with Diffusion Models', issued: 'October 2026', url: 'https://learn.nvidia.com/certificates?id=vEq-w5ssQaG2Emi6CRZcJw' },
   { name: 'Building Transformer-Based NLP Applications', issued: 'September 2026', url: 'https://learn.nvidia.com/certificates?id=7VhTQxgiSbSwfn2ZcEyPHw' },
 ];
