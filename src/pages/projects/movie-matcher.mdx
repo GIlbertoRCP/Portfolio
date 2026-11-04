@@ -1,207 +1,92 @@
 ---
 layout: '../../layouts/Layout.astro'
-title: 'Movie Matcher — Real-Time Two-Tower Recommendation & State Sync Platform'
-description: 'Full-stack collaborative movie matching application featuring a Two-Tower neural recommendation engine, Socket.IO real-time room synchronization, SQLite persistence, and Framer Motion card interactions.'
+title: 'Movie Match — Swipe on Movies Together'
+description: 'Full-stack app where two people swipe on movies in real time over Socket.IO, with a content-based recommender that updates on every swipe.'
 ---
 
 <div class="max-w-4xl mx-auto py-12 px-6">
-  
+
   {/* Project Header */}
-  <header class="mb-12 border-b border-slate-900 pb-8 relative">
-    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-3xl pointer-events-none rounded-full"></div>
+  <header class="mb-12 border-b border-slate-900 pb-8">
     <div class="flex flex-wrap gap-2 mb-4">
-      <span class="px-2.5 py-1 bg-purple-950/80 border border-purple-500/20 rounded-full text-xs font-semibold text-purple-400">Neural Recommendation Systems</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">React 19 / Vite / Tailwind v4</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">Node.js / Express / Socket.IO</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">SQLite / JWT / Authentik OIDC</span>
+      <span class="px-2.5 py-1 bg-purple-950/80 border border-purple-500/20 rounded-full text-xs font-semibold text-purple-400">Full-stack app</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">React · Node/Express · Socket.IO · SQLite</span>
     </div>
     <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
-      Movie Matcher — Real-Time Two-Tower Recommendation Platform
+      Movie Match
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      A full-stack collaborative movie matching application designed for paired decision making. Features an in-memory <strong>Two-Tower Neural Recommendation Engine</strong> for candidate retrieval and deep MLP scoring, real-time <strong>Socket.IO room synchronization</strong>, and physics-driven card gesture controls.
+      Picking a movie with someone else takes forever. In Movie Match, two people join a room with a 6-character code and swipe through movies on their own phones. When you both swipe right on the same one, it's a match. The deck re-ranks after every swipe based on what you've liked and passed.
     </p>
-  </header>
-
-  {/* Technical Specifications Table */}
-  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
-      <p class="text-sm font-semibold text-white">Full-Stack &amp; ML Architect</p>
-    </div>
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">ML Architecture</span>
-      <p class="text-sm font-semibold text-white">Two-Tower Deep MLP</p>
-    </div>
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Real-Time Sync</span>
-      <p class="text-sm font-semibold text-white">Socket.IO WebSockets</p>
-    </div>
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Repository</span>
+    <div class="flex flex-wrap gap-4 mt-6">
       <a href="https://github.com/GIlbertoRCP/movie_match" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-purple-400 hover:underline font-mono">GitHub / movie_match ↗</a>
     </div>
-  </section>
+  </header>
 
   {/* Content Grid */}
   <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
-    
-    {/* Section 1: Overview & Architecture */}
+
+    {/* Section 1: How a session works */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">01/</span> System Overview &amp; Architecture
+        <span class="text-purple-500 text-xl font-mono">01/</span> How a Session Works
       </h2>
-      <p>
-        Movie Matcher resolves collaborative decision paralysis by allowing two or more users to join a synchronized session, swipe through curated movie decks, and discover mutual matches in real time. Rather than relying on static filters or heavy external cloud services, the platform combines a lightweight custom Two-Tower neural ranking pipeline with a responsive full-stack architecture:
-      </p>
-
-      <div class="grid sm:grid-cols-2 gap-4 pt-2">
+      <div class="grid sm:grid-cols-3 gap-4 pt-2">
         <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
-          <div class="font-mono text-xs text-purple-400 font-bold">// CLIENT LAYER (REACT 19 + VITE)</div>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Built with React 19, Tailwind CSS v4, and Framer Motion physics. Movie cards respond to drag gestures with spring dynamics, rotation dampening, and velocity-based swipe commitment, complemented by Vaul drawer modals for movie details and Canvas Confetti celebration triggers.
-          </p>
+          <div class="font-mono text-xs text-purple-400 font-bold">1. Create a room</div>
+          <p class="text-sm text-slate-400">The host gets a 6-character code. The server saves the room in SQLite and puts the host's socket in it.</p>
         </div>
-
         <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
-          <div class="font-mono text-xs text-blue-400 font-bold">// BACKEND &amp; STORAGE (EXPRESS + SQLITE)</div>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Node.js/Express service with SQLite (<code class="text-blue-300">better-sqlite3</code>) for zero-latency relational persistence. Includes JWT auth, rate limiting, TMDB API proxying with memory caching (<code class="text-blue-300">node-cache</code>), and optional Authentik OIDC integration.
-          </p>
+          <div class="font-mono text-xs text-blue-400 font-bold">2. Swipe</div>
+          <p class="text-sm text-slate-400">Each person swipes at their own pace. A right swipe sends a <code class="text-blue-300">swipe_movie</code> event and the server records the like.</p>
+        </div>
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <div class="font-mono text-xs text-emerald-400 font-bold">3. Match</div>
+          <p class="text-sm text-slate-400">As soon as both people have liked the same movie, the server broadcasts <code class="text-emerald-300">match_found</code> and both screens celebrate at once.</p>
         </div>
       </div>
     </div>
 
-    {/* Section 2: Two-Tower Neural Recommendation Engine */}
-    <div class="space-y-6">
-      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">02/</span> Two-Tower Neural Recommendation Pipeline
-      </h2>
-      <p>
-        Implemented in <code class="text-purple-300">server/ml/twoTowerEngine.js</code>, the recommendation engine decouples candidate retrieval from deep nonlinear scoring:
-      </p>
-
-      {/* 64D Feature Vector */}
-      <div class="space-y-3">
-        <h3 class="text-base font-semibold text-white">1. 64-Dimensional Feature Representation</h3>
-        <p>
-          Each candidate title from TMDB is transformed into a compact 64-dimensional feature vector spanning four key feature domains:
-        </p>
-        
-        <div class="bg-slate-950 border border-slate-850 rounded-xl p-4 font-mono text-xs space-y-2 text-slate-300">
-          <div class="flex justify-between border-b border-slate-850 pb-1 text-slate-400">
-            <span>INDEX RANGE</span>
-            <span>FEATURE DOMAIN</span>
-            <span>REPRESENTATION</span>
-          </div>
-          <div class="flex justify-between py-1">
-            <span class="text-purple-400">00 .. 17</span>
-            <span>18 TMDB Genres (Action, Sci-Fi, Horror, etc.)</span>
-            <span class="text-slate-500">Multi-Hot Binary Flags</span>
-          </div>
-          <div class="flex justify-between py-1 border-t border-slate-900">
-            <span class="text-purple-400">18 .. 21</span>
-            <span>Rating, Vote Count Saturation, Popularity</span>
-            <span class="text-slate-500">Continuous Normalized Scales</span>
-          </div>
-          <div class="flex justify-between py-1 border-t border-slate-900">
-            <span class="text-purple-400">22 .. 27</span>
-            <span>Release Decades (Pre-1980s through 2020s+)</span>
-            <span class="text-slate-500">One-Hot Temporal Bins</span>
-          </div>
-          <div class="flex justify-between py-1 border-t border-slate-900">
-            <span class="text-purple-400">28 .. 63</span>
-            <span>Latent Content Representation</span>
-            <span class="text-slate-500">Deterministic Seed Projection</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Tower 1 & Tower 2 Breakdown */}
-      <div class="grid sm:grid-cols-2 gap-4 pt-2">
-        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-3">
-          <div class="font-mono text-xs text-purple-400 font-bold">// TOWER 1: CANDIDATE RETRIEVAL</div>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Builds an active user preference vector dynamically from session history by accumulating positive feedback from liked titles (+1.5 weight) and dampening passed titles (-0.5 weight), followed by unit vector normalization. Candidate movies are rapidly filtered and ranked via cosine similarity against this active user vector.
-          </p>
-        </div>
-
-        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-3">
-          <div class="font-mono text-xs text-blue-400 font-bold">// TOWER 2: DEEP MLP RANKING</div>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Feeds retrieved candidates into a 3-layer deep Multi-Layer Perceptron (64 &rarr; 32 &rarr; 16 &rarr; 1) with ReLU activations on hidden units and a Sigmoid output neuron. The network scores cross-feature interactions and outputs an estimated like probability, calibrated to a 60%&ndash;99% match compatibility score.
-          </p>
-        </div>
-      </div>
-
-      {/* Feature Attribution */}
-      <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
-        <div class="font-mono text-xs text-emerald-400 font-bold">// EXPLAINABLE FEATURE ATTRIBUTION</div>
-        <p class="text-xs text-slate-400 leading-relaxed font-sans">
-          To provide user transparency, an attribution engine computes relative contributions for each recommendation—breaking down score weights, for example genre alignment (+35%), community critic rating (+28%), release era compatibility (+18%), and neural vector similarity (+19%).
-        </p>
-      </div>
-    </div>
-
-    {/* Section 3: Real-Time Session Synchronization */}
+    {/* Section 2: Recommendations */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">03/</span> Real-Time Session State Synchronization
+        <span class="text-purple-500 text-xl font-mono">02/</span> How It Picks the Next Movie
       </h2>
       <p>
-        The collaborative pairing workflow relies on Socket.IO rooms to keep both users' swipes and matches in sync in real time:
+        The recommender lives in <code class="text-purple-300">server/ml/twoTowerEngine.js</code> and runs in memory on the server, with no external ML service.
       </p>
-
-      <div class="bg-[#0f1115] border border-slate-850 p-6 rounded-xl space-y-4">
-        <div class="grid sm:grid-cols-3 gap-4 font-mono text-xs">
-          <div class="bg-slate-950 p-4 border border-slate-850 rounded-lg space-y-2">
-            <span class="text-purple-400 font-bold block">1. ROOM CREATION</span>
-            <p class="text-slate-400 text-[11px] font-sans">
-              Host generates a 6-character session code. The server registers a room instance in SQLite and joins the host's socket channel.
-            </p>
-          </div>
-
-          <div class="bg-slate-950 p-4 border border-slate-850 rounded-lg space-y-2">
-            <span class="text-blue-400 font-bold block">2. ASYNC SWIPING</span>
-            <p class="text-slate-400 text-[11px] font-sans">
-              Participants swipe independently. Every right-swipe emits a <code class="text-blue-300">swipe_movie</code> event, appending the movie ID to the player's like set in SQLite.
-            </p>
-          </div>
-
-          <div class="bg-slate-950 p-4 border border-slate-850 rounded-lg space-y-2">
-            <span class="text-emerald-400 font-bold block">3. INSTANT MATCH</span>
-            <p class="text-slate-400 text-[11px] font-sans">
-              When both participants mutually like the same movie, the server immediately broadcasts <code class="text-emerald-300">match_found</code>, triggering simultaneous confetti celebrations.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ul class="space-y-3.5">
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Movie features.</strong> Each TMDB movie becomes a vector: 18 genre flags, its rating, vote count and popularity scaled to 0–1, and a one-hot release decade.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">The room's taste.</strong> Each room keeps one taste vector in memory. Every swipe from either person nudges it toward the movie (likes) or away from it (passes), so the deck shifts toward what the two of you are into together.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Ranking.</strong> Candidates are sorted by how closely they match your vector (cosine similarity), so liking a few 90s thrillers pushes more of them up the deck.</div></li>
+      </ul>
     </div>
 
-    {/* Section 4: Production Deployment */}
+    {/* Section 3: Honest limits */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-purple-500 text-xl font-mono">04/</span> Production Deployment &amp; Tooling
+        <span class="text-purple-500 text-xl font-mono">03/</span> What I'd Fix Next
       </h2>
       <p>
-        The project is structured for self-contained deployment through containerized infrastructure defined directly in the repository:
+        The code is set up as a two-tower model, but it isn't one yet, and I'd rather say so here:
       </p>
+      <ul class="space-y-3.5">
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">→</span><div><strong class="text-white">The scoring network isn't trained.</strong> The 64 → 32 → 16 → 1 layer on top uses fixed weights, so the ranking really comes from the cosine similarity. The next step is logging swipes and training it on them. An ONNX Runtime loader is already in the code, but nothing uses it yet.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">→</span><div><strong class="text-white">Placeholder features.</strong> 36 of the 64 dimensions are filled from a hash of the movie ID as a stand-in for real content features. They add noise to the similarity. Replacing them with plot or keyword embeddings would help most.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">→</span><div><strong class="text-white">Tell the two people apart.</strong> One shared vector can't see when you disagree: if one person loves horror and the other passes on it, the two cancel out. Keeping a vector per person and ranking toward the overlap should get to a match faster.</div></li>
+      </ul>
+    </div>
 
-      <div class="grid sm:grid-cols-2 gap-4 pt-1">
-        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2 font-mono text-xs">
-          <div class="text-purple-400 font-bold">// DOCKER &amp; SUPERVISORD</div>
-          <p class="text-slate-400 text-xs font-sans">
-            A multi-stage <code class="text-slate-300">Dockerfile</code> builds the Vite client, packages the Express backend, and configures <code class="text-slate-300">supervisord.conf</code> to manage both Nginx and Node.js processes within a single lightweight container.
-          </p>
-        </div>
-
-        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2 font-mono text-xs">
-          <div class="text-blue-400 font-bold">// NGINX &amp; RENDER</div>
-          <p class="text-slate-400 text-xs font-sans">
-            <code class="text-slate-300">nginx.conf</code> routes WebSocket upgrades, proxies API requests to port 5001, and serves static SPA assets. Deployment parameters and environment templates are maintained in <code class="text-slate-300">render.yaml</code>.
-          </p>
-        </div>
-      </div>
+    {/* Section 4: Stack */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-purple-500 text-xl font-mono">04/</span> How It's Built
+      </h2>
+      <ul class="space-y-3.5">
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Front end.</strong> React 19, Vite and Tailwind v4. The cards use Framer Motion, so a swipe commits based on how far and how fast you drag.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Back end.</strong> Node/Express with SQLite (<code class="text-purple-300">better-sqlite3</code>), JWT login with optional OIDC, rate limiting, and a cached proxy to the TMDB API.</div></li>
+        <li class="flex items-start gap-3"><span class="text-purple-500 mt-1">✓</span><div><strong class="text-white">Deployment.</strong> One Docker image runs Nginx and Node under supervisord. Nginx serves the app and forwards API and WebSocket traffic, and <code class="text-purple-300">render.yaml</code> sets it up on Render.</div></li>
+      </ul>
     </div>
 
   </div>

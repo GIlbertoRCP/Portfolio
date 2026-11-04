@@ -1,104 +1,71 @@
 ---
 layout: '../../layouts/Layout.astro'
-title: 'Distributed Wireless EOD Disposal Robot'
-description: 'Distributed 3-node wireless system simulating high-stakes bomb disposal using ESP-NOW and ESP32 nodes.'
+title: 'Wireless EOD Rover — A Bomb-Disposal Game on Three ESP32s'
+description: 'A bomb-disposal training game: drive a Mecanum rover with a 4-DOF claw over ESP-NOW, cut the right wires before time runs out, and lose time if the claw shakes.'
 ---
 import RobotDiagram from '../../components/RobotDiagram.jsx';
 
 <div class="max-w-4xl mx-auto py-12 px-6">
-  
+
   {/* Project Header */}
   <header class="mb-12 border-b border-slate-900 pb-8">
-    <div class="flex gap-2 mb-4">
-      <span class="px-2.5 py-1 bg-red-950/80 border border-red-500/20 rounded-full text-xs font-semibold text-red-400">Embedded Systems</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400">CSCI 4930 @ CU Denver</span>
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="px-2.5 py-1 bg-blue-950/80 border border-blue-500/20 rounded-full text-xs font-semibold text-blue-400">Embedded systems</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">ESP32 · ESP-NOW · C++</span>
     </div>
-    <h1 class="text-4xl font-display font-extrabold text-white mb-4">
-      Distributed Wireless EOD Disposal Robot
+    <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
+      Wireless EOD Rover
     </h1>
-    <p class="text-lg text-slate-400 leading-relaxed">
-      A gamified bomb-disposal simulation built on three independent ESP32 nodes communicating over a low-latency wireless protocol.
+    <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
+      A bomb-disposal game built from three ESP32 boards. You drive a rover with a robotic claw up to a "bomb", pull the right wires in the right order before the timer runs out, and lose time if your hand on the claw is shaky.
     </p>
+    <p class="text-sm text-slate-500 mt-4">Course project, CSCI 4930 at CU Denver.</p>
   </header>
 
-  {/* Project Specifications Grid */}
-  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-slate-950/40 border border-slate-900 rounded-2xl p-6">
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Role</h3>
-      <p class="text-sm font-semibold text-white mt-1">Embedded Systems Dev</p>
-    </div>
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Firmware Runtime</h3>
-      <p class="text-sm font-semibold text-white mt-1">C++, FreeRTOS Tasking</p>
-    </div>
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Hardware Core</h3>
-      <p class="text-sm font-semibold text-white mt-1">3x ESP32 Node MCUs</p>
-    </div>
-    <div>
-      <h3 class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Wireless Link</h3>
-      <p class="text-sm font-semibold text-white mt-1">ESP-NOW (2.4GHz Direct)</p>
-    </div>
-  </section>
+  {/* Content Grid */}
+  <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
 
-  {/* Core Content */}
-  <div class="prose prose-invert max-w-none text-slate-300 space-y-8 text-[15px] leading-relaxed">
-    
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Project Overview</h2>
+    {/* Section 1: Three boards */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-blue-500 text-xl font-mono">01/</span> Three Boards, No Router
+      </h2>
       <p>
-        The EOD (Explosive Ordnance Disposal) Trainer is an interactive simulation system built to demonstrate the capabilities of distributed wireless hardware nodes. A mobile rover equipped with a 3D-printed 4-DOF robotic arm is operated wirelessly. The goal: navigate to a target prop, identify the correct wire defusal sequence, and safely extract the wires before the countdown expires.
+        The boards talk to each other directly over ESP-NOW, Espressif's peer-to-peer radio protocol. There's no Wi-Fi network to join and no cables, so it works anywhere and the controls feel immediate.
       </p>
-    </div>
 
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">System Architecture & Node Diagram</h2>
-      <p class="mb-4">
-        To maintain low-latency responsiveness without relying on a central Wi-Fi access point, the system operates completely peer-to-peer using Espressif's <strong>ESP-NOW protocol</strong>. Each ESP32 microchip operates as a specific functional node:
-      </p>
-      
-      {/* Dynamic Diagram Mounting */}
       <RobotDiagram client:load />
 
-      <ul class="list-disc pl-6 space-y-2 mt-4">
-        <li><strong>Controller Node (The Remote):</strong> Reads analog joysticks and tactile buttons, manages the active game states (Timer, Lives, Defusal sequences), and prints outputs to a 1602 LCD display.</li>
-        <li><strong>Rover Node (The Robot):</strong> Directs four 12V DC metal gear motors via L298N drivers for holonomic Mecanum wheel driving, actuates robotic arm servos, and reads the accelerometer.</li>
-        <li><strong>Target Node (The Bomb Prop):</strong> Monitors the physical wire switches and wirelessly transmits state updates to the controller.</li>
+      <ul class="space-y-3.5 pt-2">
+        <li class="flex items-start gap-3"><span class="text-blue-500 mt-1">✓</span><div><strong class="text-white">Controller.</strong> Joysticks and buttons. It also runs the game itself: the timer, lives and the defusal sequence, shown on a 16×2 LCD.</div></li>
+        <li class="flex items-start gap-3"><span class="text-blue-500 mt-1">✓</span><div><strong class="text-white">Rover.</strong> Four 12V gear motors on Mecanum wheels through L298N drivers, so it can drive sideways and diagonally. It also drives the servos of a 3D-printed 4-DOF claw and reads an accelerometer on the claw.</div></li>
+        <li class="flex items-start gap-3"><span class="text-blue-500 mt-1">✓</span><div><strong class="text-white">Bomb prop.</strong> Watches its wire switches and radios the controller whenever one is pulled.</div></li>
       </ul>
     </div>
 
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Key Technical Challenges</h2>
-      
-      <div class="space-y-4 mt-4">
-        <div class="bg-slate-950/40 border border-slate-900 rounded-xl p-5">
-          <h4 class="text-sm font-bold text-white mb-1">1. Non-Blocking ESP-NOW Tasking</h4>
-          <p class="text-slate-400 text-xs">
-            Using connectionless packet streams requires robust frame parsing to avoid blocking the FreeRTOS loop. Packets are parsed asynchronously using structs on both ends of the transmission, guaranteeing that motor PWM signals update in real-time under 20ms of jitter.
-          </p>
+    {/* Section 2: Problems */}
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
+        <span class="text-blue-500 text-xl font-mono">02/</span> The Tricky Parts
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <h3 class="text-sm font-bold text-white">Keeping the motors responsive</h3>
+          <p class="text-sm text-slate-400">ESP-NOW packets can arrive at any time. If handling them blocks the main loop, the motors stutter. Each packet is a fixed C struct that's the same on both ends, so it's parsed asynchronously and the motor loop never waits on the radio.</p>
         </div>
-
-        <div class="bg-slate-950/40 border border-slate-900 rounded-xl p-5">
-          <h4 class="text-sm font-bold text-white mb-1">2. Tremor Penalty Algorithm (MPU6050)</h4>
-          <p class="text-slate-400 text-xs">
-            To simulate high-stakes stress, an MPU6050 accelerometer is mounted directly on the robotic claw. The rover continuously samples 3-axis acceleration. A moving standard deviation exceeds the configured threshold when shaking occurs, triggering immediate game time-penalties.
-          </p>
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <h3 class="text-sm font-bold text-white">Detecting a shaky hand</h3>
+          <p class="text-sm text-slate-400">An MPU6050 on the claw samples acceleration on all three axes. When the moving standard deviation goes over a threshold, the claw is shaking, and the game takes time off the clock.</p>
         </div>
       </div>
     </div>
 
-    <div>
-      <h2 class="text-2xl font-display font-extrabold text-white mb-3">Key Takeaways</h2>
-      <p>
-        This project highlights the strength of building distributed embedded logic. Abandoning bulky serial cables in favor of localized radio packets allowed clean, real-time control pathways, showing that microcontrollers can orchestrate complex, low-cost robotics operations.
-      </p>
-    </div>
-
   </div>
 
-  <div class="mt-16 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
-    <a href="/Portfolio/" class="hover:text-blue-400 transition">&larr; Back to Home</a>
-    <span>CU Denver CSCI 4930</span>
+  {/* Page Navigation */}
+  <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
+    <a href="/Portfolio/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
+    <span>Wireless EOD Rover</span>
   </div>
 
 </div>

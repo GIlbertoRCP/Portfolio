@@ -48,7 +48,7 @@ const PORTFOLIO_DATA = {
   },
   movies: {
     patterns: ['movie', 'match', 'recommend', 'two-tower', 'socket'],
-    response: "Movie Match lets two people swipe on movies together in real time over Socket.IO, with a two-tower recommender that adapts to both of them.\n\nDetails: [Movie Match case study](/Portfolio/projects/movie-matcher)"
+    response: "Movie Match lets two people swipe on movies together in real time over Socket.IO, with a content-based recommender that updates on every swipe from either person.\n\nDetails: [Movie Match case study](/Portfolio/projects/movie-matcher)"
   },
   rag: {
     patterns: ['rag', 'literature', 'papers', 'chromadb', 'tauri', 'flashcard', 'bm25'],
@@ -60,7 +60,7 @@ const PORTFOLIO_DATA = {
   },
   robot: {
     patterns: ['robot', 'bomb', 'embedded', 'esp32', 'esp-now', 'mecanum', 'rover', 'hardware', 'eod'],
-    response: "The EOD rover is three ESP32 nodes talking over ESP-NOW: a controller, a Mecanum rover with a 4-DOF claw, and a target node that uses an MPU6050 to penalize shaking.\n\nDetails: [EOD rover case study](/Portfolio/projects/bomb-squad-robot)"
+    response: "The EOD rover is three ESP32 nodes talking over ESP-NOW: a controller, a Mecanum rover with a 4-DOF claw (an MPU6050 on the claw costs you time if it shakes), and a bomb prop that reports which wires were pulled.\n\nDetails: [EOD rover case study](/Portfolio/projects/bomb-squad-robot)"
   },
   projects: {
     patterns: ['projects', 'portfolio', 'work', 'what did you make', 'applications', 'showcase'],

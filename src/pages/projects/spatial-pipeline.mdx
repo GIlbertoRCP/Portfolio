@@ -17,7 +17,7 @@ description: 'Geospatial analytics engine that finds wildlife and nature photo h
       Spatial Pipeline: Photo Hotspot Engine
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      <em>&ldquo;Where and when should I go to photograph elk, bighorn sheep or columbines?&rdquo;</em> <code class="text-cyan-300 font-mono">spatial_pipeline</code> pulls photographed observations from iNaturalist (or streams YFCC100M metadata), bins them into equal-area hexagons, counts <strong>unique photographers</strong> rather than raw uploads, and finds which subjects cluster in space (<strong>Moran&apos;s $I$</strong>), <em>where</em> their significant hotspots are (<strong>Getis-Ord $G_i^*$</strong>), and <em>when</em> they peak (<strong>seasonal &amp; diurnal lift</strong>).
+      <em>&ldquo;Where and when should I go to photograph elk, bighorn sheep or columbines?&rdquo;</em> This pipeline answers that from community photo data. It pulls geotagged observations from iNaturalist (or YFCC100M), counts how many different people photographed each subject in each area, and runs spatial statistics to find the places and months where a subject shows up more than chance would explain.
     </p>
     <div class="flex flex-wrap gap-4 mt-6">
       <a href="https://gilbertorcp.github.io/spatial_pipeline/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-cyan-400 hover:underline font-mono">Documentation ↗</a>
@@ -61,9 +61,6 @@ description: 'Geospatial analytics engine that finds wildlife and nature photo h
         <li class="flex items-start gap-3"><span class="text-cyan-500 mt-1">✓</span><div><strong class="text-white">Mallards</strong> cluster along the <em>South Platte River corridor and city lakes</em>.</div></li>
         <li class="flex items-start gap-3"><span class="text-cyan-500 mt-1">✓</span><div><strong class="text-white">Pinewoods geranium</strong> clusters in the <em>western foothills</em>.</div></li>
       </ul>
-      <p class="text-sm text-slate-400 pt-2">
-        Earlier versions of this repository reported benchmark numbers measured on synthetic transcriptomics data; those synthetic benchmarks were removed when repurposing the engine around real geotagged photo and biodiversity datasets.
-      </p>
     </div>
 
     {/* Section 2: Design choices */}

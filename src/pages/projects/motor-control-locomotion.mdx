@@ -1,202 +1,102 @@
 ---
 layout: '../../layouts/Layout.astro'
 title: 'Humanoid Locomotion over Uneven Terrain'
-description: 'Deep Reinforcement Learning (PPO) 3D bipedal agent trained in MuJoCo physics engine to navigate obstacles.'
+description: 'A 3D humanoid trained with PPO in MuJoCo to walk over uneven terrain, the reward-shaping failures along the way, and the knee-slide it refused to unlearn.'
 ---
 
 <div class="max-w-4xl mx-auto py-12 px-6">
-  
+
   {/* Project Header */}
-  <header class="mb-12 border-b border-slate-900 pb-8 relative">
-    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl pointer-events-none rounded-full"></div>
+  <header class="mb-12 border-b border-slate-900 pb-8">
     <div class="flex flex-wrap gap-2 mb-4">
-      <span class="px-2.5 py-1 bg-emerald-950/80 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-400">Deep Reinforcement Learning</span>
-      <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs font-semibold text-slate-400 font-mono">Motor Control Project</span>
+      <span class="px-2.5 py-1 bg-emerald-950/80 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-400">Reinforcement learning</span>
+      <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 rounded-full text-xs font-semibold text-slate-400 font-mono">MuJoCo · PPO · Python</span>
     </div>
     <h1 class="text-4xl sm:text-5xl font-display font-extrabold text-white mb-4 leading-tight">
-      Locomotion over Uneven Terrain using Deep RL
+      Teaching a Humanoid to Walk over Uneven Ground
     </h1>
     <p class="text-lg text-slate-400 leading-relaxed font-sans max-w-3xl">
-      A 3D bipedal bionic humanoid agent trained using Proximal Policy Optimization (PPO) inside the MuJoCo physics engine to walk across complex obstacles, utilizing a custom vertical LiDAR sensing array and iterative reward shaping.
+      A solo project: I trained a 3D humanoid in MuJoCo with PPO for 160 million steps to walk over obstacles and down a steep ramp. Most of the work was reward shaping: every penalty I added to fix one bad behavior tended to create a new one.
     </p>
     <p class="text-sm text-slate-500 mt-4">
-      The training code isn't public yet. The video below is a recording of the trained policy.
+      The training code isn't public yet. The video is a recording of the trained policy.
     </p>
   </header>
 
-  {/* Technical Specifications Table */}
-  <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 bg-slate-900/30 border border-slate-900 rounded-2xl p-6 shadow-md shadow-black/10">
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Project Role</span>
-      <p class="text-sm font-semibold text-white">ML &amp; Physics Researcher</p>
-    </div>
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Physics Engine</span>
-      <p class="text-sm font-semibold text-white">MuJoCo (3D Dynamics)</p>
-    </div>
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">RL Algorithm</span>
-      <p class="text-sm font-semibold text-white">PPO (160M+ Steps)</p>
-    </div>
-    <div class="space-y-1">
-      <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Sensing Array</span>
-      <p class="text-sm font-semibold text-white">Custom 5-Point LiDAR</p>
-    </div>
-  </section>
-
-  {/* Video Showcase Section */}
-  <section class="space-y-4 mb-16">
-    <h2 class="text-2xl font-display font-extrabold text-white">Locomotion Simulation Showcase</h2>
-    <p class="text-sm text-slate-400">
-      Below is the video demo showing the trained 3D bipedal agent successfully walking over obstacles, navigating the steep ramp, and exhibiting its learned locomotion behavior.
-    </p>
-    <div class="bg-slate-950/80 border border-slate-850 rounded-2xl p-4 flex justify-center shadow-inner">
-      <video 
-        src="/Portfolio/motor-control-locomotion.mp4" 
-        class="w-full max-w-2xl rounded-xl border border-slate-800 shadow-2xl"
-        controls 
-        autoplay 
-        muted 
-        loop
-        playsinline
-      >
-        Your browser does not support the video tag.
-      </video>
-    </div>
+  {/* Video */}
+  <section class="mb-16">
+    <video
+      src="/Portfolio/motor-control-locomotion.mp4"
+      class="w-full rounded-xl border border-slate-850"
+      controls
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      Your browser does not support the video tag.
+    </video>
   </section>
 
   {/* Content Grid */}
   <div class="space-y-16 text-[15px] text-slate-300 leading-relaxed">
-    
-    {/* Section 1: Abstract */}
-    <div class="space-y-4">
-      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-emerald-400 text-xl font-mono">01/</span> Project Abstract
-      </h2>
-      <p>
-        Locomotion over uneven terrain represents a core challenge in robotics and artificial intelligence. This project details the implementation of a 3D bipedal humanoid agent trained to navigate complex, uneven terrain. By leveraging Proximal Policy Optimization (PPO), the agent underwent 160 million steps of training to bridge the gap between static gaits and dynamic controlled falling.
-      </p>
-      <p>
-        Key milestones include transitioning from standard biped models to a custom bionic variant, designing a rangefinder LiDAR array for obstacle perception, and observing the emergent "Penguin Slide" behavior—a mathematical local optimum discovered by the agent to negotiate a steep ramp.
-      </p>
-    </div>
 
-    {/* Section 2: Implementation */}
+    {/* Section 1: Setup */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-emerald-400 text-xl font-mono">02/</span> Technical Approach &amp; Physics
+        <span class="text-emerald-400 text-xl font-mono">01/</span> The Setup
       </h2>
-      <p>
-        To create natural movements, the simulation was developed inside the <strong>MuJoCo</strong> physics engine, employing two key modifications:
-      </p>
-      
-      <ul class="list-disc pl-6 space-y-3 mt-2">
-        <li>
-          <strong class="text-white">Bionic Humanoid Model:</strong> The default humanoid structure was modified by thinning the limb capsules and reducing leg density. This adjustment minimized bulk, allowing for higher leg acceleration and more realistic controlled falling dynamics.
-        </li>
-        <li>
-          <strong class="text-white">Sensing via 5-Point LiDAR:</strong> To prevent the network from simply memorizing specific tracks, a vertical LiDAR rangefinder array was attached to the torso. It fans out vertically to scan the path ahead. A Python <code>VisionObservationWrapper</code> concatenates these range measurements directly into the neural network observation space.
-        </li>
+      <ul class="space-y-3.5">
+        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">A lighter body.</strong> MuJoCo's default humanoid is bulky, so I thinned its limbs and made its legs less dense. That let it move its legs faster and fall forward in a more controlled way, which is most of what walking is.</div></li>
+        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Eyes on the ground ahead.</strong> Without sensing, a policy can just memorize one track. I attached five rangefinder rays to the torso that fan out vertically to scan the path ahead, and wrote an observation wrapper (<code class="text-emerald-300">VisionObservationWrapper</code>) adds their distances to what the policy sees, so it has to react to the terrain.</div></li>
+        <li class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Slow, steady PPO.</strong> A small learning rate (5e-5) and large batches (10,240 steps) kept training stable. I ran training in 10–15M-step chunks so I could check each stage and adjust the reward before continuing.</div></li>
       </ul>
     </div>
 
-    {/* Section 3: Hyperparameters */}
+    {/* Section 2: Failure modes */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-emerald-400 text-xl font-mono">03/</span> Hyperparameter Strategy
+        <span class="text-emerald-400 text-xl font-mono">02/</span> Things It Learned That I Didn't Want
       </h2>
       <p>
-        The PPO algorithm was tuned to guarantee learning stability over the 160M+ step process:
+        Early on, each reward change fixed one problem and exposed another:
       </p>
-
-      <div class="overflow-x-auto border border-slate-800 rounded-xl bg-slate-950/40">
-        <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="border-b border-slate-800 bg-slate-900/60 font-mono text-slate-400">
-              <th class="p-3 font-semibold">Hyperparameter</th>
-              <th class="p-3 font-semibold">Value</th>
-              <th class="p-3 font-semibold">Purpose</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-900 font-sans text-slate-300">
-            <tr>
-              <td class="p-3 font-semibold font-mono text-slate-200">Clip Range</td>
-              <td class="p-3 font-mono text-emerald-400">0.2</td>
-              <td class="p-3">Prevents catastrophic policy shifts by restricting update bounds.</td>
-            </tr>
-            <tr>
-              <td class="p-3 font-semibold font-mono text-slate-200">Entropy Coef</td>
-              <td class="p-3 font-mono text-emerald-400">0.005</td>
-              <td class="p-3">Encourages model exploration to discover stable gaits.</td>
-            </tr>
-            <tr>
-              <td class="p-3 font-semibold font-mono text-slate-200">Batch Size</td>
-              <td class="p-3 font-mono text-emerald-400">10,240</td>
-              <td class="p-3">Reduces step noise generated from the complex 3D physics environment.</td>
-            </tr>
-            <tr>
-              <td class="p-3 font-semibold font-mono text-slate-200">Learning Rate</td>
-              <td class="p-3 font-mono text-emerald-400">0.00005</td>
-              <td class="p-3">Allows policy fine-tuning without destabilizing learned gaits.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    {/* Section 4: Training and Failures */}
-    <div class="space-y-4">
-      <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-emerald-400 text-xl font-mono">04/</span> Training Evolution &amp; Failure Modes
-      </h2>
-      <p>
-        Rather than executing a single continuous run, training was structured using a <strong>chunking method</strong> of 10M to 15M steps per phase. This enabled parallel execution across trials and let us inspect training states. During initial phases, three interesting failure modes were resolved through iterative reward shaping:
-      </p>
-      
-      <div class="grid sm:grid-cols-3 gap-6 pt-4">
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">Hot Stove Paralysis</h4>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Over-penalizing joint acceleration caused the model to value inactivity over movement pain, choosing to collapse immediately.
-          </p>
+      <div class="grid sm:grid-cols-3 gap-4 pt-2">
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <h3 class="text-sm font-bold text-white">Hot-stove paralysis</h3>
+          <p class="text-sm text-slate-400">I penalized joint movement too hard, so the cheapest option was to not move at all and just collapse.</p>
         </div>
-        
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">The Drunken Crab</h4>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Before adding lateral velocity penalties, the agent discovered walking sideways was more stable than moving forward, shuffling clumsily.
-          </p>
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <h3 class="text-sm font-bold text-white">The drunken crab</h3>
+          <p class="text-sm text-slate-400">Walking sideways turned out to be more stable than walking forward. Adding a penalty on sideways speed fixed it.</p>
         </div>
-
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-5 space-y-2">
-          <h4 class="text-xs font-bold text-white uppercase tracking-wider">The RL Suicide</h4>
-          <p class="text-[11px] text-slate-500 leading-relaxed">
-            Setting high fall penalties caused the agent to dive headfirst into the ground to terminate the episode early and minimize penalty accrual.
-          </p>
+        <div class="bg-slate-950 border border-slate-850 rounded-xl p-5 space-y-2">
+          <h3 class="text-sm font-bold text-white">Diving to quit</h3>
+          <p class="text-sm text-slate-400">When I set a big penalty for falling, it learned to dive into the ground right away, ending the episode before more penalties piled up.</p>
         </div>
       </div>
     </div>
 
-    {/* Section 5: Penguin Slide */}
+    {/* Section 3: Penguin slide */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-emerald-400 text-xl font-mono">05/</span> Emergent "Penguin Slide" Behavior
+        <span class="text-emerald-400 text-xl font-mono">03/</span> The Penguin Slide
       </h2>
       <p>
-        In later stages, the agent discovered a fascinating reward hack to negotiate the steepest downward ramp: instead of stepping or leaping onto the landing zone, it dropped to its knees and used forward inertia to slide down.
+        Later in training it found its own way down the steepest ramp: instead of stepping down, it drops to its knees and slides. That's a local optimum. It gets the reward, just not the way I intended.
       </p>
       <p>
-        Attempts to penalize this slide resulted in a steep performance decline; the neural network struggled to un-learn this established local optimum without forgetting basic walking policies.
+        I tried penalizing the slide, and it didn't work. Performance dropped sharply, because the policy couldn't unlearn the slide without also forgetting how to walk. It stayed in.
       </p>
     </div>
 
-    {/* Section 6: Limitations */}
+    {/* Section 4: Limits */}
     <div class="space-y-4">
       <h2 class="text-2xl font-display font-extrabold text-white flex items-center gap-2">
-        <span class="text-emerald-400 text-xl font-mono">06/</span> Limitations &amp; Future Directions
+        <span class="text-emerald-400 text-xl font-mono">04/</span> What It Can't Do Yet
       </h2>
       <p>
-        While robust, the current controller lacks a <strong>standing up recovery policy</strong>. If the agent completes a slide or encounters an off-balance fall, it cannot return to a normal walking gait. Implementing hierarchical policies where a lower-level network recovers standing posture remains a subject for future development.
+        It can't get back up. After the slide, or any fall, the episode is effectively over. The fix I'd try is a hierarchical setup: a separate lower-level policy that only learns to stand up, which the walking policy hands control to after a fall.
       </p>
     </div>
 
@@ -204,8 +104,8 @@ description: 'Deep Reinforcement Learning (PPO) 3D bipedal agent trained in MuJo
 
   {/* Page Navigation */}
   <div class="mt-20 border-t border-slate-900 pt-8 flex justify-between items-center text-xs text-slate-500">
-    <a href="/Portfolio/" class="hover:text-blue-400 hover:underline transition">&larr; Back to Home</a>
-    <span>Motor Control Locomotion Project</span>
+    <a href="/Portfolio/" class="hover:text-emerald-400 hover:underline transition">&larr; Back to Home</a>
+    <span>Humanoid Locomotion</span>
   </div>
 
 </div>

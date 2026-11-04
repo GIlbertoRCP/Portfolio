@@ -73,7 +73,7 @@ const featured = [
     title: 'Movie Match',
     slug: 'movie-matcher',
     accent: 'purple',
-    summary: 'Two people swipe on movies together in real time. A two-tower recommender adapts to both of them as they go.',
+    summary: 'Two people swipe on movies together in real time. The deck re-ranks after every swipe from either person.',
     result: 'Full stack: React 19, Node/Express, Socket.IO rooms, SQLite, JWT and OIDC auth, CI.',
     tags: ['React', 'Socket.IO', 'Recommenders'],
     code: 'https://github.com/GIlbertoRCP/movie_match',
@@ -81,6 +81,20 @@ const featured = [
 ];
 
 const more = [
+  {
+    title: 'Humanoid Locomotion',
+    slug: 'motor-control-locomotion',
+    accent: 'emerald',
+    summary: 'PPO agent trained in MuJoCo to walk over uneven terrain using a 5-point vertical rangefinder.',
+    tags: ['MuJoCo', 'PPO', 'Reward shaping'],
+  },
+  {
+    title: 'Wireless EOD Rover',
+    slug: 'bomb-squad-robot',
+    accent: 'blue',
+    summary: 'Three ESP32 nodes over ESP-NOW: a controller, a Mecanum rover with a 4-DOF claw that senses shaking, and a wire-pull bomb prop.',
+    tags: ['ESP32', 'ESP-NOW', 'C++'],
+  },
   {
     title: 'Literature Companion',
     slug: 'literature-companion',
@@ -96,20 +110,6 @@ const more = [
     summary: 'Kafka-based SDN telemetry with LSTM congestion forecasting and a DQN polling agent, in Mininet. Course project.',
     tags: ['Kafka', 'PyTorch', 'Mininet'],
     code: 'https://github.com/GIlbertoRCP/Predictive_Activation',
-  },
-  {
-    title: 'Humanoid Locomotion',
-    slug: 'motor-control-locomotion',
-    accent: 'emerald',
-    summary: 'PPO agent trained in MuJoCo to walk over uneven terrain using a 5-point vertical rangefinder.',
-    tags: ['MuJoCo', 'PPO', 'Reward shaping'],
-  },
-  {
-    title: 'Wireless EOD Rover',
-    slug: 'bomb-squad-robot',
-    accent: 'blue',
-    summary: 'Three ESP32 nodes over ESP-NOW: a controller, a Mecanum rover with a 4-DOF claw, and a tremor-sensing target.',
-    tags: ['ESP32', 'ESP-NOW', 'C++'],
   },
 ];
 
@@ -145,6 +145,10 @@ const certs = [
 
       <p class="text-base text-slate-300 leading-relaxed max-w-3xl">
         I'm a Computer Science student at <strong class="text-white">CU Denver</strong> (graduating May 2027). I build GPU and data-heavy systems and then check whether they actually work. That means validating a black-hole renderer against published physics, scoring forecasts against baselines in public, and reporting the results that didn't pan out.
+      </p>
+
+      <p class="text-base text-slate-300 leading-relaxed max-w-3xl">
+        <strong class="text-white">Looking for:</strong> ML engineering internships and new-grad roles, especially work on GPU performance or model evaluation.
       </p>
 
       <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400 font-mono border-y border-slate-850 py-3">

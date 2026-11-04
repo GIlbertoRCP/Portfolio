@@ -70,7 +70,7 @@ const initialNodes = [
   { id: 'buck', data: { label: 'LM2596 Buck Converter (5V)' }, position: { x: 100, y: 140 }, style: logicPowerStyle },
   
   // Controller
-  { id: 'esp32', data: { label: 'ESP32 Controller Node\n(Handheld Remote / Game State)' }, position: { x: 80, y: 300 }, style: esp32Style },
+  { id: 'esp32', data: { label: 'ESP32 Rover Node\n(Motors / Claw / Tremor Sensing)' }, position: { x: 80, y: 300 }, style: esp32Style },
   { id: 'lvlshift', data: { label: 'Level Shifter (3.3V <-> 5V)' }, position: { x: -160, y: 310 }, style: logicPowerStyle },
   
   // Mobility System

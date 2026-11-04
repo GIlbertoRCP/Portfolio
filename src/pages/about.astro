@@ -73,234 +73,43 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <!-- Certifications & Specialized Training -->
-    <section class="space-y-6">
+    <!-- Certifications -->
+    <section class="space-y-4">
       <h2 class="text-xl font-display font-bold text-white">Certifications</h2>
-      
-      <!-- Credential Card 1: Building RAG Agents with LLMs -->
-      <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
-        
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div class="space-y-1.5">
-            <div class="flex items-center gap-2 font-mono text-xs">
-              <span class="px-2 py-0.5 bg-[#76b900]/10 border border-[#76b900]/30 text-[#76b900] font-bold uppercase tracking-wider">
-                NVIDIA Deep Learning Institute (DLI)
-              </span>
-            </div>
-            <h3 class="text-base font-display font-bold text-white tracking-tight">
-              Building RAG Agents with LLMs
-            </h3>
-            <p class="text-xs text-slate-400">
-              Demonstrated competence in retrieval-augmented generation (RAG) architectures, agentic LLM orchestration, vector embedding pipelines, and semantic retrieval systems.
-            </p>
-          </div>
-
-          <!-- Direct Verification Link -->
-          <a 
-            href="https://learn.nvidia.com/certificates?id=mLIN0nBrTV2hXFALcbVM3Q" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="px-3 py-1.5 bg-slate-900 border border-slate-800 hover:border-[#76b900]/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold transition inline-flex items-center gap-2 self-start flex-shrink-0 group/btn"
-          >
-            <span class="w-1.5 h-1.5 bg-[#76b900] rounded-full animate-pulse"></span>
-            <span>VERIFY CERTIFICATE</span>
-            <span class="text-slate-500 group-hover/btn:text-[#76b900] transition">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Metadata Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3 border-y border-slate-900 font-mono text-xs text-slate-400 my-4 bg-slate-950/40 p-3">
+      <p class="text-sm text-slate-400">Three NVIDIA Deep Learning Institute courses, each with a hands-on assessment.</p>
+      <ul class="border border-slate-850 divide-y divide-slate-850 bg-[#0f1115]">
+        <li class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUED:</span>
-            <span class="text-slate-200">NOVEMBER 3, 2026</span>
+            <p class="text-sm font-semibold text-white">Building RAG Agents with LLMs</p>
+            <p class="text-xs text-slate-500 mt-0.5">November 2026</p>
           </div>
+          <a href="https://learn.nvidia.com/certificates?id=mLIN0nBrTV2hXFALcbVM3Q" target="_blank" rel="noopener noreferrer" class="text-sm font-mono font-bold text-[#76b900] hover:underline">Verify ↗</a>
+        </li>
+        <li class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <span class="text-slate-600 block uppercase font-bold">CREDENTIAL ID:</span>
-            <span class="text-slate-200 truncate block">mLIN0nBrTV2hXFALcbVM3Q</span>
+            <p class="text-sm font-semibold text-white">Generative AI with Diffusion Models</p>
+            <p class="text-xs text-slate-500 mt-0.5">October 2026</p>
           </div>
+          <a href="https://learn.nvidia.com/certificates?id=vEq-w5ssQaG2Emi6CRZcJw" target="_blank" rel="noopener noreferrer" class="text-sm font-mono font-bold text-[#76b900] hover:underline">Verify ↗</a>
+        </li>
+        <li class="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUER:</span>
-            <span class="text-slate-200">NVIDIA DLI</span>
+            <p class="text-sm font-semibold text-white">Building Transformer-Based NLP Applications</p>
+            <p class="text-xs text-slate-500 mt-0.5">September 2026</p>
           </div>
-        </div>
-
-        <!-- Core Competencies -->
-        <div class="space-y-2">
-          <span class="text-xs font-mono text-slate-500 uppercase font-bold tracking-wider block">CORE COMPETENCIES:</span>
-          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Retrieval-Augmented Generation (RAG)</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Agentic LLM Workflows</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Vector Embeddings &amp; FAISS</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">LangChain Orchestration</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Semantic Document Chunking</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">NVIDIA NIM Microservices</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Credential Card 2: Generative AI with Diffusion Models -->
-      <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
-        
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div class="space-y-1.5">
-            <div class="flex items-center gap-2 font-mono text-xs">
-              <span class="px-2 py-0.5 bg-[#76b900]/10 border border-[#76b900]/30 text-[#76b900] font-bold uppercase tracking-wider">
-                NVIDIA Deep Learning Institute (DLI)
-              </span>
-            </div>
-            <h3 class="text-base font-display font-bold text-white tracking-tight">
-              Generative AI with Diffusion Models
-            </h3>
-            <p class="text-xs text-slate-400">
-              Demonstrated competence in denoising diffusion models, U-Net architectures, noise scheduling, and text-to-image generation pipelines.
-            </p>
-          </div>
-
-          <!-- Direct Verification Link -->
-          <a 
-            href="https://learn.nvidia.com/certificates?id=vEq-w5ssQaG2Emi6CRZcJw" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="px-3 py-1.5 bg-slate-900 border border-slate-800 hover:border-[#76b900]/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold transition inline-flex items-center gap-2 self-start flex-shrink-0 group/btn"
-          >
-            <span class="w-1.5 h-1.5 bg-[#76b900] rounded-full animate-pulse"></span>
-            <span>VERIFY CERTIFICATE</span>
-            <span class="text-slate-500 group-hover/btn:text-[#76b900] transition">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Metadata Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3 border-y border-slate-900 font-mono text-xs text-slate-400 my-4 bg-slate-950/40 p-3">
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUED:</span>
-            <span class="text-slate-200">OCTOBER 7, 2026</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">CREDENTIAL ID:</span>
-            <span class="text-slate-200 truncate block">vEq-w5ssQaG2Emi6CRZcJw</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUER:</span>
-            <span class="text-slate-200">NVIDIA DLI</span>
-          </div>
-        </div>
-
-        <!-- Core Competencies -->
-        <div class="space-y-2">
-          <span class="text-xs font-mono text-slate-500 uppercase font-bold tracking-wider block">CORE COMPETENCIES:</span>
-          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Denoising Diffusion (DDPM)</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">U-Net Architectures</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">CLIP Conditioning</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Noise Scheduling</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Text-to-Image Pipelines</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">GPU Acceleration</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Credential Card 3: Building Transformer-Based Natural Language Processing Applications -->
-      <div class="bg-[#0f1115] border border-slate-850 p-6 shadow-flat-slate relative overflow-hidden group hover:border-slate-750 transition-all">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-2xl pointer-events-none rounded-full"></div>
-        
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div class="space-y-1.5">
-            <div class="flex items-center gap-2 font-mono text-xs">
-              <span class="px-2 py-0.5 bg-[#76b900]/10 border border-[#76b900]/30 text-[#76b900] font-bold uppercase tracking-wider">
-                NVIDIA Deep Learning Institute (DLI)
-              </span>
-            </div>
-            <h3 class="text-base font-display font-bold text-white tracking-tight">
-              Building Transformer-Based Natural Language Processing Applications
-            </h3>
-            <p class="text-xs text-slate-400">
-              Demonstrated competence in transformer fine-tuning, sequence modeling, and GPU-accelerated NLP workflows.
-            </p>
-          </div>
-
-          <!-- Direct Verification Link -->
-          <a 
-            href="https://learn.nvidia.com/certificates?id=7VhTQxgiSbSwfn2ZcEyPHw" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="px-3 py-1.5 bg-slate-900 border border-slate-800 hover:border-[#76b900]/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold transition inline-flex items-center gap-2 self-start flex-shrink-0 group/btn"
-          >
-            <span class="w-1.5 h-1.5 bg-[#76b900] rounded-full animate-pulse"></span>
-            <span>VERIFY CERTIFICATE</span>
-            <span class="text-slate-500 group-hover/btn:text-[#76b900] transition">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Metadata Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 py-3 border-y border-slate-900 font-mono text-xs text-slate-400 my-4 bg-slate-950/40 p-3">
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUED:</span>
-            <span class="text-slate-200">SEPTEMBER 2, 2026</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">CREDENTIAL ID:</span>
-            <span class="text-slate-200 truncate block">7VhTQxgiSbSwfn2ZcEyPHw</span>
-          </div>
-          <div>
-            <span class="text-slate-600 block uppercase font-bold">ISSUER:</span>
-            <span class="text-slate-200">NVIDIA DLI</span>
-          </div>
-        </div>
-
-        <!-- Core Competencies -->
-        <div class="space-y-2">
-          <span class="text-xs font-mono text-slate-500 uppercase font-bold tracking-wider block">CORE COMPETENCIES:</span>
-          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Self-Attention Architectures</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Transformer Fine-Tuning</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">Seq2Seq Modeling</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">NLP Pipeline Optimization</span>
-            <span class="px-2.5 py-1 bg-slate-900 border border-slate-850 text-slate-300">GPU Acceleration</span>
-          </div>
-        </div>
-      </div>
+          <a href="https://learn.nvidia.com/certificates?id=7VhTQxgiSbSwfn2ZcEyPHw" target="_blank" rel="noopener noreferrer" class="text-sm font-mono font-bold text-[#76b900] hover:underline">Verify ↗</a>
+        </li>
+      </ul>
     </section>
 
-    <!-- Technical Focus Areas -->
-    <section class="space-y-6">
-      <h2 class="text-xl font-display font-bold text-white">What I work on</h2>
-      <p class="text-slate-400 leading-relaxed text-sm">
-        Three areas I keep coming back to:
-      </p>
-      
-      <div class="grid sm:grid-cols-3 gap-6 mt-4">
-        <!-- Philosophy Card 1 -->
-        <div class="bg-[#0f1115] border border-slate-850 p-5 space-y-3 shadow-flat-slate">
-          <h4 class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
-            <span class="text-blue-500 font-bold">/</span> GPU PARALLEL &amp; KERNEL TUNING
-          </h4>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            CUDA C++ and WebGPU kernels generated from a metric compiler, profiled with Nsight Compute and validated in double precision against published results.
-          </p>
-        </div>
-
-        <!-- Philosophy Card 2 -->
-        <div class="bg-[#0f1115] border border-slate-850 p-5 space-y-3 shadow-flat-slate">
-          <h4 class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
-            <span class="text-cyan-500 font-bold">/</span> SPATIAL STATS &amp; DATA ENGINES
-          </h4>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Equal-area EPSG:5070 hexagonal binning, Moran's I and Local Getis-Ord Gi* hotspot detection with BH-FDR control, and out-of-core halo-exchanged tiling for large point datasets.
-          </p>
-        </div>
-
-        <!-- Philosophy Card 3 -->
-        <div class="bg-[#0f1115] border border-slate-850 p-5 space-y-3 shadow-flat-slate">
-          <h4 class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
-            <span class="text-purple-500 font-bold">/</span> TWO-TOWER ML &amp; STREAMING
-          </h4>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Two-Tower neural recommendation models, online vector updates over WebSockets, real-time room state sync, and Kafka streaming pipelines.
-          </p>
-        </div>
-      </div>
+    <!-- What I work on -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-display font-bold text-white">What I like working on</h2>
+      <ul class="space-y-3 text-sm text-slate-400 leading-relaxed">
+        <li><strong class="text-white">Making GPUs do the heavy lifting.</strong> Writing kernels, profiling them, and figuring out where the time actually goes. The black-hole renderer got 1.6× faster once Nsight showed me what to fix.</li>
+        <li><strong class="text-white">Checking whether a model is actually good.</strong> Comparing it to the dumbest reasonable baseline first. That habit is where predictive-audit and the F1 Oracle's public scorecard came from.</li>
+        <li><strong class="text-white">Turning messy real data into a straight answer.</strong> Like "where should I go to photograph elk in September?" from thousands of geotagged observations.</li>
+      </ul>
     </section>
 
     <!-- Call to action -->
